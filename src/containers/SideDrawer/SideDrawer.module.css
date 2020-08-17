@@ -1,0 +1,30 @@
+.SIdeDrawerContainter{
+    width: 25%;
+    max-height: 100vh;
+}
+
+.SideDrawer{
+    max-height: 100vh;
+    margin: auto;
+    position: fixed;
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.SideDrawer ul{
+    overflow-y: scroll;
+    list-style: none;
+}
+.SideDrawer ul::-webkit-scrollbar{
+    width: 1px;
+}
+
+
+@media (min-height: 600px) {
+    .SideDrawer ul{
+        overflow-y: hidden;
+    }
+
+}

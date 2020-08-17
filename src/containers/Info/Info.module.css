@@ -1,0 +1,30 @@
+.InfoContainer{
+    width: 25%;
+    max-height: 100vh;
+}
+
+.Info{
+    max-height: 100vh;
+    margin: auto;
+    position: fixed;
+    display: flex;
+    width: inherit;
+    flex-direction: column;
+    text-align: center;
+}
+
+.Info ul{
+    overflow-y: scroll;
+    list-style: none;
+}
+.Info ul::-webkit-scrollbar{
+    width: 1px;
+}
+
+
+@media (min-height: 600px) {
+    .Info ul{
+        overflow-y: hidden;
+    }
+    
+}
