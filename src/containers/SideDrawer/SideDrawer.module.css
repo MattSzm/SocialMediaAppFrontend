@@ -1,5 +1,5 @@
 .SIdeDrawerContainter{
-    width: 25%;
+    width: 20%;
     max-height: 100vh;
 }
 
@@ -10,7 +10,7 @@
     width: inherit;
     display: flex;
     flex-direction: column;
-    text-align: center;
+    text-align: left;
 }
 
 .SideDrawer ul{
@@ -26,5 +26,21 @@
     .SideDrawer ul{
         overflow-y: hidden;
     }
+}
 
+.SideDrawerItem{
+    margin: 2.5em 0;
+}
+.SideDrawerItem span{
+    padding: 0.5em 0.5em;
+    border-radius: 25px;
+}
+
+.SideDrawerItem span:hover{
+    cursor: pointer;
+    color: #1DA1F2;
+    background-color:rgba(29,161,242,0.16) ;
+}
+.active{
+    color: #1DA1F2;
 }

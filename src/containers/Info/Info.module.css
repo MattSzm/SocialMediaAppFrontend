@@ -10,7 +10,7 @@
     display: flex;
     width: inherit;
     flex-direction: column;
-    text-align: center;
+    border: solid orange;
 }
 
 .Info ul{

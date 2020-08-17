@@ -9,21 +9,20 @@ class SideDrawer extends React.Component{
             <div className={classes.SIdeDrawerContainter}>
                 <div className={classes.SideDrawer}>
                     <ul>
-                        <li><h2>SIDE DRAWER</h2></li>
-                        <li><h2>SIDE DRAWER</h2></li>
-                        <li><h2>SIDE DRAWER</h2></li>
-                        <li><h2>SIDE DRAWER</h2></li>
-                        <li><h2>SIDE DRAWER</h2></li>
-                        <li><h2>SIDE DRAWER</h2></li>
-                        <li><h2>SIDE DRAWER</h2></li>
-                        <li><h2>SIDE DRAWER</h2></li>
-                        <li><h2>SIDE DRAWER</h2></li>
-                        <li><h2>SIDE DRAWER</h2></li>
-                        <li><h2>SIDE DRAWER</h2></li>
-                        <li><h2>SIDE DRAWER</h2></li>
-                        <li><h2>SIDE DRAWER</h2></li>
-                        <li><h2>SIDE DRAWER</h2></li>
-                        <li><h2>SIDE DRAWER</h2></li>
+                        <li className={[classes.SideDrawerItem, classes.active].join(' ')
+                        }><h2><span>Home</span></h2></li>
+
+                        <li className={classes.SideDrawerItem}>
+                            <h2><span>Explore</span></h2></li>
+
+                        <li className={classes.SideDrawerItem}>
+                            <h2><span>Notifications</span></h2></li>
+
+                        <li className={classes.SideDrawerItem}>
+                            <h2><span>Profile</span></h2></li>
+
+                        <li className={classes.SideDrawerItem}>
+                            <h2><span>Logout</span></h2></li>
                     </ul>
                 </div>
             </div>
