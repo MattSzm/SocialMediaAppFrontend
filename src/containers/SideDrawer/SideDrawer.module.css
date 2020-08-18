@@ -44,3 +44,9 @@
 .active{
     color: #1DA1F2;
 }
+
+@media(max-width: 1050px){
+    .SIdeDrawerContainter{
+        display: none;
+    }
+}

@@ -1,5 +1,7 @@
 import React from "react";
 import classes from './SideDrawer.module.css';
+import Logo from "../../components/Logo/Logo";
+
 
 class SideDrawer extends React.Component{
 
@@ -8,6 +10,7 @@ class SideDrawer extends React.Component{
         return (
             <div className={classes.SIdeDrawerContainter}>
                 <div className={classes.SideDrawer}>
+                    <Logo />
                     <ul>
                         <li className={[classes.SideDrawerItem, classes.active].join(' ')
                         }><h2><span>Home</span></h2></li>

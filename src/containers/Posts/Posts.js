@@ -8,7 +8,9 @@ class Posts extends React.Component{
         return(
             <div className={classes.Posts}>
                 <h2>fdsfsdfsd</h2>
-                    ffdsfdsfjndskjfndskjfnsdkjnfkjsdnfkjdsnkfjasdnkjfndsakjfnadsjkfnskdaj
+                    ffdsfdsfjndskjfndskjfnsdk
+                    jnfkjsdnfkjdsnkfjasdnkjfnds
+                akjfnadsjkfnskdaj
                     fjksnajfndsajkfna.sdfjdsa
                     ajdsfnjksadnfjksdnfjkasndfjsdanf
                     asdljfnadsjfnasdjlfnasdjf

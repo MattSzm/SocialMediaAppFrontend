@@ -1,0 +1,30 @@
+.Logo {
+    background-color: transparent;
+    padding: 10px;
+    margin-left: 10px;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.Logo .srcOne{
+    height: 100%;
+}
+
+
+.Logo .srcTwo{
+    display: none;
+}
+
+
+@media (max-width: 1150px) {
+    .Logo .srcOne{
+        display: none;
+    }
+    .Logo .srcTwo{
+        margin-left: 30px;
+        height: 60px;
+        width: auto;
+        display: block;
+    }
+}

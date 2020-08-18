@@ -8,3 +8,16 @@
     border-right: solid #E1E8ED 1px;
 
 }
+
+@media(max-width: 1050px){
+    .Posts{
+        width: 95%;
+        max-width: 700px;
+    }
+}
+@media(max-width: 700px){
+    .Posts{
+        width: 90%;
+        max-width: 700px;
+    }
+}

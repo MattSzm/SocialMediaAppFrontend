@@ -26,5 +26,10 @@
     .Info ul{
         overflow-y: hidden;
     }
-    
+}
+@media(max-width: 1050px){
+    .InfoContainer{
+        width: 0;
+        display: none;
+    }
 }
