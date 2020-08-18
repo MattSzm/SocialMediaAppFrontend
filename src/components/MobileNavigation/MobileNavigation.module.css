@@ -1,0 +1,13 @@
+.MobileNavigation{
+    width: 100vw;
+    height: 3em;
+    position: fixed;
+    background-color: #E1E8ED;
+    bottom: 0;
+}
+
+@media (min-width: 1050px) {
+    .MobileNavigation{
+       display: none;
+    }
+}

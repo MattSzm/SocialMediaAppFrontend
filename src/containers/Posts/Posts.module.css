@@ -1,13 +1,14 @@
 .Posts{
     text-align: center;
     margin: auto;
-    width: 55%;
+    width: 60%;
     display: flex;
     flex-direction: column;
     border-left: solid #E1E8ED 1px;
     border-right: solid #E1E8ED 1px;
 
 }
+
 
 @media(max-width: 1050px){
     .Posts{

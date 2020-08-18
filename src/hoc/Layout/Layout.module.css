@@ -8,8 +8,9 @@
 
 @media (max-width: 1050px) {
     .Layout{
+        display: block;
         justify-content: space-between;
-        width: 95%;
+        width: 90%;
     }
 }
 
