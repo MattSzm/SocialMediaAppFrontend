@@ -28,4 +28,20 @@
     height: 20px;
     width: auto;
     cursor: pointer;
+    background-color: transparent;
+    padding: 5px;
+}
+.Icons img:hover{
+    transform: scale(1.1);
+    border-radius: 35%;
+}
+
+.Comment:hover{
+    background-color: #cfe7fa;
+}
+.Share:hover{
+    background-color: #e6fdcd;
+}
+.Like:hover{
+    background-color: #fddbdb;
 }

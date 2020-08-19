@@ -1,6 +1,6 @@
 import React from "react";
 import classes from './PostContent.module.css';
-import likeButton from '../../../assets/icons/like.png'
+import likeButton from '../../../assets/icons/heart.png'
 import commentButton from '../../../assets/icons/comment.png'
 import shareButton from '../../../assets/icons/share.png';
 
@@ -20,13 +20,13 @@ const hashtag_formatter = string => {
 const PostContent = (props) => {
     return (
         <div className={classes.PostContent}>
-            <p className={classes.bolded}>Author nickname <span>&#183; Aug 17</span></p>
+            <p className={classes.bolded}>Author nickname <span>@Name &#183; Aug 17</span></p>
             <p>{hashtag_formatter("Goooooodmorning @guyssss! #working in @the studio on new music, what are you doing #today??")}</p>
 
             <div className={classes.Icons}>
-                <img src={likeButton} />
-                <img src={commentButton} />
-                <img src={shareButton} />
+                <img src={commentButton} className={classes.Comment}/>
+                <img src={shareButton} className={classes.Share}/>
+                <img src={likeButton} className={classes.Like}/>
             </div>
         </div>
     );
