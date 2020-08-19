@@ -10,6 +10,7 @@ const Post = (props) => {
             <div className={classes.PostImage}>
                 <img src={photo}/>
             </div>
+
             <PostContent/>
 
         </div>

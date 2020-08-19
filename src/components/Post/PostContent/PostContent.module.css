@@ -1,8 +1,13 @@
 .PostContent{
     width: 87%;
     text-align: left;
+    margin-right: 8px;
 }
 .bolded{
     font-weight: bold;
     margin-top: 0em;
+}
+.bolded span{
+    font-weight: normal;
+    color: #AAB8C2;
 }

@@ -8,6 +8,10 @@ class Posts extends React.Component{
         return(
             <div className={classes.Posts}>
                 <Post />
+                <Post />
+                <Post />
+                <Post />
+                <Post />
 
                 <h2>fdsfsdfsd</h2>
                     ffdsfdsfjndskjfndskjfnsdk

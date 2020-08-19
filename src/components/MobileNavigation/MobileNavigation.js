@@ -6,7 +6,7 @@ const MobileNavigation = (props) => {
 
     return (
         <div className={classes.MobileNavigation}>
-            BUTTONS
+            <h4>BUTTONS</h4>
         </div>
     );
 }
