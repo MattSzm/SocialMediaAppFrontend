@@ -11,3 +11,21 @@
     font-weight: normal;
     color: #AAB8C2;
 }
+
+.hashtag{
+    color: #1DA1F2;
+}
+.hashtag:hover{
+    cursor: pointer;
+}
+
+.Icons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.Icons img{
+    height: 20px;
+    width: auto;
+    cursor: pointer;
+}
