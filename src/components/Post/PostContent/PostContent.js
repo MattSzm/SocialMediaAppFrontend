@@ -3,6 +3,7 @@ import classes from './PostContent.module.css';
 import likeButton from '../../../assets/icons/heart.png'
 import commentButton from '../../../assets/icons/comment.png'
 import shareButton from '../../../assets/icons/share.png';
+import Linkify from 'react-linkify'
 
 
 const hashtag_formatter = string => {
@@ -21,7 +22,12 @@ const PostContent = (props) => {
     return (
         <div className={classes.PostContent}>
             <p className={classes.bolded}>Author nickname <span>@Name &#183; Aug 17</span></p>
-            <p>{hashtag_formatter("Goooooodmorning @guyssss! #working in @the studio on new music, what are you doing #today??")}</p>
+            <p>
+                <Linkify fuzzyEmail={false}>
+                    {hashtag_formatter("Goooooodmorning www.npmjs.com/package/react-linkify @guyssss! #working " +
+                        "https://www.npmjs.com/package/react-linkify  in @the studio on new music, what are you doing #today??")}
+                </Linkify>
+            </p>
 
             <div className={classes.Icons}>
                 <img src={commentButton} className={classes.Comment}/>

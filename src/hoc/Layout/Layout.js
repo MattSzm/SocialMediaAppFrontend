@@ -4,6 +4,7 @@ import SideDrawer from "../../containers/SideDrawer/SideDrawer";
 import Posts from "../../containers/Posts/Posts";
 import Info from "../../containers/Info/Info";
 import MobileNavigation from "../../components/MobileNavigation/MobileNavigation";
+import Spinner from "../../components/UI/Spinner/Spinner";
 
 
 class Layout extends React.Component{
@@ -21,6 +22,7 @@ class Layout extends React.Component{
                 </div>
 
                 <MobileNavigation />
+                <Spinner />
             </React.Fragment>
         );
     }
