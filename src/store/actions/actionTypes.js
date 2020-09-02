@@ -1,1 +1,2 @@
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const MODAL_TOGGLE = 'MODAL_TOGGLE'

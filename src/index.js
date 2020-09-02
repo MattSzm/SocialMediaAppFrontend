@@ -9,12 +9,13 @@ import Thunk from 'redux-thunk';
 import axios from 'axios';
 import postsReducer from './store/reducers/posts';
 import authReducer from './store/reducers/auth';
-
+import modalReducer from './store/reducers/modal';
 
 
 const rootReducer = combineReducers({
     posts: postsReducer,
-    auth: authReducer
+    auth: authReducer,
+    modal: modalReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(Thunk));

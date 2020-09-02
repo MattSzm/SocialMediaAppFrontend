@@ -6,25 +6,25 @@ import Info from "../../containers/Info/Info";
 import MobileNavigation from "../../components/MobileNavigation/MobileNavigation";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import Modal from '../../components/UI/Modal/Modal';
+import { connect } from 'react-redux';
+import * as modalActions from '../../store/actions/modal';
+
 
 class Layout extends React.Component{
-    state = {show:false}
-    logoutHandler = () => {
-        this.setState(prevState => ({show: !prevState.show}));
-    }
 
     render() {
         return(
             <React.Fragment>
-                <Modal show={this.state.show}
-                       closeModalAndBackdrop={this.logoutHandler.bind(this)}>
+                <Modal show={this.props.showModal}
+                       closeModalAndBackdrop={this.props.modalToggle.bind(this)}>
                     <h2>LOGIN PLACE </h2>
                     <h2>LOGIN PLACE </h2>
                     <h2>LOGIN PLACE </h2>
                     <h2>LOGIN PLACE </h2>
                 </Modal>
                 <div className={classes.Layout}>
-                    <SideDrawer onLogout={this.logoutHandler.bind(this)}/>
+                    <SideDrawer
+                        onLogout={this.props.modalToggle.bind(this)}/>
 
                     <Posts />
 
@@ -37,4 +37,16 @@ class Layout extends React.Component{
     }
 }
 
-export default Layout;
+const mapStateToProps = state => (
+    {
+        showModal: state.modal.showModal
+    }
+);
+
+const mapDispatchToProps = dispatch => (
+    {
+        modalToggle: () => dispatch(modalActions.modalToggle())
+    }
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);
