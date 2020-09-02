@@ -22,10 +22,14 @@
 }
 
 .Invalid{
-    border: 1px solid #ffb1b1;
+    border: 1.5px solid #fda6a6;
     background-color: #ffcaca;
 }
 
 .ColorGreen{
-    border: 1px solid #e2ffc6;
+    border: 1.5px solid #bbf387;
+}
+
+.textarea{
+    resize: none;
 }
