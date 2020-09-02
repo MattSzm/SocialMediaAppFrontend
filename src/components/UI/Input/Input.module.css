@@ -22,6 +22,10 @@
 }
 
 .Invalid{
-    border: 1px solid #ff0000;
+    border: 1px solid #ffb1b1;
     background-color: #ffcaca;
+}
+
+.ColorGreen{
+    border: 1px solid #e2ffc6;
 }

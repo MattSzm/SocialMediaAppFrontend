@@ -13,16 +13,16 @@ const reducer = (state= initialState, action) =>{
                 token: null,
                 user: null,
                 loading: true};
-        case actionTypes.USER_LOADING:
-            return {...state,
-                loading: true};
         case actionTypes.LOGIN_SUCCESS:
             localStorage.setItem('token', action.payload.token)
             return {...state,
                 token: action.payload.token,
                 user: action.payload.user,
                 loading: false};
-        case actionTypes.USER_LOADED:
+        case actionTypes.USER_LOADING_START:
+            return {...state,
+                loading: true};
+        case actionTypes.USER_LOADED_SUCCESS:
             return {...state,
                 user: action.payload.user,
                 loading: false};
@@ -31,7 +31,12 @@ const reducer = (state= initialState, action) =>{
             return {...state,
                 token: null,
                 user: null,
-                loading: false}
+                loading: false};
+        case actionTypes.LOGOUT_SUCCESS:
+            return {...state,
+                token: null,
+                user: null,
+                loading: false};
         default:
             return state;
     }

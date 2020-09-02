@@ -20,12 +20,12 @@ export default tokenConfig;
 
 export const loadUser = () => {
     return (dispatch, getState) => {
-    dispatch({type: actionTypes.USER_LOADING});
+    dispatch({type: actionTypes.USER_LOADING_START});
     console.log(getState().auth.token);
     axios.get('/api/user/currentuser/', tokenConfig(getState))
         .then(res => {
             dispatch({
-                type: actionTypes.USER_LOADED,
+                type: actionTypes.USER_LOADED_SUCCESS,
                 payload: res.data
             })
         }).catch(error => {
@@ -63,3 +63,18 @@ export const login = (username, password) => {
             })
     };
 };
+
+
+export const logout = () => {
+    return (dispatch, getState) => {
+
+    axios.post('/api/auth/logout/', null, tokenConfig(getState))
+        .then(res => {
+            dispatch({
+                type: actionTypes.LOGOUT_SUCCESS,
+            })
+        }).catch(error => {
+            console.log(error);
+        // dispatch(returnErrors(error.response.data, error.response.status));
+    });
+};};

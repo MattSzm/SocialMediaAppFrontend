@@ -1,11 +1,12 @@
 import React from "react";
 import classes from './SideDrawer.module.css';
 import Logo from "../../components/Logo/Logo";
+import {connect} from 'react-redux';
+import {logout} from '../../store/actions/auth';
 
 
 class SideDrawer extends React.Component{
 
-    //todo: change to redux!
     render() {
         return (
             <div className={classes.SIdeDrawerContainer}>
@@ -25,7 +26,7 @@ class SideDrawer extends React.Component{
                             <h2><span>Profile</span></h2></li>
 
                         <li className={classes.SideDrawerItem}>
-                            <h2><span onClick={this.props.onLogout}>Logout</span></h2></li>
+                            <h2><span onClick={this.props.logout}>Logout</span></h2></li>
                     </ul>
                 </div>
             </div>
@@ -33,4 +34,10 @@ class SideDrawer extends React.Component{
     }
 }
 
-export default SideDrawer;
+const mapDispatchToProps = (dispatch) => (
+    {
+        logout: () => dispatch(logout()),
+    }
+);
+
+export default connect(null, mapDispatchToProps)(SideDrawer);

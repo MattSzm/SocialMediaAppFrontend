@@ -7,7 +7,9 @@ const input = (props) => {
     if(props.invalid && props.shouldValidate && props.touched){
         inputClasses.push(classes.Invalid);
     }
-
+    if(!props.invalid && props.colorGreen && props.touched){
+        inputClasses.push(classes.ColorGreen);
+    }
     switch (props.elementType) {
         case ('input'):
             inputElement = <input

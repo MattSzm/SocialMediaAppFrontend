@@ -92,6 +92,7 @@ class Login extends React.Component{
                 shouldValidate={true}
                 touched={formElement.config.touched}
                 invalid={!formElement.config.valid}
+                colorGreen={true}
             />
         ))
         let form = <Spinner />
