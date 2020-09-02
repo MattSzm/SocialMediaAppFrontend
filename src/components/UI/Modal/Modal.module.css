@@ -1,13 +1,22 @@
 .Modal {
     position: fixed;
     z-index: 600;
-    background-color: white;
     width: 80%;
-    border: 3px solid #657786;
+    border: 1.5px solid #657786;
     left: 15%;
     top: 30%;
     box-sizing: border-box;
     transition: all 0.25s ease-in;
+}
+
+.ModalBright{
+    background-color: white;
+}
+
+.ModalDark {
+    background-color: #657786;
+    border: 1.5px solid #AAB8C2;
+    color: white;
 }
 
 @media (min-width: 600px) {
@@ -15,4 +24,12 @@
         width: 500px;
         left: calc(50% - 250px);
     }
+}
+
+@media (min-width: 300px) {
+    .Modal{
+        width: 280px;
+        left: calc(50% - 140px);
+    }
+
 }

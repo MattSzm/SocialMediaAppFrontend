@@ -17,19 +17,18 @@ class Layout extends React.Component{
             <React.Fragment>
                 <Modal show={this.props.showModal}
                        closeModalAndBackdrop={this.props.modalToggle.bind(this)}>
-                    <h2>LOGIN PLACE </h2>
-                    <h2>LOGIN PLACE </h2>
-                    <h2>LOGIN PLACE </h2>
-                    <h2>LOGIN PLACE </h2>
+                        <h2>MODALPLACEHOLDER</h2>
                 </Modal>
+
+
                 <div className={classes.Layout}>
-                    <SideDrawer
-                        onLogout={this.props.modalToggle.bind(this)}/>
+                    <SideDrawer/>
 
                     <Posts />
 
                     <Info />
                 </div>
+
                 <MobileNavigation />
                 <Spinner />
             </React.Fragment>

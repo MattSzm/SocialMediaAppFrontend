@@ -1,0 +1,15 @@
+.UnauthorizedUserMainPage{
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+}
+
+.Buttons{
+    position: center;
+    width: 200px;
+    margin: auto;
+    padding-top: 5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
