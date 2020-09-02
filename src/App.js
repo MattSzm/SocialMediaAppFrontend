@@ -4,9 +4,14 @@ import Layout from "./hoc/Layout/Layout";
 import {connect} from 'react-redux';
 import UnauthorizedUserMainPage from "./containers/UnauthorizedUserMainPage/UnauthorizedUserMainPage";
 import { Route, Switch, Redirect } from 'react-router-dom';
+import store from './store/store';
+import {loadUser} from './store/actions/auth';
 
 
 class App extends React.Component {
+    componentDidMount() {
+        store.dispatch(loadUser());
+    }
 
     render() {
         let routers = (

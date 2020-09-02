@@ -1,10 +1,10 @@
 import React from "react";
 import classes from './Login.module.css';
 import { connect } from 'react-redux';
-import {Redirect} from 'react-router-dom';
 import Input from "../../../components/UI/Input/Input";
 import Button from '../../../components/UI/AuthButton/AuthButton';
 import * as actions from '../../../store/actions/auth';
+import Spinner from '../../../components/UI/Spinner/Spinner';
 
 
 class Login extends React.Component{
@@ -80,7 +80,7 @@ class Login extends React.Component{
             });
         }
 
-        let form = formElementArray.map(formElement => (
+        let formInputs = formElementArray.map(formElement => (
             <Input
                 key ={formElement.id}
                 elementType={formElement.config.elementType}
@@ -94,16 +94,22 @@ class Login extends React.Component{
                 invalid={!formElement.config.valid}
             />
         ))
-
-        return (
-            <div className={classes.Login}>
+        let form = <Spinner />
+        if(!this.props.loading){
+            form = (
                 <form>
-                    {form}
+                    {formInputs}
                     <br/>
                     <Button click={this.submitHandler}>
                         Login
                     </Button>
                 </form>
+            );
+        }
+
+        return (
+            <div className={classes.Login}>
+                {form}
             </div>
         );
     }
@@ -112,7 +118,7 @@ class Login extends React.Component{
 
 const mapStateToProps = (state) => (
     {
-        AuthRedirectPath: state.auth.AuthRedirectPath
+        loading: state.auth.loading
     }
 );
 

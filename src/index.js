@@ -3,24 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import Thunk from 'redux-thunk';
-import axios from 'axios';
-import postsReducer from './store/reducers/posts';
-import authReducer from './store/reducers/auth';
-import modalReducer from './store/reducers/modal';
+import store from './store/store';
 import {BrowserRouter} from 'react-router-dom'
 
-
-
-const rootReducer = combineReducers({
-    posts: postsReducer,
-    auth: authReducer,
-    modal: modalReducer,
-});
-
-const store = createStore(rootReducer, applyMiddleware(Thunk));
 
 ReactDOM.render(
   <React.StrictMode>
