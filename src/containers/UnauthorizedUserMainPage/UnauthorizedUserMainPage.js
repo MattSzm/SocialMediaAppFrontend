@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as modalActions from '../../store/actions/modal';
 import AuthButton from '../../components/UI/AuthButton/AuthButton';
 import classes from './UnauthorizedUserMainPage.module.css';
+import Login from "../Auth/Login/Login";
 
 
 class UnauthorizedUserMainPage extends React.Component{
@@ -15,16 +16,20 @@ class UnauthorizedUserMainPage extends React.Component{
                 <Modal show={this.props.showModal}
                         closeModalAndBackdrop={this.props.modalToggle.bind(this)}
                         dark={true}>
-                    <div style={{height: '15em'}}>LOGIN PANEL</div>
+
+                    <Login />
+
                 </Modal>
 
                <div className={classes.Buttons}>
                     <AuthButton
-                        click={this.props.modalToggle.bind(this)}>
+                        click={this.props.modalToggle.bind(this)}
+                        withAnimation={true}>
                         Login
                     </AuthButton>
+
                     <AuthButton
-                        click={this.props.modalToggle.bind(this)}>
+                        withAnimation={true}>
                         Register
                     </AuthButton>
                 </div>

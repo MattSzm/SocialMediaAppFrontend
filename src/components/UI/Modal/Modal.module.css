@@ -19,13 +19,6 @@
     color: white;
 }
 
-@media (min-width: 600px) {
-    .Modal {
-        width: 500px;
-        left: calc(50% - 250px);
-    }
-}
-
 @media (min-width: 300px) {
     .Modal{
         width: 280px;
@@ -33,3 +26,19 @@
     }
 
 }
+
+@media (min-width: 600px) {
+    .Modal {
+        width: 500px;
+        left: calc(50% - 250px);
+    }
+}
+
+@media (min-width: 1200px) {
+    .Modal {
+        width: 700px;
+        left: calc(50% - 350px);
+    }
+}
+
+

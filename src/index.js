@@ -10,6 +10,8 @@ import axios from 'axios';
 import postsReducer from './store/reducers/posts';
 import authReducer from './store/reducers/auth';
 import modalReducer from './store/reducers/modal';
+import {BrowserRouter} from 'react-router-dom'
+
 
 
 const rootReducer = combineReducers({
@@ -23,7 +25,9 @@ const store = createStore(rootReducer, applyMiddleware(Thunk));
 ReactDOM.render(
   <React.StrictMode>
       <Provider store={store}>
+          <BrowserRouter>
             <App />
+          </BrowserRouter>
       </Provider>
   </React.StrictMode>,
   document.getElementById('root')

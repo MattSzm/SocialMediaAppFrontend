@@ -3,14 +3,31 @@ import classes from './App.module.css';
 import Layout from "./hoc/Layout/Layout";
 import {connect} from 'react-redux';
 import UnauthorizedUserMainPage from "./containers/UnauthorizedUserMainPage/UnauthorizedUserMainPage";
+import { Route, Switch, Redirect } from 'react-router-dom';
+
 
 class App extends React.Component {
 
     render() {
+        let routers = (
+            <Switch>
+                <Route path="/"  component={UnauthorizedUserMainPage} />
+                <Redirect to="/" />
+            </Switch>
+        );
+        if(this.props.isAuthenticated){
+            routers = (
+                <Switch>
+                    <Route path="/" component={Layout} />
+                    <Redirect to="/" />
+                </Switch>
+            );
+        }
+
+
       return (
         <div className={classes.App}>
-            {this.props.isAuthenticated ?
-                <Layout /> : <UnauthorizedUserMainPage />}
+            {routers}
         </div>
   )}
 }
