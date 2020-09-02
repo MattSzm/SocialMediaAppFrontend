@@ -5,10 +5,10 @@ import Logo from "../../components/Logo/Logo";
 
 class SideDrawer extends React.Component{
 
-
+    //todo: change to redux!
     render() {
         return (
-            <div className={classes.SIdeDrawerContainter}>
+            <div className={classes.SIdeDrawerContainer}>
                 <div className={classes.SideDrawer}>
                     <Logo />
                     <ul>
@@ -25,7 +25,7 @@ class SideDrawer extends React.Component{
                             <h2><span>Profile</span></h2></li>
 
                         <li className={classes.SideDrawerItem}>
-                            <h2><span>Logout</span></h2></li>
+                            <h2><span onClick={this.props.onLogout}>Logout</span></h2></li>
                     </ul>
                 </div>
             </div>

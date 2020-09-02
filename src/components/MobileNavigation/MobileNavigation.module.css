@@ -4,6 +4,7 @@
     position: fixed;
     background-color: #E1E8ED;
     bottom: 0;
+    z-index: 10;
 }
 
 @media (min-width: 1050px) {
