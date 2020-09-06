@@ -33,6 +33,7 @@ const reducer = (state= initialState, action) =>{
                 user: null,
                 loading: false};
         case actionTypes.LOGOUT_SUCCESS:
+            localStorage.removeItem('token');
             return {...state,
                 token: null,
                 user: null,

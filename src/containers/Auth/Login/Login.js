@@ -38,7 +38,7 @@ class Login extends React.Component{
             },
         },
     }
-
+ 
     checkValidity(value, rules){
         let isValid = true;
         if (rules) {

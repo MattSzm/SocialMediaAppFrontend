@@ -26,6 +26,12 @@
     transform: scale(3); /*change scale(3) to scale(1)*/
 }
 
+@media (max-width: 1200px) {
+    .black{
+        color: #657786;
+    }
+}
+
 .effect1 .bg {
     background: #1DA1F2;
     width: 30px;

@@ -1,10 +1,10 @@
 .Logo {
     background-color: transparent;
-    padding: 10px;
-    margin-left: 10px;
-    height: 100%;
+    margin: 25px 0 15px 0;
+    height: 100px;
+    width: 100%;
     box-sizing: border-box;
-    border-radius: 5px;
+
 }
 
 .Logo .srcOne{
@@ -12,19 +12,6 @@
 }
 
 
-.Logo .srcTwo{
-    display: none;
-}
-
-
 @media (max-width: 1150px) {
-    .Logo .srcOne{
-        display: none;
-    }
-    .Logo .srcTwo{
-        margin-left: 30px;
-        height: 60px;
-        width: auto;
-        display: block;
-    }
+
 }

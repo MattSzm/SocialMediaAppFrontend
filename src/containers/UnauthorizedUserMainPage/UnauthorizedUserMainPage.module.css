@@ -1,15 +1,74 @@
-.UnauthorizedUserMainPage{
+.UnauthorizedUserMainPageContainer{
     width: 100vw;
     height: 100vh;
-    background-color: black;
+    display: flex;
+    flex-direction: row;
+    color: white;
+}
+
+.UnauthorizedUserMainPageLeft{
+    width: 50%;
+    height: 100vh;
+}
+
+.UnauthorizedUserMainPageLeft .BigScreen{
+    width: 100%;
+    height: 100%;
+}
+
+.UnauthorizedUserMainPageLeft .SmallScreen{
+    display: none;
+}
+.SmallScreenLogo{
+    display: none;
+}
+.UnauthorizedUserMainPageRight{
+    width: 50%;
+    height: 100vh;
+    background-color: #14171A;
+}
+.Content{
+    margin-top: 10em;
+    position: center;
 }
 
 .Buttons{
-    position: center;
     width: 200px;
     margin: auto;
-    padding-top: 5em;
     display: flex;
+    padding-top: 5em;
     flex-direction: column;
     justify-content: space-evenly;
 }
+@media (max-width: 1200px) {
+    .UnauthorizedUserMainPageContainer{
+        display: block;
+    }
+    .UnauthorizedUserMainPageLeft{
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+    }
+    .UnauthorizedUserMainPageLeft .BigScreen{
+        display: none;
+    }
+    .UnauthorizedUserMainPageLeft .SmallScreen{
+        position: absolute;
+        display: block;
+        width: 100vw;
+        height: 100vh;
+    }
+    .UnauthorizedUserMainPageRight{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+    }
+    .SmallScreenLogo{
+        width: 100%;
+        display: block;
+        position: fixed;
+        background: transparent;
+    }
+}
+
