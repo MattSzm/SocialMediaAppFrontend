@@ -1,19 +1,42 @@
 import React, {Component, Fragment} from "react";
 import {withAlert} from "react-alert";
+import {connect} from 'react-redux';
 
 
 class Alert extends Component{
-    componentDidMount() {
-        this.props.alert.show('IT works');
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const { error, alert, message } = this.props;
+        if(error !== prevProps.error){
+            console.log('im ine');
+            if(error.message.username){
+                alert.error('Username or e-mail is required');
+            }
+            if(error.message.password){
+                alert.error('Password is required');
+            }
+            if(error.message.non_field_errors){
+                alert.error(error.message.non_field_errors);
+            }
+        }
+        if(message !== prevProps.message){
+            if(message.loggedIn){
+                alert.success(message.loggedIn);
+            }
+            if(message.loggedOut){
+                alert.success(message.loggedOut);
+            }
+        }
     }
 
     render() {
         return (
-            <Fragment>
-
-            </Fragment>
+            <Fragment />
         );
     }
 }
+const mapStateToProps = state => ({
+    error: state.errors,
+    message: state.messages
+});
 
-export default withAlert()(Alert);
+export default connect(mapStateToProps)(withAlert()(Alert));

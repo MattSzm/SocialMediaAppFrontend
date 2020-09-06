@@ -9,3 +9,7 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 
 
 export const MODAL_TOGGLE = 'MODAL_TOGGLE';
+
+export const GET_ERRORS = 'GET_ERRORS';
+
+export const CREATE_MESSAGE = 'CREATE_MESSAGE';

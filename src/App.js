@@ -39,15 +39,15 @@ class App extends React.Component {
         }
 
 
-      return (
-          <AlertProvider
-              template={AlertTemplate}
-              {...alertOptions} >
-              <Alert />
-                <div className={classes.App}>
-                    {routers}
-                </div>
-          </AlertProvider>
+        return (
+            <AlertProvider
+                template={AlertTemplate}
+                {...alertOptions} >
+                <Alert />
+                    <div className={classes.App}>
+                        {routers}
+                    </div>
+            </AlertProvider>
   )}
 }
 

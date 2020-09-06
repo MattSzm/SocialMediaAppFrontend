@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios'
 import * as modalActions from './modal';
+import {createMessage} from './messages';
 
 
 const tokenConfig = getState => {
@@ -21,7 +22,6 @@ export default tokenConfig;
 export const loadUser = () => {
     return (dispatch, getState) => {
     dispatch({type: actionTypes.USER_LOADING_START});
-    console.log(getState().auth.token);
     axios.get('/api/user/currentuser/', tokenConfig(getState))
         .then(res => {
             dispatch({
@@ -55,11 +55,22 @@ export const login = (username, password) => {
                     type: actionTypes.LOGIN_SUCCESS,
                     payload: res.data
                 })
+                dispatch(createMessage(
+                    {loggedIn: 'Logged in successfully'}));
                 dispatch(modalActions.modalToggle());
             }).catch(error => {
-                dispatch({
-                    type: actionTypes.LOGIN_FAIL
-                })
+                if(error.response) {
+                    dispatch({
+                        type: actionTypes.LOGIN_FAIL
+                    });
+                    dispatch({
+                        type: actionTypes.GET_ERRORS,
+                        payload: {
+                            msg: error.response.data,
+                            status: error.response.status
+                        }
+                    });
+                }
             })
     };
 };
@@ -73,6 +84,9 @@ export const logout = () => {
             dispatch({
                 type: actionTypes.LOGOUT_SUCCESS,
             })
+            dispatch(createMessage(
+                {loggedOut: 'Logged out successfully'}
+            ));
         }).catch(error => {
             console.log(error);
         // dispatch(returnErrors(error.response.data, error.response.status));

@@ -55,6 +55,7 @@ class Login extends React.Component{
             this.state.controls.username.value,
             this.state.controls.password.value
         )
+        this.forceUpdate();
     }
 
     inputChangedHandler = (event, controlName) => {
