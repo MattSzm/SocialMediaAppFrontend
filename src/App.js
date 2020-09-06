@@ -6,6 +6,15 @@ import UnauthorizedUserMainPage from "./containers/UnauthorizedUserMainPage/Unau
 import { Route, Switch, Redirect } from 'react-router-dom';
 import store from './store/store';
 import {loadUser} from './store/actions/auth';
+import {Provider as AlertProvider} from "react-alert";
+import AlertTemplate from "react-alert-template-basic";
+import Alert from "./containers/Alert/Alert";
+
+
+const alertOptions = {
+    timeout: 3000,
+    position: 'top center'
+}
 
 
 class App extends React.Component {
@@ -31,9 +40,14 @@ class App extends React.Component {
 
 
       return (
-        <div className={classes.App}>
-            {routers}
-        </div>
+          <AlertProvider
+              template={AlertTemplate}
+              {...alertOptions} >
+              <Alert />
+                <div className={classes.App}>
+                    {routers}
+                </div>
+          </AlertProvider>
   )}
 }
 

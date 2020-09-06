@@ -28,7 +28,7 @@
     background-color: #14171A;
 }
 .Content{
-    margin-top: 10em;
+    margin-top: 5em;
     position: center;
 }
 
@@ -40,7 +40,7 @@
     flex-direction: column;
     justify-content: space-evenly;
 }
-@media (max-width: 1200px) {
+@media (max-width: 1300px) {
     .UnauthorizedUserMainPageContainer{
         display: block;
     }
@@ -60,15 +60,30 @@
     }
     .UnauthorizedUserMainPageRight{
         position: absolute;
-        width: 100%;
+        width: 90%;
+        left: 5%;
         height: 100%;
         background-color: transparent;
     }
     .SmallScreenLogo{
-        width: 100%;
+        width: 48%;
+        left: 26%;
         display: block;
         position: fixed;
         background: transparent;
     }
 }
+@media (max-width: 900px){
+    .SmallScreenLogo{
+        width: 70%;
+        left: 15%;
+    }
+}
+@media (max-width: 600px){
+    .SmallScreenLogo{
+        width: 100%;
+        left: 0;
+    }
+}
+
 
