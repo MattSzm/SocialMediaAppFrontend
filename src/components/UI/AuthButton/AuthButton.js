@@ -12,8 +12,7 @@ const authButton = (props) => {
             onClick={props.click}>
             <span className={classNames.join(' ')}>
                 {props.children}
-                {props.withAnimation ?
-                    <span className={classes.bg} /> : null}
+                <span className={classes.bg} />
             </span>
         </div>
     );

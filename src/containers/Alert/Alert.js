@@ -7,7 +7,6 @@ class Alert extends Component{
     componentDidUpdate(prevProps, prevState, snapshot) {
         const { error, alert, message } = this.props;
         if(error !== prevProps.error){
-            console.log('im ine');
             if(error.message.username){
                 alert.error('Username or e-mail is required');
             }
@@ -16,6 +15,9 @@ class Alert extends Component{
             }
             if(error.message.non_field_errors){
                 alert.error(error.message.non_field_errors);
+            }
+            if(error.status === 500){
+                alert.error('Error');
             }
         }
         if(message !== prevProps.message){

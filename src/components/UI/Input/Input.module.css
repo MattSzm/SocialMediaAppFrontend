@@ -7,7 +7,8 @@
 
 .InputElement {
     outline: none;
-    border: 2px solid #F5F8FA;
+    border: none;
+    border-bottom: 2px solid #F5F8FA;
     background-color: #AAB8C2;
     font: inherit;
     padding: 6px 10px;
@@ -22,12 +23,12 @@
 }
 
 .Invalid{
-    border: 1.5px solid #fda6a6;
+    border-bottom: 2px solid #fda6a6;
     background-color: #ffcaca;
 }
 
 .ColorGreen{
-    border: 1.5px solid #bbf387;
+    border-bottom: 2px solid #adef70;
 }
 
 .textarea{

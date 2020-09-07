@@ -36,13 +36,11 @@ class UnauthorizedUserMainPage extends Component{
                             <div className={classes.Buttons}>
                                 <AuthButton
                                     click={this.props.modalToggle.bind(this)}
-                                    withAnimation={true}
                                     blackWithSmallScreens={true}>
                                     Login
                                 </AuthButton>
 
                                 <AuthButton
-                                    withAnimation={true}
                                     blackWithSmallScreens={true}>
                                     Register
                                 </AuthButton>

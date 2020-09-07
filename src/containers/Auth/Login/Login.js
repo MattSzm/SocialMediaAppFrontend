@@ -2,7 +2,7 @@ import React from "react";
 import classes from './Login.module.css';
 import { connect } from 'react-redux';
 import Input from "../../../components/UI/Input/Input";
-import Button from '../../../components/UI/AuthButton/AuthButton';
+import Button from '../../../components/UI/StandardButton/StandardButton';
 import * as actions from '../../../store/actions/auth';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 
