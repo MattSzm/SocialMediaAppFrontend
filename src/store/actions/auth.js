@@ -19,6 +19,7 @@ const tokenConfig = getState => {
 }
 export default tokenConfig;
 
+
 export const loadUser = () => {
     return (dispatch, getState) => {
     dispatch({type: actionTypes.USER_LOADING_START});
@@ -92,3 +93,4 @@ export const logout = () => {
         // dispatch(returnErrors(error.response.data, error.response.status));
     });
 };};
+

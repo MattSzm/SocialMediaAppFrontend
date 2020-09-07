@@ -45,3 +45,9 @@
 .Like:hover{
     background-color: #fddbdb;
 }
+
+@media(max-width: 400px){
+    .PostContent{
+        width: 78%;
+    }
+}

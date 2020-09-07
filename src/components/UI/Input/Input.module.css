@@ -2,7 +2,6 @@
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
-
 }
 
 .InputElement {
@@ -31,6 +30,31 @@
     border-bottom: 2px solid #adef70;
 }
 
+.InputCreatePost{
+    width: 87%;
+    box-sizing: border-box;
+    margin-right: 8px;
+}
+
+.InputElementCreatePost {
+    outline: none;
+    border: none;
+    border-bottom: solid #E1E8ED 2px;;
+    font: inherit;
+    padding: 6px 10px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .textarea{
     resize: none;
+    font-size: 1.5em;
+}
+
+
+@media(max-width: 400px){
+    .InputCreatePost{
+        width: 78%;
+    }
 }

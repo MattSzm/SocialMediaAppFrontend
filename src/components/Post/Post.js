@@ -2,19 +2,15 @@ import React from "react";
 import classes from './Post.module.css';
 import photo from '../../assets/mockAvatar1.jpeg'
 import PostContent from "./PostContent/PostContent";
+import Avatar from '../Avatar/Avatar';
 
-
-const Post = (props) => {
+const post = (props) => {
     return (
         <div className={classes.Post}>
-            <div className={classes.PostImage}>
-                <img src={photo}/>
-            </div>
-
+            <Avatar link={photo} />
             <PostContent/>
-
         </div>
     );
 }
 
-export default Post;
+export default post;

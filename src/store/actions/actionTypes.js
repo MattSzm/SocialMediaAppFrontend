@@ -6,6 +6,7 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const USER_LOADING_START = 'USER_LOADING_START';
 export const USER_LOADED_SUCCESS = 'USER_LOADED';
 export const AUTH_ERROR = 'AUTH_ERROR';
+export const USER_PHOTO_LOAD = 'USER_PHOTO_LOAD';
 
 
 export const MODAL_TOGGLE = 'MODAL_TOGGLE';

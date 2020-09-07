@@ -1,14 +1,21 @@
 import React from "react";
 import classes from './Input.module.css';
+import TextareaAutosize from 'react-textarea-autosize';
 
 const input = (props) => {
     let inputElement = null;
-    const inputClasses = [classes.InputElement];
+    let inputClasses = [classes.InputElement];
+    if(props.createPost){
+        inputClasses = [classes.InputElementCreatePost];
+    }
     if(props.invalid && props.shouldValidate && props.touched){
         inputClasses.push(classes.Invalid);
     }
     if(!props.invalid && props.colorGreen && props.touched){
         inputClasses.push(classes.ColorGreen);
+    }
+    if(props.elementType === 'textarea'){
+        inputClasses.push(classes.textarea);
     }
     switch (props.elementType) {
         case ('input'):
@@ -19,7 +26,8 @@ const input = (props) => {
                 onChange={props.changed}/>;
             break;
         case ('textarea'):
-            inputElement = <textarea
+            inputElement = <TextareaAutosize
+                minRows = {2}
                 className={inputClasses.join(' ')}
                 {...props.elementConfig}
                 value={props.value}
@@ -41,7 +49,8 @@ const input = (props) => {
     }
 
     return (
-        <div className={classes.Input}>
+        <div className={props.createPost ?
+            classes.InputCreatePost : classes.Input}>
             {inputElement}
         </div>
     );

@@ -1,4 +1,4 @@
-.Post{
+.Container{
     width: 100%;
     height: auto;
     display: flex;
@@ -8,8 +8,3 @@
     border-bottom: solid #E1E8ED 1px;
     z-index: 1;
 }
-
-.Post:hover{
-    background-color: #F5F8FA;
-}
-

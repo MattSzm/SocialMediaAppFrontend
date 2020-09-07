@@ -1,14 +1,14 @@
 .btn {
     display: inline-block;
-    padding: 9px 12px;
-    padding-top: 7px;
+    padding: 12px 25px;
+    /*padding-top: 7px;*/
     margin-bottom: 0;
     color: #F5F8FA;
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
     background-color: #1DA1F2;
-    -webkit-border-radius: 4px;
+    -webkit-border-radius: 21px;
     background-image: none !important;
     border: none;
     text-shadow: none;

@@ -25,7 +25,7 @@ const PostContent = (props) => {
             <p>
                 <Linkify fuzzyEmail={false}>
                     {hashtag_formatter("Goooooodmorning www.npmjs.com/package/react-linkify @guyssss! #working " +
-                        "https://www.npmjs.com/package/react-linkify  in @the studio on new music, " +
+                        " in @the studio on new music, " +
                         "what are you doing #today ??")}
                 </Linkify>
             </p>

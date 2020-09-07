@@ -13,6 +13,7 @@ import * as modalActions from '../../store/actions/modal';
 class Layout extends React.Component{
 
     render() {
+
         return(
             <React.Fragment>
                 <Modal show={this.props.showModal}
@@ -31,6 +32,7 @@ class Layout extends React.Component{
 
                 <MobileNavigation />
                 <Spinner />
+                {/*{ this.props.user ? <img  src={this.props.user.photo} /> : null}*/}
             </React.Fragment>
         );
     }
@@ -38,7 +40,8 @@ class Layout extends React.Component{
 
 const mapStateToProps = state => (
     {
-        showModal: state.modal.showModal
+        showModal: state.modal.showModal,
+        user: state.auth.user
     }
 );
 
