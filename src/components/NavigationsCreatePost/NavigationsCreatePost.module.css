@@ -9,8 +9,8 @@
     width: 13%;
     height: auto;
 }
-
 .Navigation{
+    height: auto;
     width: 80%;
     display: flex;
     flex-direction: row;

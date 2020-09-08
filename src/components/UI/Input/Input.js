@@ -33,13 +33,13 @@ const input = (props) => {
                 value={props.value}
                 onChange={props.changed}/>;
             break;
-        case ('image'):
-            inputElement = (<file
-                className={inputClasses.join(' ')}
-                {...props.elementConfig}
-                onChange={props.changed}
-                accept="image/*"/>);
-            break;
+        // case ('image'):
+        //     inputElement = (<file
+        //         className={inputClasses.join(' ')}
+        //         {...props.elementConfig}
+        //         onChange={props.changed}
+        //         accept="image/*"/>);
+        //     break;
         default:
             inputElement = <input
                 className={inputClasses.join(' ')}

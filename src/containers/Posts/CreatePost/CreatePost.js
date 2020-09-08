@@ -6,6 +6,26 @@ import Input from '../../../components/UI/Input/Input';
 import NavigationCreatePost from "../../../components/NavigationsCreatePost/NavigationsCreatePost";
 
 class CreatePost extends React.Component{
+    state = {
+        content: {
+            elementType: 'textarea',
+            elementConfig: {
+                type: 'text',
+                placeholder: `What's happening?`
+            },
+            value: '',
+            validation: {
+                required: true,
+                minLength: 0,
+                maxLength: 280
+            },
+            valid: false
+        },
+        picture: null
+
+    }
+
+
 
     render() {
         return(
@@ -16,7 +36,8 @@ class CreatePost extends React.Component{
                         <Input elementType={'textarea'}
                                 createPost={true}/>
                 </div>
-                <NavigationCreatePost />
+                <NavigationCreatePost
+                   />
 
             </div>
         );
