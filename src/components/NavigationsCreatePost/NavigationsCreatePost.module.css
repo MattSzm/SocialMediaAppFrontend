@@ -1,0 +1,18 @@
+.Container{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0.7em;
+}
+.Dump{
+    width: 13%;
+    height: auto;
+}
+
+.Navigation{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

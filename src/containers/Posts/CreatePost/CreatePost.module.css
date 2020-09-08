@@ -1,10 +1,18 @@
-.Container{
+.ContainerOutside{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    border-bottom: solid #E1E8ED 1px;
+}
+
+
+.ContainerInside{
     width: 100%;
     height: auto;
     display: flex;
     flex-direction: row;
     padding: 10px 0;
     justify-content: space-around;
-    border-bottom: solid #E1E8ED 1px;
-    z-index: 1;
 }

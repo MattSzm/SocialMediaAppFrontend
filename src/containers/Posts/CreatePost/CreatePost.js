@@ -3,17 +3,21 @@ import classes from './CreatePost.module.css';
 import {connect} from "react-redux";
 import Avatar from "../../../components/Avatar/Avatar";
 import Input from '../../../components/UI/Input/Input';
-
+import NavigationCreatePost from "../../../components/NavigationsCreatePost/NavigationsCreatePost";
 
 class CreatePost extends React.Component{
 
     render() {
         return(
-            <div className={classes.Container}>
-                {this.props.user ?
-                    <Avatar link={this.props.user.photo} /> : null}
-                    <Input elementType={'textarea'}
-                            createPost={true}/>
+            <div className={classes.ContainerOutside}>
+                <div className={classes.ContainerInside}>
+                    {this.props.user ?
+                        <Avatar link={this.props.user.photo} /> : null}
+                        <Input elementType={'textarea'}
+                                createPost={true}/>
+                </div>
+                <NavigationCreatePost />
+
             </div>
         );
     }

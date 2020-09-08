@@ -30,6 +30,11 @@
 
 .SideDrawerItem{
     margin: 2.5em 0;
+    text-decoration: none;
+    color: #14171A;
+}
+.SideDrawerItem h2{
+    margin-bottom: 1.7em;
 }
 .SideDrawerItem span{
     padding: 0.5em 0.5em;
@@ -41,7 +46,7 @@
     color: #1DA1F2;
     background-color:rgba(29,161,242,0.16) ;
 }
-.active{
+.Active{
     color: #1DA1F2;
 }
 
