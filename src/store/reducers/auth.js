@@ -24,7 +24,6 @@ const reducer = (state= initialState, action) =>{
             return {...state,
                 loading: true};
         case actionTypes.USER_LOADED_SUCCESS:
-            console.log(action.payload);
             return {...state,
                 user: action.payload,
                 loading: false};

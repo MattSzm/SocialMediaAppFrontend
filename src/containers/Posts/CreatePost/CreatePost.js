@@ -25,6 +25,10 @@ class CreatePost extends React.Component{
 
     }
 
+    pictureUploadHandler = (picture) => {
+        this.setState({picture: picture});
+        console.log(this.state.picture);
+    }
 
 
     render() {
@@ -37,7 +41,7 @@ class CreatePost extends React.Component{
                                 createPost={true}/>
                 </div>
                 <NavigationCreatePost
-                   />
+                    pictureUpload={this.pictureUploadHandler} />
 
             </div>
         );

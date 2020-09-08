@@ -8,7 +8,7 @@ const navigationCreatePost = (props) => {
         <div className={classes.Container}>
             <div className={classes.Dump} />
             <div className={classes.Navigation}>
-                <UploadFile />
+                <UploadFile upload={props.pictureUpload}/>
                 <Button>Tweet</Button>
             </div>
         </div>

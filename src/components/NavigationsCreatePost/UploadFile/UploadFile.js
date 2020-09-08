@@ -7,9 +7,8 @@ const UploadFile = (props) => {
     const maxNumber = 1;
 
     const onChange = (imageList, addUpdateIndex) => {
-        // data for submit
-        console.log(imageList, addUpdateIndex);
         setImages(imageList);
+        props.upload(imageList[0]);
     };
 
     return (
