@@ -8,6 +8,7 @@ import {NavLink} from "react-router-dom";
 class SideDrawer extends React.Component{
 
     render() {
+
         return (
             <div className={classes.SIdeDrawerContainer}>
                 <div className={classes.SideDrawer}>
@@ -37,11 +38,10 @@ class SideDrawer extends React.Component{
                             <h2><span>Profile</span></h2>
                         </NavLink>
 
-                        <NavLink to="/logout"
-                                 className={classes.SideDrawerItem}
-                                 activeClassName={classes.Active}>
+                        <li
+                                 className={classes.SideDrawerItem}>
                             <h2><span onClick={this.props.logout}>Logout</span></h2>
-                        </NavLink>
+                        </li>
                     </ul>
                 </div>
             </div>

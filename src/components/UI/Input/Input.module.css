@@ -26,15 +26,7 @@
     background-color: #ffcaca;
 }
 
-.ColorGreen{
-    border-bottom: 2px solid #adef70;
-}
 
-.InputCreatePost{
-    width: 87%;
-    box-sizing: border-box;
-    margin-right: 8px;
-}
 
 .InputElementCreatePost {
     outline: none;
@@ -52,6 +44,9 @@
     font-size: 1.5em;
 }
 
+.ColorGreen{
+    border-bottom: 2px solid #adef70;
+}
 
 @media(max-width: 400px){
     .InputCreatePost{

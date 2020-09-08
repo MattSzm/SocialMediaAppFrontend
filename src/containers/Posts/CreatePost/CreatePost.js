@@ -5,6 +5,7 @@ import Avatar from "../../../components/Avatar/Avatar";
 import Input from '../../../components/UI/Input/Input';
 import NavigationCreatePost from "../../../components/NavigationsCreatePost/NavigationsCreatePost";
 
+
 class CreatePost extends React.Component{
     state = {
         content: {
@@ -16,10 +17,10 @@ class CreatePost extends React.Component{
             value: '',
             validation: {
                 required: true,
-                minLength: 0,
-                maxLength: 280
+                maxLength: 280,
             },
-            valid: false
+            valid: false,
+            touched: false
         },
         picture: null
 
@@ -30,15 +31,50 @@ class CreatePost extends React.Component{
         console.log(this.state.picture);
     }
 
+    checkValidity = (value, rules) => {
+        let isValid = true;
+        if (rules) {
+            if (rules.required) {
+                isValid = value.trim() !== '' && isValid;
+            }
+            if (rules.maxLength) {
+                isValid = value.length < rules.maxLength && isValid;
+            }
+        }
+        return isValid;
+    }
+
+    contentChangedHandler = event => {
+        const updatedContent = {...this.state.content};
+        updatedContent.value = event.target.value;
+        updatedContent.valid = this.checkValidity(updatedContent.value,
+            updatedContent.validation);
+        updatedContent.touched = true;
+        if(updatedContent.value.length === 0){
+            updatedContent.touched = false;
+        }
+
+        this.setState({content: updatedContent});
+    }
+
 
     render() {
+
         return(
             <div className={classes.ContainerOutside}>
                 <div className={classes.ContainerInside}>
                     {this.props.user ?
                         <Avatar link={this.props.user.photo} /> : null}
-                        <Input elementType={'textarea'}
-                                createPost={true}/>
+                        <Input elementType={this.state.content.elementType}
+                               elementConfig={this.state.content.elementConfig}
+                               maxLength={this.state.content.validation.maxLength}
+                               value={this.state.content.value}
+                               changed = {event => (this.contentChangedHandler(event))}
+
+                               shouldValidate={true}
+                               touched={this.state.content.touched}
+                               invalid={!this.state.content.valid}
+                               createPost={true}/>
                 </div>
                 <NavigationCreatePost
                     pictureUpload={this.pictureUploadHandler} />

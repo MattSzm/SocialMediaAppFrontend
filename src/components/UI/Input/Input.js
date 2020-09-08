@@ -1,13 +1,39 @@
 import React from "react";
 import classes from './Input.module.css';
 import TextareaAutosize from 'react-textarea-autosize';
+import styled from 'styled-components';
+
+
+const InputCreatePostStyledDiv = styled.div.attrs(props =>({
+    precent: props.precent
+}))`
+        width: 87%;
+        box-sizing: border-box;
+        margin-right: 8px;
+        &:after{
+            content: "";
+            display: block;
+            position: relative;
+            margin: 0;
+            width: ${props => props.precent}%;
+            border-bottom: 2px solid ${props => 
+                props.precent < 100 ? '#adef70' : '#fda6a6'};
+        }
+        @media(max-width: 400px){
+            width: 78%;
+           }
+    }`;
+
 
 const input = (props) => {
     let inputElement = null;
+
+
     let inputClasses = [classes.InputElement];
     if(props.createPost){
         inputClasses = [classes.InputElementCreatePost];
     }
+
     if(props.invalid && props.shouldValidate && props.touched){
         inputClasses.push(classes.Invalid);
     }
@@ -33,13 +59,6 @@ const input = (props) => {
                 value={props.value}
                 onChange={props.changed}/>;
             break;
-        // case ('image'):
-        //     inputElement = (<file
-        //         className={inputClasses.join(' ')}
-        //         {...props.elementConfig}
-        //         onChange={props.changed}
-        //         accept="image/*"/>);
-        //     break;
         default:
             inputElement = <input
                 className={inputClasses.join(' ')}
@@ -47,13 +66,20 @@ const input = (props) => {
                 value={props.value}
                 onChange={props.changed}/>;
     }
-
-    return (
-        <div className={props.createPost ?
-            classes.InputCreatePost : classes.Input}>
-            {inputElement}
-        </div>
-    );
+    let output = (
+                <div className={classes.Input}>
+                        {inputElement}
+                </div>);
+    if (props.createPost){
+        output = (
+                <InputCreatePostStyledDiv
+                    precent={props.value.length < props.maxLength ?
+                        (props.value.length/props.maxLength)*100 : 100}>
+                    {inputElement}
+                </InputCreatePostStyledDiv>
+        );
+    }
+    return output;
 }
 
 export default input;

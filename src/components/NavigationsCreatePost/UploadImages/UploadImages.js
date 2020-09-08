@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import ImageUploading from 'react-images-uploading';
 import StandardButton from "../../UI/StandardButton/StandardButton";
 
-const UploadFile = (props) => {
+const UploadImages = (props) => {
     const [images, setImages] = useState([]);
     const maxNumber = 1;
 
@@ -42,7 +42,7 @@ const UploadFile = (props) => {
                                         click={onImageUpload}
                                         drag = {dragProps}
                                     >
-                                        Upload Image
+                                        Upload
                                     </StandardButton>
                         }
                         {images[0]  ? <div style={{height: '0.5em'
@@ -53,7 +53,7 @@ const UploadFile = (props) => {
                                 <div className="image-item__btn-wrapper">
                                     <span style={{
                                         cursor: 'pointer',
-                                        color: '#657786'
+                                        color: '#657786',
                                     }}
                                         onClick={() => onImageRemove(index)}><strong>Remove</strong></span>
                                 </div>
@@ -66,4 +66,4 @@ const UploadFile = (props) => {
     );
 }
 
-export default UploadFile;
+export default UploadImages;

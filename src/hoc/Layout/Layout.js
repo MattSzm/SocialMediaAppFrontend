@@ -13,7 +13,6 @@ import * as modalActions from '../../store/actions/modal';
 class Layout extends React.Component{
 
     render() {
-
         return(
             <React.Fragment>
                 <Modal show={this.props.showModal}
