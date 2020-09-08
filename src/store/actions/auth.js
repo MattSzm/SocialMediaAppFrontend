@@ -28,7 +28,7 @@ export const loadUser = () => {
             dispatch({
                 type: actionTypes.USER_LOADED_SUCCESS,
                 payload: res.data
-            })
+            });
         }).catch(error => {
             console.log(error);
         dispatch({

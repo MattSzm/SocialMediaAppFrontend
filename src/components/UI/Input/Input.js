@@ -3,7 +3,6 @@ import classes from './Input.module.css';
 import TextareaAutosize from 'react-textarea-autosize';
 import styled from 'styled-components';
 
-
 const InputCreatePostStyledDiv = styled.div.attrs(props =>({
     precent: props.precent
 }))`

@@ -30,7 +30,6 @@ class Layout extends React.Component{
                 </div>
 
                 <MobileNavigation />
-                <Spinner />
                 {/*{ this.props.user ? <img  src={this.props.user.photo} /> : null}*/}
             </React.Fragment>
         );

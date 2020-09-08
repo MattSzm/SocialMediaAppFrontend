@@ -28,7 +28,6 @@ class CreatePost extends React.Component{
 
     pictureUploadHandler = (picture) => {
         this.setState({picture: picture});
-        console.log(this.state.picture);
     }
 
     checkValidity = (value, rules) => {
