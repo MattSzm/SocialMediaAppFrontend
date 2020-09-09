@@ -13,10 +13,10 @@ class Posts extends React.Component{
     }
 
     render() {
-        let posts = <Spinner />
+        let content = <Spinner />
         if(!this.props.loading){
-            console.log(this.props.posts);
-            posts = (<Post />);
+            console.log(this.props.shares);
+            content = (<Post />);
         }
         return(
             <div className={classes.Posts}>
@@ -24,7 +24,7 @@ class Posts extends React.Component{
                 <h2>Home</h2>
                 <CreatePost />
 
-                {posts}
+                {content}
 
 
             </div>
@@ -34,6 +34,7 @@ class Posts extends React.Component{
 
 const mapStateToProps = state => ({
     posts: state.posts.posts,
+    shares: state.posts.shares,
     loading: state.posts.loading
 });
 
