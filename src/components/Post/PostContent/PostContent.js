@@ -19,14 +19,14 @@ const hashtag_formatter = string => {
 
 
 const PostContent = (props) => {
+    let date = props.date.substring(0,10) + ' ' + props.date.substring(11,16);
     return (
         <div className={classes.PostContent}>
-            <p className={classes.bolded}>Author nickname <span>@Name &#183; Aug 17</span></p>
+            <p className={classes.bolded}>{props.usernameDisplay}<span> @{props.username}
+                            &#183; {date}</span></p>
             <p>
                 <Linkify fuzzyEmail={false}>
-                    {hashtag_formatter("Goooooodmorning www.npmjs.com/package/react-linkify @guyssss! #working " +
-                        " in @the studio on new music, " +
-                        "what are you doing #today ??")}
+                    {hashtag_formatter(props.content)}
                 </Linkify>
             </p>
 

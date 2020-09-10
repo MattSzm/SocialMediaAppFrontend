@@ -4,6 +4,7 @@ import authReducer from "./reducers/auth";
 import modalReducer from "./reducers/modal";
 import errorsReducer from './reducers/errors';
 import messagesReducer from './reducers/messages';
+import usersReducer from './reducers/users';
 import Thunk from "redux-thunk";
 
 
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
     auth: authReducer,
     modal: modalReducer,
     errors: errorsReducer,
-    messages: messagesReducer
+    messages: messagesReducer,
+    users: usersReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(Thunk));

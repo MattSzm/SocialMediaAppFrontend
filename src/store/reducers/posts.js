@@ -8,7 +8,7 @@ const initialState = {
     loading: false
 }
 
-const reducer = (state=initialState, action) =>{
+const reducer = (state=initialState, action) => {
     switch (action.type){
         case actionTypes.FETCH_NEWSFEED_START:
             return {...state, loading: true};
