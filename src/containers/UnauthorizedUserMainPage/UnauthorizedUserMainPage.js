@@ -35,15 +35,23 @@ class UnauthorizedUserMainPage extends Component{
         this.props.modalToggle();
     }
 
+    changeLogReg = () => {
+        this.setState(prevState => ({showLogin: !prevState.showLogin,
+                                        showRegistration: !prevState.showRegistration}))
+    }
+
     render() {
         return (
             <Fragment>
                 <Modal show={this.props.showModal}
                        closeModalAndBackdrop={this.closeModalAndBackdrop.bind(this)}
                        dark={true}>
-                    <Login show={this.state.showLogin} />
-                    <Registration show={this.state.showRegistration} />
-
+                    <Login
+                        show={this.state.showLogin}
+                        changeState={this.changeLogReg}/>
+                    <Registration
+                        show={this.state.showRegistration}
+                        changeState={this.changeLogReg}/>
                 </Modal>
 
                 <div className={classes.UnauthorizedUserMainPageContainer} >
@@ -60,13 +68,13 @@ class UnauthorizedUserMainPage extends Component{
                                 <AuthButton
                                     click={this.showLoginHandler.bind(this)}
                                     blackWithSmallScreens={true}>
-                                    Login
+                                    Log in
                                 </AuthButton>
 
                                 <AuthButton
                                     click={this.showRegistrationHandler.bind(this)}
                                     blackWithSmallScreens={true}>
-                                    Register
+                                    Sign up
                                 </AuthButton>
                             </div>
                             <img src={logo} className={classes.SmallScreenLogo}/>

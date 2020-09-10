@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 class Alert extends Component{
     componentDidUpdate(prevProps, prevState, snapshot) {
-        const { error, alert, message } = this.props;
+        const { error, alert, message, isAuthenticated } = this.props;
         if(error !== prevProps.error){
             if(error.message.username){
                 alert.error('Username or e-mail is required');

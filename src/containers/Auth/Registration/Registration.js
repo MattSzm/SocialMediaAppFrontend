@@ -7,6 +7,7 @@ import * as actions from '../../../store/actions/auth';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import UploadImages from "../../../components/NavigationsCreatePost/UploadImages/UploadImages";
 import {createError} from "../../../store/actions/messages";
+import AuthButton from "../../../components/UI/AuthButton/AuthButton";
 
 
 class Login extends React.Component{
@@ -89,7 +90,6 @@ class Login extends React.Component{
     }
 
     pictureUploadHandler = (picture) => {
-        console.log(picture);
         this.setState({picture: picture});
     }
 
@@ -109,8 +109,8 @@ class Login extends React.Component{
         return isValid;
     }
 
-    checkValidityPasswords(secondPasswordValue){
-        if(this.state.controls.password.value === secondPasswordValue){
+    checkValidityPasswords(firstPasswordValue, secondPasswordValue){
+        if(firstPasswordValue === secondPasswordValue){
             return true;
         }
         return false;
@@ -166,7 +166,8 @@ class Login extends React.Component{
                     value: event.target.value,
                     valid: (this.checkValidity(event.target.value,
                         this.state.controls.password2.validation) &&
-                        this.checkValidityPasswords(event.target.value)),
+                        this.checkValidityPasswords(event.target.value,
+                            this.state.controls.password.value)),
                     touched: true
                 }
             }
@@ -210,6 +211,15 @@ class Login extends React.Component{
                     <br/>
                     <Button click={this.submitHandler}>
                         Sign up
+                    </Button>
+                    <div style={{
+                        display: "inline",
+                        width: "4em",
+                        margin: '0 1em'
+                    }} />
+                    <Button click={this.props.changeState}
+                            isGrey={true}>
+                        Switch to Log in
                     </Button>
                 </form>
             );

@@ -103,7 +103,16 @@ class Login extends React.Component{
                     {formInputs}
                     <br/>
                     <Button click={this.submitHandler}>
-                        Login
+                        Log in
+                    </Button>
+                    <div style={{
+                        display: "inline",
+                        width: "4em",
+                        margin: '0 1em'
+                    }} />
+                    <Button click={this.props.changeState}
+                        isGrey={true}>
+                        Switch to Sign up
                     </Button>
                 </form>
             );
