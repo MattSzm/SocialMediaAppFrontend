@@ -20,11 +20,25 @@ const hashtag_formatter = string => {
 
 const PostContent = (props) => {
     let date = props.date.substring(0,10) + ' ' + props.date.substring(11,16);
+
     return (
         <div className={classes.PostContent}>
-            <p className={classes.bolded}>{props.usernameDisplay}<span> @{props.username}
-                            &#183; {date}</span></p>
-            <p>
+            {props.loading ? (<p className={classes.bolded}>
+                <span
+                    className={classes.loading}
+                    style={{color: '#E1E8ED'}}>
+                    ........
+                </span>
+                <span> @<span
+                    className={classes.loading}
+                    style={{color: '#E1E8ED'}}>
+                    ........
+                </span>
+                &#183; {date}</span></p>) : (<p className={classes.bolded}>
+                {props.usernameDisplay}<span> @{props.username}
+                &#183; {date}</span></p>)}
+
+                <p>
                 <Linkify fuzzyEmail={false}>
                     {hashtag_formatter(props.content)}
                 </Linkify>

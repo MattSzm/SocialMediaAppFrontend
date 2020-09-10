@@ -5,7 +5,7 @@ import CreatePost from "./CreatePost/CreatePost";
 import {connect} from 'react-redux';
 import * as newsFeedActions from '../../store/actions/newsFeed';
 import Spinner from '../../components/UI/Spinner/Spinner';
-
+import SharedPost from '../../components/Post/SharedPost';
 
 class Posts extends React.Component{
     componentDidMount() {
@@ -42,16 +42,37 @@ class Posts extends React.Component{
         if(!this.props.loadingPosts){
             content = this.mergePostsWithShares().map(
                 singlePost => {
-                    if(singlePost.tweet_itself){
-                        singlePost = singlePost.tweet_itself;
+                    if(!singlePost.tweet_itself){
+                        if(this.props.users[`${singlePost.user}`.substring(36, singlePost.user.length-1)]){
+                            return (<Post key={singlePost.id}
+                                          post={singlePost}
+                                          user={this.props.users[`${singlePost.user}`.substring(36, singlePost.user.length-1)]}/>);
+                        }
+                        else {
+                            return <Post key={singlePost.id}
+                                         post={singlePost}
+                                         loading={true}/>
+                        }
                     }
-                    if(this.props.users[`${singlePost.user}`.substring(36, singlePost.user.length-1)]){
-                    return (<Post key={singlePost.id}
-                                  post={singlePost}
-                                  user={this.props.users[`${singlePost.user}`.substring(36, singlePost.user.length-1)]}/>);}
+                    else{
+                        if(this.props.users[`${singlePost.account}`.substring(36, singlePost.account.length-1)] &&
+                                this.props.users[`${singlePost.tweet_itself.user}`.substring(36, singlePost.tweet_itself.user.length-1)]){
+                            return (<SharedPost key={singlePost.id}
+                                                post={singlePost.tweet_itself}
+                                                account={this.props.users[`${singlePost.account}`.substring(36, singlePost.account.length-1)]}
+                                                user={this.props.users[`${singlePost.tweet_itself.user}`.substring(36, singlePost.tweet_itself.user.length-1)]}/>);
+                        }
+                        else{
+                            return (<SharedPost
+                                key={singlePost.id}
+                                post={singlePost.tweet_itself}
+                                loading={true} />);
+                        }
+                    }
                 }
             );
         }
+
         return(
             <div className={classes.Posts}>
                 {/*NewsFeed*/}
