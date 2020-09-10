@@ -13,9 +13,15 @@ export const fetchNewsFeed = () => {
                         payload: res.data});
                 dispatch(fetchRelatedUsers(res.data));
             }).catch(error => {
-                console.log(error);
                 dispatch({type: actionTypes.FETCH_NEWSFEED_FAIL});
-            }
-        );
+            if(error.response) {
+                dispatch({
+                    type: actionTypes.GET_ERRORS,
+                    payload: {
+                        msg: {newsfeed: 'Unable to load newsfeed'},
+                        status: error.response.status
+                    }
+                })
+            }});
     };
 };

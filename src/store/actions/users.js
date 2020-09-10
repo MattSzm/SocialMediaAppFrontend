@@ -11,8 +11,7 @@ export const fetchRelatedUsers = (payload) => {
                     dispatch({
                         type: actionTypes.SAVE_USERS,
                         payload: res.data});
-                }).catch(error => {
-            });
+                }).catch(error => {});
         }
         for(let post of payload.shares) {
             axios.get(post.account.substring(22,), config)
@@ -20,15 +19,13 @@ export const fetchRelatedUsers = (payload) => {
                     dispatch({
                         type: actionTypes.SAVE_USERS,
                         payload: res.data});
-                }).catch(error => {
-            });
+                }).catch(error => {});
             axios.get(post.tweet_itself.user.substring(22,), config)
                 .then(res => {
                     dispatch({
                         type: actionTypes.SAVE_USERS,
                         payload: res.data});
-                }).catch(error => {
-            });
+                }).catch(error => {});
         }
 
     };

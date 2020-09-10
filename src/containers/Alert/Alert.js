@@ -16,6 +16,9 @@ class Alert extends Component{
             if(error.message.non_field_errors){
                 alert.error(error.message.non_field_errors);
             }
+            if(error.message.newsfeed){
+                alert.error(error.message.newsfeed);
+            }
             if(error.status === 500){
                 alert.error('Error');
             }
