@@ -58,22 +58,29 @@ class CreatePost extends React.Component{
 
 
     render() {
-
+        let avatar = (<Avatar loading={true} blank={false}/>);
+        if(this.props.user){
+            if(this.props.user.photo){
+                avatar = (<Avatar link={this.props.user.photo}/>);
+            }
+            else{
+                avatar = (<Avatar blank={true} /> );
+            }
+        }
         return(
             <div className={classes.ContainerOutside}>
                 <div className={classes.ContainerInside}>
-                    {this.props.user ?
-                        <Avatar link={this.props.user.photo} /> : null}
-                        <Input elementType={this.state.content.elementType}
-                               elementConfig={this.state.content.elementConfig}
-                               maxLength={this.state.content.validation.maxLength}
-                               value={this.state.content.value}
-                               changed = {event => (this.contentChangedHandler(event))}
+                    {avatar}
+                    <Input elementType={this.state.content.elementType}
+                           elementConfig={this.state.content.elementConfig}
+                           maxLength={this.state.content.validation.maxLength}
+                           value={this.state.content.value}
+                           changed = {event => (this.contentChangedHandler(event))}
 
-                               shouldValidate={true}
-                               touched={this.state.content.touched}
-                               invalid={!this.state.content.valid}
-                               createPost={true}/>
+                           shouldValidate={true}
+                           touched={this.state.content.touched}
+                           invalid={!this.state.content.valid}
+                           createPost={true}/>
                 </div>
                 <NavigationCreatePost
                     pictureUpload={this.pictureUploadHandler} />
