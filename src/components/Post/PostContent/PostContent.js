@@ -27,12 +27,12 @@ const PostContent = (props) => {
                 <span
                     className={classes.loading}
                     style={{color: '#E1E8ED'}}>
-                    ........
+                    ...........
                 </span>
                 <span> @<span
                     className={classes.loading}
                     style={{color: '#E1E8ED'}}>
-                    ........
+                    ...........
                 </span>
                 &#183; {date}</span></p>) : (<p className={classes.bolded}>
                 {props.usernameDisplay}<span> @{props.username}

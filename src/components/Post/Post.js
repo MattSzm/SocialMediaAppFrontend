@@ -6,7 +6,9 @@ import Avatar from '../Avatar/Avatar';
 const post = (props) => {
     let content = (
         <div className={classes.Post}>
-            <Avatar loading={true} />
+            <Avatar
+                blank={false}
+                loading={true} />
             <PostContent
                 loading={true}
                 date={props.post.created}
@@ -15,17 +17,32 @@ const post = (props) => {
         </div>
     );
     if(!props.loading){
-        content = (
-            <div className={classes.Post}>
-                <Avatar link={props.user.photo} />
-                <PostContent
-                    username={props.user.username}
-                    usernameDisplay={props.user.username_displayed}
-                    date={props.post.created}
-                    content={props.post.content}
-                />
-            </div>
-        );
+        if(props.user.photo) {
+            content = (
+                <div className={classes.Post}>
+                    <Avatar link={props.user.photo}/>
+                    <PostContent
+                        username={props.user.username}
+                        usernameDisplay={props.user.username_displayed}
+                        date={props.post.created}
+                        content={props.post.content}
+                    />
+                </div>
+            );
+        }
+        else{
+            content = (
+                <div className={classes.Post}>
+                    <Avatar blank={true}/>
+                    <PostContent
+                        username={props.user.username}
+                        usernameDisplay={props.user.username_displayed}
+                        date={props.post.created}
+                        content={props.post.content}
+                    />
+                </div>
+            );
+        }
     }
 
     return (

@@ -8,6 +8,7 @@ import Login from "../Auth/Login/Login";
 import background from '../../assets/background.png';
 import background_color from '../../assets/background_color.png';
 import logo from "../../assets/logo.png";
+import Footer from "../../components/UI/Footer/Footer";
 
 class UnauthorizedUserMainPage extends Component{
 
@@ -48,6 +49,7 @@ class UnauthorizedUserMainPage extends Component{
                             <img src={logo} className={classes.SmallScreenLogo}/>
                         </div>
                     </div>
+                    <Footer />
                 </div>
             </Fragment>
         );

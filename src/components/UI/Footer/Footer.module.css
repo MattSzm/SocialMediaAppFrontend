@@ -1,0 +1,18 @@
+.Footer{
+    position:absolute;
+    bottom:0;
+    right: 0;
+    width:50%;
+    height:100px;
+    background: transparent;
+}
+
+.Footer strong{
+    cursor: pointer;
+}
+
+@media (max-width: 1300px) {
+    .Footer{
+        width: 100%;
+    }
+}
