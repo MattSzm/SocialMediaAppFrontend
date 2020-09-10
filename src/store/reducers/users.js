@@ -8,9 +8,12 @@ const reducer = (state=initialState, action) => {
     switch (action.type){
         case actionTypes.SAVE_USERS:
             const id = action.payload.uuid;
-            let newUsers = {...state.users};
-            newUsers[id] = action.payload;
-            return {...state, users: newUsers};
+            if(!(state.users[id])){
+                let newUsers = {...state.users};
+                newUsers[id] = action.payload;
+                return {...state, users: newUsers};
+            }
+            return state;
         default:
             return state;
     }

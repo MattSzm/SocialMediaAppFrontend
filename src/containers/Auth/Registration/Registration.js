@@ -7,7 +7,6 @@ import * as actions from '../../../store/actions/auth';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import UploadImages from "../../../components/NavigationsCreatePost/UploadImages/UploadImages";
 import {createError} from "../../../store/actions/messages";
-import AuthButton from "../../../components/UI/AuthButton/AuthButton";
 
 
 class Login extends React.Component{

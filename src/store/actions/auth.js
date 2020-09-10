@@ -107,22 +107,21 @@ export const register = (form) => {
                     type: actionTypes.REGISTER_SUCCESS,
                     payload: res.data
                 })
-                // dispatch(createMessage(
-                //     {loggedIn: 'Logged in successfully'}));
+                dispatch(createMessage(
+                    {registered: 'Account successfully created'}));
                 dispatch(modalActions.modalToggle());
             }).catch(error => {
             if(error.response) {
-                console.log(error.response);
                 dispatch({
                     type: actionTypes.REGISTER_FAIL
                 });
-                // dispatch({
-                //     type: actionTypes.GET_ERRORS,
-                //     payload: {
-                //         msg: error.response.data,
-                //         status: error.response.status
-                //     }
-                // });
+                dispatch({
+                    type: actionTypes.GET_ERRORS,
+                    payload: {
+                        msg: error.response.data,
+                        status: 500
+                    }
+                });
             }
         })
     };

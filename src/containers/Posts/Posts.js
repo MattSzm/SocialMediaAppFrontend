@@ -7,6 +7,7 @@ import * as newsFeedActions from '../../store/actions/newsFeed';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import SharedPost from '../../components/Post/SharedPost';
 
+
 class Posts extends React.Component{
     componentDidMount() {
         this.props.fetchNewsFeed();
@@ -93,6 +94,8 @@ class Posts extends React.Component{
                 <CreatePost />
 
                 {content}
+                <button onClick={()=>{this.props.fetchMore(this.props.postTimeStamp,
+                                                        this.props.shareTimeStamp)}}/>
 
 
             </div>
@@ -101,6 +104,8 @@ class Posts extends React.Component{
 }
 
 const mapStateToProps = state => ({
+    postTimeStamp: state.posts.newsFeedPostsTimeStamp,
+    shareTimeStamp: state.posts.newsFeedSharesTimeStamp,
     posts: state.posts.posts,
     shares: state.posts.shares,
     users: state.users.users,
@@ -110,7 +115,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-   fetchNewsFeed: () => dispatch(newsFeedActions.fetchNewsFeed())
+    fetchNewsFeed: () => dispatch(newsFeedActions.fetchNewsFeed()),
+    fetchMore: (postTimeStamp, shareTimeStamp) =>
+        dispatch(newsFeedActions.fetchMore(postTimeStamp,shareTimeStamp))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);

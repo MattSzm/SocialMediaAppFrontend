@@ -33,6 +33,9 @@ class Alert extends Component{
             if(message.loggedOut){
                 alert.success(message.loggedOut);
             }
+            if(message.registered){
+                alert.success(message.registered);
+            }
         }
     }
 
