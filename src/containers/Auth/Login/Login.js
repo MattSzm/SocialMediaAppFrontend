@@ -108,12 +108,16 @@ class Login extends React.Component{
                 </form>
             );
         }
-
-        return (
-            <div className={classes.Login}>
+        let content = null;
+        if(this.props.show){
+             content = (<div className={classes.Login}>
                 {form}
-            </div>
-        );
+            </div>);
+        }
+
+        return (<React.Fragment>
+                 {content}
+                </React.Fragment>);
     }
 
 }

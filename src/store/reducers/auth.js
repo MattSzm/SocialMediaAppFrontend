@@ -10,11 +10,13 @@ const initialState = {
 const reducer = (state= initialState, action) =>{
     switch (action.type){
         case actionTypes.LOGIN_START:
+        case actionTypes.REGISTER_START:
             return {...state,
                 token: null,
                 user: null,
                 loading: true};
         case actionTypes.LOGIN_SUCCESS:
+        case actionTypes.REGISTER_SUCCESS:
             localStorage.setItem('token', action.payload.token)
             return {...state,
                 token: action.payload.token,
@@ -29,6 +31,7 @@ const reducer = (state= initialState, action) =>{
                 loading: false};
         case actionTypes.AUTH_ERROR:
         case actionTypes.LOGIN_FAIL:
+        case actionTypes.REGISTER_FAIL:
             return {...state,
                 token: null,
                 user: null,

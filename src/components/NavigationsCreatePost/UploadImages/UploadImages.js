@@ -42,7 +42,7 @@ const UploadImages = (props) => {
                                         click={onImageUpload}
                                         drag = {dragProps}
                                     >
-                                        Upload
+                                            {props.registration ? 'Set your picture ': 'Upload'}
                                     </StandardButton>
                         }
                         {images[0]  ? <div style={{height: '0.5em'
@@ -55,7 +55,11 @@ const UploadImages = (props) => {
                                         cursor: 'pointer',
                                         color: '#657786',
                                     }}
-                                        onClick={() => onImageRemove(index)}><strong>Remove</strong></span>
+                                        onClick={() => onImageRemove(index)}>
+                                        <strong style={props.registration ? {color: "white"} : null}>
+                                            Remove
+                                        </strong>
+                                    </span>
                                 </div>
                             </div>
                         ))}

@@ -7,3 +7,13 @@ export const createMessage = msg => {
         payload: msg
     };
 };
+
+export const createError = (msg, body) => {
+    return {
+        type: actionTypes.GET_ERRORS,
+        payload: {
+            msg: {[msg]: body},
+            status: 400
+        }
+    };
+};

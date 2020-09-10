@@ -9,18 +9,40 @@ import background from '../../assets/background.png';
 import background_color from '../../assets/background_color.png';
 import logo from "../../assets/logo.png";
 import Footer from "../../components/UI/Footer/Footer";
+import Registration from "../Auth/Registration/Registration";
 
 class UnauthorizedUserMainPage extends Component{
+    state = {
+        showLogin: false,
+        showRegistration: false
+    }
 
+    showLoginHandler = () => {
+        this.setState({showLogin: true});
+        this.props.modalToggle();
+    }
+
+    showRegistrationHandler = () => {
+        this.setState({showRegistration: true});
+        this.props.modalToggle();
+    }
+
+    closeModalAndBackdrop = () => {
+        this.setState({
+            showLogin: false,
+            showRegistration: false
+        });
+        this.props.modalToggle();
+    }
 
     render() {
         return (
             <Fragment>
                 <Modal show={this.props.showModal}
-                       closeModalAndBackdrop={this.props.modalToggle.bind(this)}
+                       closeModalAndBackdrop={this.closeModalAndBackdrop.bind(this)}
                        dark={true}>
-
-                    <Login show={this.props.showModal}/>
+                    <Login show={this.state.showLogin} />
+                    <Registration show={this.state.showRegistration} />
 
                 </Modal>
 
@@ -36,12 +58,13 @@ class UnauthorizedUserMainPage extends Component{
                             <h1>See what happens in the world!</h1>
                             <div className={classes.Buttons}>
                                 <AuthButton
-                                    click={this.props.modalToggle.bind(this)}
+                                    click={this.showLoginHandler.bind(this)}
                                     blackWithSmallScreens={true}>
                                     Login
                                 </AuthButton>
 
                                 <AuthButton
+                                    click={this.showRegistrationHandler.bind(this)}
                                     blackWithSmallScreens={true}>
                                     Register
                                 </AuthButton>

@@ -21,4 +21,4 @@ const sharedPost = (props) => {
     );
 }
 
-export default sharedPost;
+export default React.memo(sharedPost);

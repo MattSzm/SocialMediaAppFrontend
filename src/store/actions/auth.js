@@ -76,7 +76,6 @@ export const login = (username, password) => {
     };
 };
 
-
 export const logout = () => {
     return (dispatch, getState) => {
 
@@ -88,9 +87,44 @@ export const logout = () => {
             dispatch(createMessage(
                 {loggedOut: 'Logged out successfully'}
             ));
-        }).catch(error => {
-            console.log(error);
-        // dispatch(returnErrors(error.response.data, error.response.status));
-    });
+        }).catch(error => {});
 };};
+
+export const register = (form) => {
+    return dispatch => {
+        dispatch({type: actionTypes.REGISTER_START});
+
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }
+
+        axios.post('/api/auth/register/', form, config)
+            .then(res => {
+                console.log(res.data);
+                dispatch({
+                    type: actionTypes.REGISTER_SUCCESS,
+                    payload: res.data
+                })
+                // dispatch(createMessage(
+                //     {loggedIn: 'Logged in successfully'}));
+                dispatch(modalActions.modalToggle());
+            }).catch(error => {
+            if(error.response) {
+                console.log(error.response);
+                dispatch({
+                    type: actionTypes.REGISTER_FAIL
+                });
+                // dispatch({
+                //     type: actionTypes.GET_ERRORS,
+                //     payload: {
+                //         msg: error.response.data,
+                //         status: error.response.status
+                //     }
+                // });
+            }
+        })
+    };
+};
 

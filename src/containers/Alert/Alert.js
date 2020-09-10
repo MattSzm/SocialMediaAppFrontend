@@ -19,6 +19,9 @@ class Alert extends Component{
             if(error.message.newsfeed){
                 alert.error(error.message.newsfeed);
             }
+            if(error.message.badCreditsRegistration){
+                alert.error(error.message.badCreditsRegistration);
+            }
             if(error.status === 500){
                 alert.error('Error');
             }
