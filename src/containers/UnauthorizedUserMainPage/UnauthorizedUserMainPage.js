@@ -55,6 +55,10 @@ class UnauthorizedUserMainPage extends Component{
                 </Modal>
 
                 <div className={classes.UnauthorizedUserMainPageContainer} >
+                    <div className={classes.UnauthorizedUserMainPageExtraLeft}>
+                        <img src={background_color} />
+                    </div>
+
                     <div className={classes.UnauthorizedUserMainPageLeft}>
                         <img src={background} className={classes.BigScreen}/>
                         <img src={background_color} className={classes.SmallScreen} />

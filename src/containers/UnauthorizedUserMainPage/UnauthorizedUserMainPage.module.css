@@ -86,5 +86,22 @@
     }
 }
 
+.UnauthorizedUserMainPageExtraLeft{
+    display: none;
+}
+
+@media (min-width: 1920px) {
+    .UnauthorizedUserMainPageLeft{
+        width: 960px;
+    }
+    .UnauthorizedUserMainPageExtraLeft{
+        display: block;
+        height: 100%;
+        width: calc(50% - 960px);
+    }
+    .UnauthorizedUserMainPageExtraLeft img{
+        height: 100%;
+    }
+}
 
 
