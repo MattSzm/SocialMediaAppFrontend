@@ -8,8 +8,13 @@ const navigationCreatePost = (props) => {
         <div className={classes.Container}>
             <div className={classes.Dump} />
             <div className={classes.Navigation}>
-                <UploadImages upload={props.pictureUpload}/>
-                <Button>Tweet</Button>
+                <UploadImages
+                    images={props.images}
+                    upload={props.pictureUpload}/>
+                <Button
+                    click={props.sumbit}>
+                    Tweet
+                </Button>
             </div>
             <div className={classes.Dump2} />
         </div>

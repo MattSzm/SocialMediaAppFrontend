@@ -85,11 +85,11 @@ class Login extends React.Component{
                 touched: false
             },
         },
-        picture: null
+        pictures: []
     }
 
-    pictureUploadHandler = (picture) => {
-        this.setState({picture: picture});
+    pictureUploadHandler = (picturesList) => {
+        this.setState({pictures: picturesList});
     }
 
     checkValidity(value, rules){
@@ -124,25 +124,6 @@ class Login extends React.Component{
         return valid;
     }
 
-    submitHandler = (event) => {
-        event.preventDefault();
-        if(!this.checkFormValidity()){
-            this.props.createError('badCreditsRegistration', 'Bad credentials');
-        }
-        else{
-            const formData = new FormData();
-            formData.append('email', this.state.controls.email.value);
-            formData.append('username', this.state.controls.username.value);
-            formData.append('username_displayed', this.state.controls.usernameDisplayed.value);
-            formData.append('password', this.state.controls.password.value);
-            if(this.state.picture) {
-                formData.append('photo', this.state.picture.file);
-            }
-            this.props.register(formData);
-            this.forceUpdate();
-        }
-    }
-
     inputChangedHandler = (event, controlName) => {
         if (controlName !== 'password2') {
             const updatedControls = {
@@ -174,6 +155,24 @@ class Login extends React.Component{
         }
     }
 
+    submitHandler = (event) => {
+        event.preventDefault();
+        if(!this.checkFormValidity()){
+            this.props.createError('badCreditsRegistration', 'Bad credentials');
+        }
+        else{
+            const formData = new FormData();
+            formData.append('email', this.state.controls.email.value);
+            formData.append('username', this.state.controls.username.value);
+            formData.append('username_displayed', this.state.controls.usernameDisplayed.value);
+            formData.append('password', this.state.controls.password.value);
+            if(this.state.pictures[0]) {
+                formData.append('photo', this.state.pictures[0].file);
+            }
+            this.props.register(formData);
+        }
+    }
+
     render() {
         const formElementArray = []
         for(let key in this.state.controls){
@@ -198,6 +197,7 @@ class Login extends React.Component{
                 colorGreen={true}
             />
         ))
+
         let form = <Spinner />
         if(!this.props.loading){
             form = (
@@ -205,6 +205,7 @@ class Login extends React.Component{
                     {formInputs}
                     <UploadImages
                         upload={this.pictureUploadHandler}
+                        images={this.state.pictures}
                         registration={true}/>
                     <br/>
                     <br/>
@@ -249,6 +250,6 @@ const mapDispatchToProps = (dispatch) => (
         register: (form) => dispatch(actions.register(form)),
         createError: (msg, body) => dispatch(createError(msg, body))
     }
-)
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

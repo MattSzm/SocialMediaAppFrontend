@@ -45,6 +45,18 @@ const reducer = (state=initialState, action) => {
                 newsFeedSharesTimeStamp: action.payload.oldest_share_tweet,
                 loading: false,
                 hasMore: hasMoreMore};
+        case actionTypes.CREATE_POST_START:
+            return {...state,
+                loading: true};
+        case actionTypes.CREATE_POST_SUCCESS:
+            let newPostsWithCreated = [...state.posts]
+            newPostsWithCreated.unshift(action.payload)
+            return {...state,
+                posts: newPostsWithCreated,
+                loading: false}
+        case actionTypes.CREATE_POST_FAIL:
+            return {...state,
+                loading: false};
         default:
             return state;
     }

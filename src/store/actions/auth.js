@@ -78,22 +78,21 @@ export const login = (username, password) => {
 
 export const logout = () => {
     return (dispatch, getState) => {
-
-    axios.post('/api/auth/logout/', null, tokenConfig(getState))
-        .then(res => {
-            dispatch({
-                type: actionTypes.LOGOUT_SUCCESS,
-            })
-            dispatch(createMessage(
-                {loggedOut: 'Logged out successfully'}
-            ));
-        }).catch(error => {});
-};};
+        axios.post('/api/auth/logout/', null, tokenConfig(getState))
+            .then(res => {
+                dispatch({
+                    type: actionTypes.LOGOUT_SUCCESS,
+                })
+                dispatch(createMessage(
+                    {loggedOut: 'Logged out successfully'}
+                ));
+            }).catch(error => {});
+    };
+};
 
 export const register = (form) => {
     return dispatch => {
         dispatch({type: actionTypes.REGISTER_START});
-
         const config = {
             headers: {
                 'Content-Type': 'multipart/form-data'

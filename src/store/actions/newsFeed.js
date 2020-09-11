@@ -26,7 +26,6 @@ export const fetchNewsFeed = () => {
     };
 };
 
-
 export const fetchMore = (postTimeStamp, shareTimeStamp) => {
     return (dispatch, getState) => {
         dispatch({type: actionTypes.FETCH_NEWSFEED_START});

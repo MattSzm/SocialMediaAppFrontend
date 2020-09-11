@@ -3,18 +3,16 @@ import ImageUploading from 'react-images-uploading';
 import StandardButton from "../../UI/StandardButton/StandardButton";
 
 const UploadImages = (props) => {
-    const [images, setImages] = useState([]);
     const maxNumber = 1;
 
     const onChange = (imageList, addUpdateIndex) => {
-        setImages(imageList);
-        props.upload(imageList[0]);
+        props.upload(imageList);
     };
 
     return (
         <div className="App">
             <ImageUploading
-                value={images}
+                value={props.images}
                 onChange={onChange}
                 maxNumber={maxNumber}
                 dataURLKey="data_url"
@@ -29,7 +27,7 @@ const UploadImages = (props) => {
                   }) => (
                     // write your building UI
                     <div className="upload__image-wrapper">
-                        {images[0] ? <StandardButton
+                        {props.images[0] ? <StandardButton
                                         isGrey={true}
                                         click={onImageUpdate}
                                         >
@@ -45,7 +43,7 @@ const UploadImages = (props) => {
                                             {props.registration ? 'Set your picture ': 'Upload'}
                                     </StandardButton>
                         }
-                        {images[0]  ? <div style={{height: '0.5em'
+                        {props.images[0]  ? <div style={{height: '0.5em'
                         }} /> : null }
                         {imageList.map((image, index) => (
                             <div key={index} className="image-item">

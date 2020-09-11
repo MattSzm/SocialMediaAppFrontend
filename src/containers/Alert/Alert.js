@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 class Alert extends Component{
     componentDidUpdate(prevProps, prevState, snapshot) {
-        const { error, alert, message, isAuthenticated } = this.props;
+        const { error, alert, message } = this.props;
         if(error !== prevProps.error){
             if(error.message.username){
                 alert.error('Username or e-mail is required');
@@ -18,6 +18,9 @@ class Alert extends Component{
             }
             if(error.message.newsfeed){
                 alert.error(error.message.newsfeed);
+            }
+            if(error.message.createPost){
+                alert.error(error.message.createPost);
             }
             if(error.message.badCreditsRegistration){
                 alert.error(error.message.badCreditsRegistration);
@@ -35,6 +38,9 @@ class Alert extends Component{
             }
             if(message.registered){
                 alert.success(message.registered);
+            }
+            if(message.createdPost){
+                alert.success(message.createdPost);
             }
         }
     }

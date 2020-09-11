@@ -4,6 +4,8 @@ import {connect} from "react-redux";
 import Avatar from "../../../components/Avatar/Avatar";
 import Input from '../../../components/UI/Input/Input';
 import NavigationCreatePost from "../../../components/NavigationsCreatePost/NavigationsCreatePost";
+import {createError} from "../../../store/actions/messages";
+import {createPost} from '../../../store/actions/posts';
 
 
 class CreatePost extends React.Component{
@@ -22,12 +24,11 @@ class CreatePost extends React.Component{
             valid: false,
             touched: false
         },
-        picture: null
-
+        pictures: [],
     }
 
-    pictureUploadHandler = (picture) => {
-        this.setState({picture: picture});
+    pictureUploadHandler = (picturesList) => {
+        this.setState({pictures: picturesList});
     }
 
     checkValidity = (value, rules) => {
@@ -56,6 +57,25 @@ class CreatePost extends React.Component{
         this.setState({content: updatedContent});
     }
 
+    submitHandler = (event) => {
+        event.preventDefault();
+        if(!this.state.content.valid){
+            this.props.createError('badCreditsRegistration', 'Cannot perform');
+        }
+        else{
+            const formData = new FormData();
+            formData.append('content', this.state.content.value);
+            if(this.state.pictures[0]) {
+                formData.append('image', this.state.pictures[0].file);
+            }
+            this.props.createPost(formData);
+        }
+        this.setState({content:
+                                {...this.state.content,
+                                    value: ''},
+                            pictures: []
+                            });
+    }
 
     render() {
         let avatar = (<Avatar loading={true} blank={false}/>);
@@ -83,17 +103,26 @@ class CreatePost extends React.Component{
                            createPost={true}/>
                 </div>
                 <NavigationCreatePost
-                    pictureUpload={this.pictureUploadHandler} />
+                    pictureUpload={this.pictureUploadHandler}
+                    images={this.state.pictures}
+                    sumbit={this.submitHandler}/>
 
             </div>
         );
     }
 }
 
-const mapStateToProps = state => (
+const mapStateToProps = (state) => (
     {
         user: state.auth.user
     }
 );
 
-export default connect(mapStateToProps)(CreatePost);
+const mapDispatchToProps = (dispatch) => (
+    {
+        createPost: (form) => dispatch(createPost(form)),
+        createError: (msg, body) => dispatch(createError(msg, body))
+    }
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePost);

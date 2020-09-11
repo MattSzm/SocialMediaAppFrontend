@@ -1,5 +1,5 @@
 import React from "react";
-import classes from './Posts.module.css';
+import classes from './NewsFeed.module.css';
 import Post from "../../components/Post/Post";
 import CreatePost from "./CreatePost/CreatePost";
 import {connect} from 'react-redux';
@@ -9,7 +9,7 @@ import SharedPost from '../../components/Post/SharedPost';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 
-class Posts extends React.Component{
+class NewsFeed extends React.Component{
     componentDidMount() {
         this.props.fetchNewsFeed();
     }
@@ -95,7 +95,6 @@ class Posts extends React.Component{
         // }
         return(
             <div className={classes.Posts}>
-                {/*NewsFeed*/}
                 <h2>Home</h2>
                 <CreatePost />
                 <InfiniteScroll
@@ -151,8 +150,6 @@ class Posts extends React.Component{
                         }
                     )}
                 </InfiniteScroll>
-
-
             </div>
         );
     }
@@ -173,4 +170,4 @@ const mapDispatchToProps = dispatch => ({
         dispatch(newsFeedActions.fetchMore(postTimeStamp,shareTimeStamp))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Posts);
+export default connect(mapStateToProps, mapDispatchToProps)(NewsFeed);
