@@ -36,7 +36,6 @@ export const fetchMore = (postTimeStamp, shareTimeStamp) => {
         };
         axios.post('/api/tweet/newsfeed/', data, tokenConfig(getState))
             .then(res => {
-                // console.log(res.data);
                 dispatch({type: actionTypes.LOAD_MORE_NEWSFEED_SUCCESS,
                             payload: res.data});
                 dispatch(fetchRelatedUsers(res.data));
@@ -51,7 +50,7 @@ export const fetchMore = (postTimeStamp, shareTimeStamp) => {
                     }
                 });
             }
-        })
+        });
 
     }
 }
