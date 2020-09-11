@@ -7,7 +7,8 @@ import Linkify from 'react-linkify'
 
 
 const hashtag_formatter = string => {
-    return string.split(/((?:^|\s)(?:[@|#][a-z\d-]+))/gi).filter(Boolean).map((v, i) => {
+    return string.split(/((?:^|\s)(?:[@|#][a-z\d-]+))/gi)
+        .filter(Boolean).map((v, i) => {
         if(v.includes('#') || v.includes('@')){
             return <span key={i} className={classes.hashtag}>{v}</span>
         }
@@ -19,7 +20,8 @@ const hashtag_formatter = string => {
 
 
 const PostContent = (props) => {
-    let date = props.date.substring(0,10) + ' ' + props.date.substring(11,16);
+    let date = props.date.substring(0,10) + ' ' +
+        props.date.substring(11,16);
 
     return (
         <div className={classes.PostContent}>
@@ -45,9 +47,21 @@ const PostContent = (props) => {
             </p>
 
             <div className={classes.Icons}>
-                <img src={commentButton} className={classes.Comment}/>
-                <img src={shareButton} className={classes.Share}/>
-                <img src={likeButton} className={classes.Like}/>
+                <img src={commentButton}
+                     className={classes.Comment}/>
+                <img src={shareButton}
+                     className={classes.Share}/>
+                {props.likedAlready ?
+                    (<img src={likeButton}
+                          className={classes.Like}
+                            style={{
+                                backgroundColor: '#fddbdb',
+                                borderRadius: '35%'
+                            }}/>)
+                    :
+                    (<img src={likeButton}
+                          className={classes.Like}/>)
+                }
             </div>
         </div>
     );

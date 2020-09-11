@@ -26,6 +26,7 @@ const post = (props) => {
                         usernameDisplay={props.user.username_displayed}
                         date={props.post.created}
                         content={props.post.content}
+                        likedAlready={props.post.liked_by_current_user}
                     />
                 </div>
             );
@@ -39,6 +40,7 @@ const post = (props) => {
                         usernameDisplay={props.user.username_displayed}
                         date={props.post.created}
                         content={props.post.content}
+                        likedAlready={props.post.liked_by_current_user}
                     />
                 </div>
             );
