@@ -23,18 +23,19 @@ export default tokenConfig;
 export const loadUser = () => {
     return (dispatch, getState) => {
     dispatch({type: actionTypes.USER_LOADING_START});
-    axios.get('/api/user/currentuser/', tokenConfig(getState))
-        .then(res => {
-            dispatch({
-                type: actionTypes.USER_LOADED_SUCCESS,
-                payload: res.data
-            });
-        }).catch(error => {
+
+        axios.get('/api/user/currentuser/', tokenConfig(getState))
+            .then(res => {
+                dispatch({
+                    type: actionTypes.USER_LOADED_SUCCESS,
+                    payload: res.data
+                });
+            }).catch(error => {
             console.log(error);
-        dispatch({
-            type: actionTypes.AUTH_ERROR
+            dispatch({
+                type: actionTypes.AUTH_ERROR
+            })
         })
-    })
 };};
 
 export const login = (username, password) => {
@@ -121,7 +122,7 @@ export const register = (form) => {
                     type: actionTypes.GET_ERRORS,
                     payload: {
                         msg: error.response.data,
-                        status: 500
+                        status: error.response.status
                     }
                 });
             }

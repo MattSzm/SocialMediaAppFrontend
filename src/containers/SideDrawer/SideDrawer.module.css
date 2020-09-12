@@ -2,7 +2,6 @@
     width: 20%;
     max-height: 100vh;
 }
-
 .SideDrawer{
     max-height: 100vh;
     margin: auto;
@@ -12,7 +11,6 @@
     flex-direction: column;
     text-align: left;
 }
-
 .SideDrawer ul{
     overflow-y: scroll;
     list-style: none;
@@ -20,16 +18,13 @@
 .SideDrawer ul::-webkit-scrollbar{
     width: 1px;
 }
-
 @media (min-height: 600px) {
     .SideDrawer ul{
         overflow-y: hidden;
     }
 }
 .disappearOnSmallScreens{
-
 }
-
 .SideDrawerItem{
     margin: 0;
     text-decoration: none;
@@ -55,6 +50,7 @@
 .Active{
     color: #1DA1F2;
 }
+
 @media(max-width: 1050px){
     .SIdeDrawerContainer{
         width: 10%;

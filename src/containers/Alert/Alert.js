@@ -13,6 +13,9 @@ class Alert extends Component{
             if(error.message.password){
                 alert.error('Password is required');
             }
+            if(error.message.email){
+                alert.error(error.message.email);
+            }
             if(error.message.non_field_errors){
                 alert.error(error.message.non_field_errors);
             }

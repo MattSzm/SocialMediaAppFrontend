@@ -9,11 +9,22 @@ import exploreLogo from '../../assets/icons/explore.png';
 import profileLogo from '../../assets/icons/profile.png';
 import logoutLogo from '../../assets/icons/logout.png';
 import MobileNavigation from "../../components/MobileNavigation/MobileNavigation";
+import ProfileHighlight from "../../components/ProfileHighlight/ProfileHighlight";
 
 
 class SideDrawer extends React.Component{
 
     render() {
+        let profile = <ProfileHighlight loading={true}/>;
+        if(this.props.user) {
+            profile = (
+                <ProfileHighlight
+                    username={this.props.user.username}
+                    usernameDisplay={this.props.user.username_displayed}
+                    photo={this.props.user.photo}
+                    loading={false}/>
+            );
+        }
 
         return (
             <React.Fragment>
@@ -79,6 +90,7 @@ class SideDrawer extends React.Component{
                             </li>
                         </ul>
                     </div>
+                    {profile}
                 </div>
 
                 <MobileNavigation
@@ -88,10 +100,16 @@ class SideDrawer extends React.Component{
     }
 }
 
+const mapStateToProps = (state) => (
+    {
+        user: state.auth.user,
+    }
+);
+
 const mapDispatchToProps = (dispatch) => (
     {
         logout: () => dispatch(logout()),
     }
 );
 
-export default connect(null, mapDispatchToProps)(SideDrawer);
+export default connect(mapStateToProps, mapDispatchToProps)(SideDrawer);
