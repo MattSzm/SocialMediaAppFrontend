@@ -4,6 +4,7 @@ import likeButton from '../../../assets/icons/heart.png'
 import commentButton from '../../../assets/icons/comment.png'
 import shareButton from '../../../assets/icons/share.png';
 import Linkify from 'react-linkify'
+import PostImage from "../../images/PostImage/PostImage";
 
 
 const hashtag_formatter = string => {
@@ -22,7 +23,6 @@ const hashtag_formatter = string => {
 const PostContent = (props) => {
     let date = props.date.substring(0,10) + ' ' +
         props.date.substring(11,16);
-
     return (
         <div className={classes.PostContent}>
             {props.loading ? (<p className={classes.bolded}>
@@ -45,6 +45,9 @@ const PostContent = (props) => {
                     {hashtag_formatter(props.content)}
                 </Linkify>
             </p>
+            {props.imageLink ?
+                (<PostImage link={props.imageLink} />) :
+                null}
 
             <div className={classes.Icons}>
                 <img src={commentButton}

@@ -1,7 +1,8 @@
 import React from "react";
 import classes from './Post.module.css';
 import PostContent from "./PostContent/PostContent";
-import Avatar from '../Avatar/Avatar';
+import Avatar from '../images/Avatar/Avatar';
+
 
 const post = (props) => {
     let content = (
@@ -17,36 +18,25 @@ const post = (props) => {
         </div>
     );
     if(!props.loading){
-        if(props.user.photo) {
-            content = (
-                <div className={classes.Post}>
-                    <Avatar link={props.user.photo}/>
-                    <PostContent
-                        username={props.user.username}
-                        usernameDisplay={props.user.username_displayed}
-                        date={props.post.created}
-                        content={props.post.content}
-                        likedAlready={props.post.liked_by_current_user}
-                    />
-                </div>
-            );
+        let avatar = (<Avatar blank={true}/>);
+        if(props.user.photo){
+            avatar = ( <Avatar link={props.user.photo}/>);
         }
-        else{
-            content = (
-                <div className={classes.Post}>
-                    <Avatar blank={true}/>
-                    <PostContent
-                        username={props.user.username}
-                        usernameDisplay={props.user.username_displayed}
-                        date={props.post.created}
-                        content={props.post.content}
-                        likedAlready={props.post.liked_by_current_user}
-                    />
-                </div>
-            );
-        }
-    }
+        content = (
+            <div className={classes.Post}>
+                {avatar}
+                <PostContent
+                    username={props.user.username}
+                    usernameDisplay={props.user.username_displayed}
+                    date={props.post.created}
+                    content={props.post.content}
+                    likedAlready={props.post.liked_by_current_user}
+                    imageLink={props.post.image}
+                />
+            </div>
+        );
 
+    }
     return (
         <React.Fragment>
             {content}

@@ -1,6 +1,6 @@
 import React from "react";
 import classes from './Avatar.module.css';
-import avatarPlaceholder from '../../assets/avatar_placeholder.png';
+import avatarPlaceholder from '../../../assets/avatar_placeholder.png';
 
 const avatar = (props) => {
     let src = props.link;
