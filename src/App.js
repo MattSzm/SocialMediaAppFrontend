@@ -26,7 +26,6 @@ class App extends React.Component {
         let routers = (
             <Switch>
                 <Route path="/"  component={UnauthorizedUserMainPage} />
-                <Redirect from="/logout" to="/" />
                 <Redirect to="/" />
             </Switch>
         );

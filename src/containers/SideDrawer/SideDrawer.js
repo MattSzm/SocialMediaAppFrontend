@@ -4,6 +4,11 @@ import Logo from "../../components/Logo/Logo";
 import {connect} from 'react-redux';
 import {logout} from '../../store/actions/auth';
 import {NavLink} from "react-router-dom";
+import homeLogo from '../../assets/icons/home.png';
+import exploreLogo from '../../assets/icons/explore.png';
+import profileLogo from '../../assets/icons/profile.png';
+import logoutLogo from '../../assets/icons/logout.png';
+
 
 class SideDrawer extends React.Component{
 
@@ -14,16 +19,30 @@ class SideDrawer extends React.Component{
                 <div className={classes.SideDrawer}>
                     <Logo />
                     <ul>
-                        <NavLink to="/"
+                        <NavLink to="/" exact
                                  className={classes.SideDrawerItem}
                                  activeClassName={classes.Active}>
-                            <h2><span>Home</span></h2>
+                            <h2>
+                                <span className={classes.Hovered}>
+                                    <img src={homeLogo} />
+                                    <span className={classes.disappearOnSmallScreens}>
+                                        Home
+                                    </span>
+                                </span>
+                            </h2>
                         </NavLink>
 
                         <NavLink to="/explore"
                                  className={classes.SideDrawerItem}
                                  activeClassName={classes.Active}>
-                            <h2><span>Explore</span></h2>
+                            <h2>
+                                <span className={classes.Hovered}>
+                                    <img src={exploreLogo} />
+                                    <span className={classes.disappearOnSmallScreens}>
+                                        Explore
+                                    </span>
+                                </span>
+                            </h2>
                         </NavLink>
 
                         {/*<NavLink to="/notifications"*/}
@@ -35,12 +54,26 @@ class SideDrawer extends React.Component{
                         <NavLink to="/profile"
                                  className={classes.SideDrawerItem}
                                  activeClassName={classes.Active}>
-                            <h2><span>Profile</span></h2>
+                            <h2>
+                                <span className={classes.Hovered}>
+                                    <img src={profileLogo} />
+                                    <span className={classes.disappearOnSmallScreens}>
+                                        Profile
+                                    </span>
+                                </span>
+                            </h2>
                         </NavLink>
 
-                        <li
-                                 className={classes.SideDrawerItem}>
-                            <h2><span onClick={this.props.logout}>Logout</span></h2>
+                        <li className={classes.SideDrawerItem}>
+                            <h2>
+                                <span className={classes.Hovered}
+                                      onClick={this.props.logout}>
+                                    <img src={logoutLogo} />
+                                    <span className={classes.disappearOnSmallScreens}>
+                                        Logout
+                                    </span>
+                                </span>
+                            </h2>
                         </li>
                     </ul>
                 </div>

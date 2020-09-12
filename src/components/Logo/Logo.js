@@ -3,9 +3,9 @@ import classes from './Logo.module.css';
 import Logo from '../../assets/logo.png';
 
 
-const logo = (props) => (
+const logo = () => (
     <div className={classes.Logo}>
-        <img src={Logo} className={classes.srcOne}/>
+        <img src={Logo} />
     </div>
 );
 

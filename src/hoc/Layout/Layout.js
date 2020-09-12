@@ -4,7 +4,6 @@ import SideDrawer from "../../containers/SideDrawer/SideDrawer";
 import Posts from "../../containers/Posts/NewsFeed";
 import Info from "../../containers/Info/Info";
 import MobileNavigation from "../../components/MobileNavigation/MobileNavigation";
-import Spinner from "../../components/UI/Spinner/Spinner";
 import Modal from '../../components/UI/Modal/Modal';
 import { connect } from 'react-redux';
 import * as modalActions from '../../store/actions/modal';
@@ -13,6 +12,7 @@ import * as modalActions from '../../store/actions/modal';
 class Layout extends React.Component{
 
     render() {
+        // console.log(this.props.history);
         return(
             <React.Fragment>
                 <Modal show={this.props.showModal}

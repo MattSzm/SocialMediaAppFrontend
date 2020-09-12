@@ -7,11 +7,26 @@
 
 }
 
-.Logo .srcOne{
+.Logo img{
     height: 100%;
 }
 
+@media (max-width: 1050px) {
+    .Logo{
+        margin: 25px 0 15px -0.5em
+    }
+}
 
-@media (max-width: 1150px) {
+/*@media (max-width: 950px) {*/
+/*    .Logo{*/
+/*        margin: 25px 0 15px 0;*/
+/*        height: 70px;*/
+/*    }*/
+/*}*/
 
+@media (max-width: 950px) {
+    .Logo{
+        height: 70px;
+        margin: 25px 0 15px -1.5em ;
+    }
 }

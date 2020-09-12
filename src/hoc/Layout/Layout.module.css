@@ -6,7 +6,8 @@
     flex-direction: row;
 }
 
-@media (max-width: 1050px) {
+
+@media (max-width: 800px) {
     .Layout{
         display: block;
         justify-content: space-between;
@@ -14,9 +15,3 @@
     }
 }
 
-/*@media (max-width: 800px) {*/
-/*    .Layout{*/
-/*        width: 100%;*/
-/*        justify-content: space-between;*/
-/*    }*/
-/*}*/
