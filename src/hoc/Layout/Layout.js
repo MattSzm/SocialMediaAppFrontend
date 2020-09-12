@@ -29,8 +29,6 @@ class Layout extends React.Component{
                     <Info />
                 </div>
 
-                <MobileNavigation />
-                {/*{ this.props.user ? <img  src={this.props.user.photo} /> : null}*/}
             </React.Fragment>
         );
     }

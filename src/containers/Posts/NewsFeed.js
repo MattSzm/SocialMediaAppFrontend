@@ -104,7 +104,7 @@ class NewsFeed extends React.Component{
                     dataLength={this.props.posts.length + this.props.shares.length}
                     endMessage={ this.props.posts.length + this.props.shares.length > 0 ?
                         (<p style={{textAlign: 'center',
-                                    marginBottom: '3em',
+                                    marginBottom: '4em',
                                     color: '#AAB8C2'}}>
                             You have seen it all!
                         </p>) :

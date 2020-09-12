@@ -83,6 +83,9 @@ export const logout = () => {
                 dispatch({
                     type: actionTypes.LOGOUT_SUCCESS,
                 })
+                dispatch({
+                    type: actionTypes.CLEAR_NEWSFEED
+                });
                 dispatch(createMessage(
                     {loggedOut: 'Logged out successfully'}
                 ));

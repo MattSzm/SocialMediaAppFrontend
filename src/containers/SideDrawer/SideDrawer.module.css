@@ -36,7 +36,7 @@
     color: #14171A;
 }
 .SideDrawerItem h2{
-    margin-bottom: 2.2em;
+    margin-bottom: 2em;
 }
 .SideDrawerItem span{
     padding: 0.5em 0.5em;
@@ -74,13 +74,16 @@
     .SIdeDrawerContainer img{
         padding: 0.42em;
     }
-    img:hover{
+    .Hovered img:hover{
         background-color:rgba(29,161,242,0.16);
         border-radius: 30%;
     }
     .Active img{
         background-color: #1DA1F2;
         border-radius: 30%;
+    }
+    .Active .Hovered img:hover{
+        background-color: #1DA1F2;
     }
 }
 @media(max-width: 950px){
@@ -93,4 +96,5 @@
     .SIdeDrawerContainer{
         display: none;
     }
+
 }

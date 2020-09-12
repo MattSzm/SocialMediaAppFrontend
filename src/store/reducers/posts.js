@@ -30,6 +30,14 @@ const reducer = (state=initialState, action) => {
                 hasMore: hasMore};
         case actionTypes.FETCH_NEWSFEED_FAIL:
             return {...state, loading: false};
+        case actionTypes.CLEAR_NEWSFEED:
+            return {...state,
+                posts: [],
+                shares: [],
+                newsFeedPostsTimeStamp: null,
+                newsFeedSharesTimeStamp: null,
+                loading: false,
+                hasMore: true}
         case actionTypes.LOAD_MORE_NEWSFEED_SUCCESS:
             const newPosts = [...state.posts].concat(action.payload.tweets);
             const newShares = [...state.shares].concat(action.payload.shares);

@@ -2,9 +2,36 @@
     width: 100%;
     height: 3em;
     position: fixed;
+    left: 0;
     background-color: #E1E8ED;
     bottom: 0;
     z-index: 10;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.MobileNavigationItem{
+    cursor: pointer;
+    height: 1.5em;
+    padding: 0.4em;
+    margin-top: 0.4em;
+}
+
+.MobileNavigationItem img{
+    height: 100%;
+    width: auto;
+}
+.MobileNavigationItem:hover{
+    background-color:rgba(29,161,242,0.16);
+    border-radius: 30%;
+}
+.Active{
+    background-color: #1DA1F2;
+    border-radius: 30%;
+}
+.Active:hover{
+    background-color:#1DA1F2;
+    border-radius: 30%;
 }
 
 @media (min-width: 800px) {
