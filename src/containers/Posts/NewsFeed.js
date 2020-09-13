@@ -14,30 +14,6 @@ class NewsFeed extends React.Component{
         this.props.fetchNewsFeed();
     }
 
-    mergePostsWithShares = () => {
-        let postIndex = 0;
-        let shareIndex = 0;
-        let output = []
-        while (postIndex < this.props.posts.length &&
-                shareIndex < this.props.shares.length){
-            if(this.props.posts[postIndex].created > this.props.shares[shareIndex].created){
-                output.push(this.props.posts[postIndex]);
-                postIndex++;
-            } else{
-              output.push(this.props.shares[shareIndex]);
-              shareIndex++;
-            }
-        }
-        while (postIndex < this.props.posts.length){
-            output.push(this.props.posts[postIndex]);
-            postIndex++;
-        }
-        while (shareIndex < this.props.shares.length){
-            output.push(this.props.shares[shareIndex]);
-            shareIndex++;
-        }
-        return output;
-    }
 
     loadMore = () => {
         this.props.fetchMore(this.props.postTimeStamp,
@@ -101,8 +77,8 @@ class NewsFeed extends React.Component{
                     next={() => {this.loadMore()}}
                     hasMore={this.props.hasMore}
                     loader={<Spinner />}
-                    dataLength={this.props.posts.length + this.props.shares.length}
-                    endMessage={ this.props.posts.length + this.props.shares.length > 0 ?
+                    dataLength={this.props.posts.length}
+                    endMessage={ this.props.posts.length > 0 ?
                         (<p style={{textAlign: 'center',
                                     marginBottom: '4em',
                                     color: '#AAB8C2'}}>
@@ -121,7 +97,7 @@ class NewsFeed extends React.Component{
                         </h2>)
                     }
                 >
-                    { this.mergePostsWithShares().map(
+                    { this.props.posts.map(
                         singlePost => {
                             if (!singlePost.tweet_itself) {
                                 if (this.props.users[`${singlePost.user}`.substring(36, singlePost.user.length - 1)]) {
@@ -159,7 +135,6 @@ const mapStateToProps = state => ({
     postTimeStamp: state.posts.newsFeedPostsTimeStamp,
     shareTimeStamp: state.posts.newsFeedSharesTimeStamp,
     posts: state.posts.posts,
-    shares: state.posts.shares,
     users: state.users.users,
     hasMore: state.posts.hasMore
 });

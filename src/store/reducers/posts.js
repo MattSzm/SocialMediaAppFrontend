@@ -2,11 +2,35 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     posts: [],
-    shares: [],
     newsFeedPostsTimeStamp: null,
     newsFeedSharesTimeStamp: null,
     loading: false,
     hasMore: true
+}
+
+const mergePostsWithShares = (posts, shares) => {
+    let postIndex = 0;
+    let shareIndex = 0;
+    let output = []
+    while (postIndex < posts.length &&
+    shareIndex < shares.length){
+        if(posts[postIndex].created > shares[shareIndex].created){
+            output.push(posts[postIndex]);
+            postIndex++;
+        } else{
+            output.push(shares[shareIndex]);
+            shareIndex++;
+        }
+    }
+    while (postIndex < posts.length){
+        output.push(posts[postIndex]);
+        postIndex++;
+    }
+    while (shareIndex < shares.length){
+        output.push(shares[shareIndex]);
+        shareIndex++;
+    }
+    return output;
 }
 
 const reducer = (state=initialState, action) => {
@@ -17,13 +41,15 @@ const reducer = (state=initialState, action) => {
                 hasMore: true};
         case actionTypes.FETCH_NEWSFEED_SUCCESS:
             let hasMore = true;
-            if(action.payload.tweets.length < 2 &&
-                    action.payload.shares.length < 2){
+            if(action.payload.tweets.length < 10 &&
+                    action.payload.shares.length < 10){
                 hasMore = false;
             }
+            const mergedPosts = mergePostsWithShares(
+                    action.payload.tweets,
+                    action.payload.shares);
             return {...state,
-                posts: action.payload.tweets,
-                shares: action.payload.shares,
+                posts: mergedPosts,
                 newsFeedPostsTimeStamp: action.payload.oldest_tweet_date,
                 newsFeedSharesTimeStamp: action.payload.oldest_share_tweet,
                 loading: false,
@@ -33,22 +59,23 @@ const reducer = (state=initialState, action) => {
         case actionTypes.CLEAR_NEWSFEED:
             return {...state,
                 posts: [],
-                shares: [],
                 newsFeedPostsTimeStamp: null,
                 newsFeedSharesTimeStamp: null,
                 loading: false,
                 hasMore: true}
         case actionTypes.LOAD_MORE_NEWSFEED_SUCCESS:
-            const newPosts = [...state.posts].concat(action.payload.tweets);
-            const newShares = [...state.shares].concat(action.payload.shares);
+            const newMergedPosts = mergePostsWithShares(
+                action.payload.tweets,
+                action.payload.shares
+            );
+            const newPosts = [...state.posts].concat(newMergedPosts);
             let hasMoreMore = true;
-            if(action.payload.tweets.length < 2 &&
-                    action.payload.shares.length < 2){
+            if(action.payload.tweets.length < 10 &&
+                    action.payload.shares.length < 10){
                 hasMoreMore = false;
             }
             return {...state,
                 posts: newPosts,
-                shares: newShares,
                 newsFeedPostsTimeStamp: action.payload.oldest_tweet_date,
                 newsFeedSharesTimeStamp: action.payload.oldest_share_tweet,
                 loading: false,

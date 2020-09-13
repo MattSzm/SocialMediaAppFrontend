@@ -10,7 +10,7 @@ export const REGISTER_FAIL = 'REGISTER_FAIL';
 
 
 export const USER_LOADING_START = 'USER_LOADING_START';
-export const USER_LOADED_SUCCESS = 'USER_LOADED';
+export const USER_LOADING_SUCCESS = 'USER_LOADED';
 export const AUTH_ERROR = 'AUTH_ERROR';
 
 

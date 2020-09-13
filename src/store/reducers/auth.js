@@ -25,7 +25,7 @@ const reducer = (state= initialState, action) =>{
         case actionTypes.USER_LOADING_START:
             return {...state,
                 loading: true};
-        case actionTypes.USER_LOADED_SUCCESS:
+        case actionTypes.USER_LOADING_SUCCESS:
             return {...state,
                 user: action.payload,
                 loading: false};

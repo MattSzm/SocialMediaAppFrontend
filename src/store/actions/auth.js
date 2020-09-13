@@ -27,7 +27,7 @@ export const loadUser = () => {
         axios.get('/api/user/currentuser/', tokenConfig(getState))
             .then(res => {
                 dispatch({
-                    type: actionTypes.USER_LOADED_SUCCESS,
+                    type: actionTypes.USER_LOADING_SUCCESS,
                     payload: res.data
                 });
             }).catch(error => {
