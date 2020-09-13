@@ -1,5 +1,5 @@
 import {createStore, applyMiddleware, combineReducers} from "redux";
-import postsReducer from "./reducers/posts";
+import newsFeedReducer from "./reducers/newsFeed";
 import authReducer from "./reducers/auth";
 import modalReducer from "./reducers/modal";
 import errorsReducer from './reducers/errors';
@@ -9,7 +9,7 @@ import Thunk from "redux-thunk";
 
 
 const rootReducer = combineReducers({
-    posts: postsReducer,
+    newsFeed: newsFeedReducer,
     auth: authReducer,
     modal: modalReducer,
     errors: errorsReducer,

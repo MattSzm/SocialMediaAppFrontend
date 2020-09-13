@@ -1,7 +1,7 @@
 import React from "react";
 import classes from './Layout.module.css';
 import SideDrawer from "../../containers/SideDrawer/SideDrawer";
-import Posts from "../../containers/Posts/NewsFeed";
+import NewsFeed from "../../containers/Posts/NewsFeed";
 import Info from "../../containers/Info/Info";
 import Modal from '../../components/UI/Modal/Modal';
 import { connect } from 'react-redux';
@@ -23,7 +23,7 @@ class Layout extends React.Component{
                 <div className={classes.Layout}>
                     <SideDrawer/>
 
-                    <Posts />
+                    <NewsFeed />
 
                     <Info />
                 </div>

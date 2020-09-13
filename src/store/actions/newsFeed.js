@@ -26,12 +26,11 @@ export const fetchNewsFeed = () => {
     };
 };
 
-export const fetchMore = (postTimeStamp, shareTimeStamp) => {
+export const fetchMore = (TimeStamp) => {
     return (dispatch, getState) => {
         dispatch({type: actionTypes.FETCH_NEWSFEED_START});
         const data = {
-            oldest_tweet_date: postTimeStamp,
-            oldest_share_tweet: shareTimeStamp
+            time_stamp: TimeStamp,
         };
         axios.post('/api/tweet/newsfeed/', data, tokenConfig(getState))
             .then(res => {

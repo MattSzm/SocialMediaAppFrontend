@@ -14,10 +14,8 @@ class NewsFeed extends React.Component{
         this.props.fetchNewsFeed();
     }
 
-
     loadMore = () => {
-        this.props.fetchMore(this.props.postTimeStamp,
-                            this.props.shareTimeStamp);
+        this.props.fetchMore(this.props.newsFeedTimeStamp);
     }
 
     render() {
@@ -132,17 +130,16 @@ class NewsFeed extends React.Component{
 }
 
 const mapStateToProps = state => ({
-    postTimeStamp: state.posts.newsFeedPostsTimeStamp,
-    shareTimeStamp: state.posts.newsFeedSharesTimeStamp,
-    posts: state.posts.posts,
+    newsFeedTimeStamp: state.newsFeed.newsFeedTimeStamp,
+    posts: state.newsFeed.posts,
     users: state.users.users,
-    hasMore: state.posts.hasMore
+    hasMore: state.newsFeed.hasMore
 });
 
 const mapDispatchToProps = dispatch => ({
     fetchNewsFeed: () => dispatch(newsFeedActions.fetchNewsFeed()),
-    fetchMore: (postTimeStamp, shareTimeStamp) =>
-        dispatch(newsFeedActions.fetchMore(postTimeStamp,shareTimeStamp))
+    fetchMore: (timeStamp) =>
+        dispatch(newsFeedActions.fetchMore(timeStamp))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewsFeed);
