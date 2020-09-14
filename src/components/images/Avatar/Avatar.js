@@ -4,12 +4,16 @@ import avatarPlaceholder from '../../../assets/avatar_placeholder.png';
 
 const avatar = (props) => {
     let src = props.link;
+    let className = classes.Avatar;
+    if(props.bigOne){
+        className = classes.AvatarBigOne;
+    }
     if(props.blank){
         src = avatarPlaceholder;
     }
 
     return (
-        <div className={classes.Avatar}>
+        <div className={className}>
             {props.loading ? (<img className={classes.loading}
                                    src={avatarPlaceholder}/>) :
                 <img src={src}/>}

@@ -1,17 +1,18 @@
 import React from "react";
 import classes from './Layout.module.css';
 import SideDrawer from "../../containers/SideDrawer/SideDrawer";
-import NewsFeed from "../../containers/Posts/NewsFeed";
+import NewsFeed from "../../containers/Posts/NewsFeed/NewsFeed";
 import Info from "../../containers/Info/Info";
 import Modal from '../../components/UI/Modal/Modal';
 import { connect } from 'react-redux';
 import * as modalActions from '../../store/actions/modal';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import UserPage from "../../containers/Posts/UserPage/UserPage";
 
 
 class Layout extends React.Component{
 
     render() {
-        // console.log(this.props.history);
         return(
             <React.Fragment>
                 <Modal show={this.props.showModal}
@@ -23,7 +24,10 @@ class Layout extends React.Component{
                 <div className={classes.Layout}>
                     <SideDrawer/>
 
-                    <NewsFeed />
+                    <Switch>
+                        <Route path="/" exact component={NewsFeed} />
+                        <Route path="/user/:username" component={UserPage} />
+                    </Switch>
 
                     <Info />
                 </div>

@@ -1,0 +1,25 @@
+.UserDetail{
+    width: 100%;
+    margin: auto;
+    border-bottom: solid #E1E8ED 1px;
+    text-align: left;
+}
+.Title{
+    position: fixed;
+    height: 3em;
+    padding: 0.5em 1.5em;
+    border-bottom: solid #E1E8ED 1px;
+}
+
+.UserDetail h2,
+.UserDetail p{
+    margin: auto;
+}
+
+.UserDetail p{
+    color: #657786;
+}
+
+.Info{
+    margin-top: 5em;
+}
