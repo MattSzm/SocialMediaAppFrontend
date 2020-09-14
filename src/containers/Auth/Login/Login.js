@@ -5,6 +5,17 @@ import Input from "../../../components/UI/Input/Input";
 import Button from '../../../components/UI/StandardButton/StandardButton';
 import * as actions from '../../../store/actions/auth';
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import styled from 'styled-components';
+
+
+const SpaceStyledDiv = styled.div`
+        display: inline;
+        width: 4em;
+        margin: 0 1em;
+        @media (max-width: 600px){
+           margin: 0em 0em; 
+        }
+    }`;
 
 
 class Login extends React.Component{
@@ -105,11 +116,7 @@ class Login extends React.Component{
                     <Button click={this.submitHandler}>
                         Log in
                     </Button>
-                    <div style={{
-                        display: "inline",
-                        width: "4em",
-                        margin: '0 1em'
-                    }} />
+                    <SpaceStyledDiv/>
                     <Button click={this.props.changeState}
                         isGrey={true}>
                         Switch to Sign up

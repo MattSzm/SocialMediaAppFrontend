@@ -11,7 +11,6 @@ class UserPage extends Component{
         this.props.loadUser(username);
     }
 
-
     render() {
         return(
             <div className={classes.UserPage}>

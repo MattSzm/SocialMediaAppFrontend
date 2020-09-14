@@ -1,46 +1,43 @@
 import axios from "axios";
 import * as actionTypes from "./actionTypes";
+import tokenConfig from "./auth";
+import {createError} from "./messages";
 
-
-const config = {
-    headers: {
-        'Content-Type': 'application/json'
-    }
-}
 
 export const fetchRelatedUsers = (payload) => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         for(let post of payload.tweets){
-            axios.get(post.user.substring(22, ), config)
+            axios.get(post.user.substring(22, ), tokenConfig(getState))
                 .then(res => {
                     dispatch({
-                        type: actionTypes.SAVE_USERS,
+                        type: actionTypes.SAVE_USERS_SUCCESS,
                         payload: res.data});
                 }).catch(error => {});
         }
         for(let post of payload.shares) {
-            axios.get(post.account.substring(22,), config)
+            axios.get(post.account.substring(22,), tokenConfig(getState))
                 .then(res => {
                     dispatch({
-                        type: actionTypes.SAVE_USERS,
+                        type: actionTypes.SAVE_USERS_SUCCESS,
                         payload: res.data});
                 }).catch(error => {});
-            axios.get(post.tweet_itself.user.substring(22,), config)
+            axios.get(post.tweet_itself.user.substring(22,), tokenConfig(getState))
                 .then(res => {
                     dispatch({
-                        type: actionTypes.SAVE_USERS,
+                        type: actionTypes.SAVE_USERS_SUCCESS,
                         payload: res.data});
-                }).catch(error => {});
+                }).catch(error => {
+                    dispatch(createError('userFail', 'Cannot load users'));
+            });
         }
 
     };
 };
 
 export const fetchUser = (username) => {
-    return (dispatch) => {
-        axios.get(`/api/user/username/${username}/`, config)
+    return (dispatch, getState) => {
+        axios.get(`/api/user/username/${username}/`, tokenConfig(getState))
             .then(res => {
-                console.log(res.data);
                 dispatch({
                     type: actionTypes.FETCH_USER_SUCCESS,
                     payload: res.data

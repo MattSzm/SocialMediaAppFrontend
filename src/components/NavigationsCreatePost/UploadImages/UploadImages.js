@@ -25,7 +25,6 @@ const UploadImages = (props) => {
                       isDragging,
                       dragProps,
                   }) => (
-                    // write your building UI
                     <div className="upload__image-wrapper">
                         {props.images[0] ? <StandardButton
                                         isGrey={true}

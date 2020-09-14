@@ -8,7 +8,7 @@ const initialState = {
 
 const reducer = (state=initialState, action) => {
     switch (action.type){
-        case actionTypes.SAVE_USERS:
+        case actionTypes.SAVE_USERS_SUCCESS:
             const id = action.payload.uuid;
             if(!(state.users[id])){
                 let newUsers = {...state.users};

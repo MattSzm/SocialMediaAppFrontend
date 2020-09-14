@@ -10,9 +10,14 @@ import profileLogo from '../../assets/icons/profile.png';
 import logoutLogo from '../../assets/icons/logout.png';
 import MobileNavigation from "../../components/MobileNavigation/MobileNavigation";
 import ProfileHighlight from "../../components/ProfileHighlight/ProfileHighlight";
-
+import {withRouter} from 'react-router-dom';
 
 class SideDrawer extends React.Component{
+
+    performLogout = () => {
+        this.props.history.replace('/logout');
+        this.props.logout();
+    }
 
     render() {
         let profile = <ProfileHighlight loading={true}/>;
@@ -80,7 +85,7 @@ class SideDrawer extends React.Component{
                             <li className={classes.SideDrawerItem}>
                                 <h2>
                                     <span className={classes.Hovered}
-                                          onClick={this.props.logout}>
+                                          onClick={this.performLogout}>
                                         <img src={logoutLogo} />
                                         <span className={classes.disappearOnSmallScreens}>
                                             Logout
@@ -94,7 +99,7 @@ class SideDrawer extends React.Component{
                 </div>
 
                 <MobileNavigation
-                    performLogout={this.props.logout}/>
+                    performLogout={this.performLogout}/>
             </React.Fragment>
         );
     }
@@ -112,4 +117,4 @@ const mapDispatchToProps = (dispatch) => (
     }
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(SideDrawer);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SideDrawer));

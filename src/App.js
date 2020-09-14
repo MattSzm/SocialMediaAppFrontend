@@ -9,6 +9,7 @@ import {loadUser} from './store/actions/auth';
 import {Provider as AlertProvider} from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import Alert from "./containers/Alert/Alert";
+import UserPage from "./containers/Posts/UserPage/UserPage";
 
 
 const alertOptions = {
@@ -25,19 +26,21 @@ class App extends React.Component {
     render() {
         let routers = (
             <Switch>
-                <Route path="/"  component={UnauthorizedUserMainPage} />
-                <Redirect to="/" />
+                <Route path="/user/:username" exact component={UserPage} />
+                <Redirect from="/logout" to="/" />
+                <Route path="/" component={UnauthorizedUserMainPage} />
+                <Redirect from="*" to="/" />
             </Switch>
         );
         if(this.props.isAuthenticated){
             routers = (
                 <Switch>
+                    <Redirect from="/:url*(/+)" to="/" />
                     <Route path="/" component={Layout} />
-                    <Redirect to="/" />
+                    <Redirect from="*" to="/" />
                 </Switch>
             );
         }
-
 
         return (
             <AlertProvider

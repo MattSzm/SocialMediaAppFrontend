@@ -7,6 +7,17 @@ import * as actions from '../../../store/actions/auth';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import UploadImages from "../../../components/NavigationsCreatePost/UploadImages/UploadImages";
 import {createError} from "../../../store/actions/messages";
+import styled from "styled-components";
+
+
+const SpaceStyledDiv = styled.div`
+        display: inline;
+        width: 4em;
+        margin: 0 1em;
+        @media (max-width: 600px){
+           margin: 0em 0em; 
+        }
+    }`;
 
 
 class Login extends React.Component{
@@ -212,11 +223,7 @@ class Login extends React.Component{
                     <Button click={this.submitHandler}>
                         Sign up
                     </Button>
-                    <div style={{
-                        display: "inline",
-                        width: "4em",
-                        margin: '0 1em'
-                    }} />
+                    <SpaceStyledDiv />
                     <Button click={this.props.changeState}
                             isGrey={true}>
                         Switch to Log in

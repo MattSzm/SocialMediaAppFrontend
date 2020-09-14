@@ -25,6 +25,9 @@ class Alert extends Component{
             if(error.message.createPost){
                 alert.error(error.message.createPost);
             }
+            if(error.message.userFail){
+                alert.error(error.message.userFail);
+            }
             if(error.message.badCreditsRegistration){
                 alert.error(error.message.badCreditsRegistration);
             }

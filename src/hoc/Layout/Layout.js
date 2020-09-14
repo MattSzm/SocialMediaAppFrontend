@@ -25,8 +25,8 @@ class Layout extends React.Component{
                     <SideDrawer/>
 
                     <Switch>
-                        <Route path="/" exact component={NewsFeed} />
-                        <Route path="/user/:username" component={UserPage} />
+                        <Route path="/user/:username" exact component={UserPage} />
+                        <Route path="/" component={NewsFeed} />
                     </Switch>
 
                     <Info />
