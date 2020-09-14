@@ -59,3 +59,33 @@
         width: calc(100% - 120px);
     }
 }
+
+.loading{
+    background-color: #E1E8ED;
+    color: #E1E8ED;
+    animation: blur 1.2s linear infinite;
+    -webkit-animation: blur 1.2s  linear infinite;
+    -moz-animation: blur 1.2s  linear infinite;
+}
+
+
+@keyframes blur {
+    0%{
+        -webkit-filter: blur(0px);
+        -moz-filter: blur(0px);
+        -o-filter: blur(0px);
+        -ms-filter: blur(0px);
+    }
+    50% {
+        -webkit-filter: blur(5px);
+        -moz-filter: blur(5px);
+        -o-filter: blur(5px);
+        -ms-filter: blur(5px);
+    }
+    100%{
+        -webkit-filter: blur(0px);
+        -moz-filter: blur(0px);
+        -o-filter: blur(0px);
+        -ms-filter: blur(0px);
+    }
+}

@@ -12,15 +12,17 @@ class UserPage extends Component{
     }
 
     render() {
+        let userDetail = <UserDetail loading={true} />;
+        if(this.props.user){
+            userDetail = (
+                        <UserDetail
+                            user={this.props.user}
+                        />
+            );
+        }
         return(
             <div className={classes.UserPage}>
-                {this.props.user ? (
-                    <UserDetail
-                        user={this.props.user}
-                    />) :
-                    null}
-
-
+                {userDetail}
             </div>
         );
     }

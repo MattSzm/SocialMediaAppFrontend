@@ -12,7 +12,9 @@ export const fetchRelatedUsers = (payload) => {
                     dispatch({
                         type: actionTypes.SAVE_USERS_SUCCESS,
                         payload: res.data});
-                }).catch(error => {});
+                }).catch(error => {
+                dispatch(createError('userFail', 'Cannot load user'));
+            });
         }
         for(let post of payload.shares) {
             axios.get(post.account.substring(22,), tokenConfig(getState))
@@ -20,14 +22,16 @@ export const fetchRelatedUsers = (payload) => {
                     dispatch({
                         type: actionTypes.SAVE_USERS_SUCCESS,
                         payload: res.data});
-                }).catch(error => {});
+                }).catch(error => {
+                dispatch(createError('userFail', 'Cannot load user'));
+            });
             axios.get(post.tweet_itself.user.substring(22,), tokenConfig(getState))
                 .then(res => {
                     dispatch({
                         type: actionTypes.SAVE_USERS_SUCCESS,
                         payload: res.data});
                 }).catch(error => {
-                    dispatch(createError('userFail', 'Cannot load users'));
+                    dispatch(createError('userFail', 'Cannot load user'));
             });
         }
 

@@ -19,6 +19,10 @@ class SideDrawer extends React.Component{
         this.props.logout();
     }
 
+    reloadRoute = () => {
+        this.props.history.replace({ pathname: '/' });
+    }
+
     render() {
         let profile = <ProfileHighlight loading={true}/>;
         if(this.props.user) {
@@ -37,7 +41,8 @@ class SideDrawer extends React.Component{
                     <div className={classes.SideDrawer}>
                         <Logo />
                         <ul>
-                            <NavLink to="/" exact
+                            <NavLink onClick={() => window.location.replace('/')}
+                                     to="/" exact
                                      className={classes.SideDrawerItem}
                                      activeClassName={classes.Active}>
                                 <h2>

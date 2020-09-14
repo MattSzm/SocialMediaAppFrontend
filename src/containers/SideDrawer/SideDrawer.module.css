@@ -1,6 +1,7 @@
 .SIdeDrawerContainer{
     width: 20%;
     max-height: 100vh;
+    z-index: 0;
 }
 .SideDrawer{
     max-height: 100vh;

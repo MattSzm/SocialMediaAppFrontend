@@ -82,11 +82,11 @@ export const logout = () => {
         axios.post('/api/auth/logout/', null, tokenConfig(getState))
             .then(res => {
                 dispatch({
-                    type: actionTypes.LOGOUT_SUCCESS,
-                })
-                dispatch({
                     type: actionTypes.CLEAR_NEWSFEED
                 });
+                dispatch({
+                    type: actionTypes.LOGOUT_SUCCESS,
+                })
                 dispatch(createMessage(
                     {loggedOut: 'Logged out successfully'}
                 ));

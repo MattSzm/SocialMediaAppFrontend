@@ -6,6 +6,7 @@
     flex-direction: column;
     border-left: solid #E1E8ED 1px;
     border-right: solid #E1E8ED 1px;
+    z-index: 5;
 }
 
 .NewsFeed h2 {

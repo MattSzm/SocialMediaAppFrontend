@@ -37,7 +37,7 @@ const PostContent = (props) => {
                     ...........
                 </span>
                 &#183; {date}</span></p>) : (<p className={classes.bolded}>
-                {props.usernameDisplay}<span> @{props.username}
+                {props.usernameDisplay}<span style={{cursor: 'pointer'}}> @{props.username}
                 &#183; {date}</span></p>)}
 
                 <p>

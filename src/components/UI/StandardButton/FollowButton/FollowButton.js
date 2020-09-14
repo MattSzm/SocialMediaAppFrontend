@@ -10,7 +10,10 @@ const followButton = (props) => {
               {...props.drag}
               style={{marginBottom:'1em',
                         width:'5em'}}>
-            Follow
+            {props.alreadyFollow ?
+                'Unfollow' :
+                'Follow'
+            }
         </span>
     );
 }
