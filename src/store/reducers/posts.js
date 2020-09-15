@@ -3,6 +3,7 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
     posts: [],
     newsFeedTimeStamp: null,
+    linkToLoadMoreUserPage: null,
     loading: false,
     hasMore: true
 }
@@ -35,6 +36,14 @@ const mergePostsWithShares = (posts, shares) => {
 const reducer = (state=initialState, action) => {
     switch (action.type){
         case actionTypes.FETCH_NEWSFEED_START:
+        case actionTypes.FETCH_USER_POSTS_START:
+            return {...state,
+                posts: [],
+                newsFeedTimeStamp: null,
+                linkToLoadMoreUserPage: null,
+                loading: true,
+                hasMore: true}
+        case actionTypes.LOAD_MORE_NEWSFEED_START:
             return {...state,
                 loading: true,
                 hasMore: true};

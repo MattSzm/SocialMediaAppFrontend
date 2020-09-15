@@ -33,7 +33,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    loadUser: (username) => dispatch(fetchUser(username))
+    loadUser: (username) => dispatch(fetchUser(username, true))
 });
 
 

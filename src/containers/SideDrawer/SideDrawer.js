@@ -19,10 +19,6 @@ class SideDrawer extends React.Component{
         this.props.logout();
     }
 
-    reloadRoute = () => {
-        this.props.history.replace({ pathname: '/' });
-    }
-
     render() {
         let profile = <ProfileHighlight loading={true}/>;
         if(this.props.user) {

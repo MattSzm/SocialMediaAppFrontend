@@ -5,9 +5,9 @@ import {createMessage} from './messages';
 
 
 export const createPost = (form) => {
-    return (dispatch, setState) => {
+    return (dispatch, getState) => {
         dispatch({type: actionTypes.CREATE_POST_START});
-        const config = tokenConfig(setState);
+        const config = tokenConfig(getState);
         config.headers["Content-Type"] = {
             'Content-Type': 'multipart/form-data'
         };
@@ -35,3 +35,15 @@ export const createPost = (form) => {
         });
     };
 };
+
+
+export const fetchUserPosts = (userUuid) => {
+    return (dispatch, getState) => {
+        dispatch({type: actionTypes.FETCH_USER_POSTS_START});
+
+        axios.get(`/api/tweet/byuser/${userUuid}/`, tokenConfig(getState))
+            .then(res => {
+                console.log(res.data);
+            });
+    }
+}

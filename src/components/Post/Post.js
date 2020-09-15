@@ -32,6 +32,9 @@ const post = (props) => {
                     content={props.post.content}
                     likedAlready={props.post.liked_by_current_user}
                     imageLink={props.post.image}
+                    likesNumber={props.post.number_likes}
+                    commentsNumber={props.post.number_comments}
+                    sharesNumber={props.post.number_shares}
                 />
             </div>
         );

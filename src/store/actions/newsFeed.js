@@ -28,7 +28,7 @@ export const fetchNewsFeed = () => {
 
 export const fetchMore = (TimeStamp) => {
     return (dispatch, getState) => {
-        dispatch({type: actionTypes.FETCH_NEWSFEED_START});
+        dispatch({type: actionTypes.LOAD_MORE_NEWSFEED_START});
         const data = {
             time_stamp: TimeStamp,
         };

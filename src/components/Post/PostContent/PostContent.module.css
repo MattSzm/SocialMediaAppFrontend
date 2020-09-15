@@ -21,18 +21,33 @@
 }
 
 .Icons{
+    width: 90%;
+    float: right;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
-.Icons img{
+
+.IconContainer{
+    width: calc(100%/3);
+    height: auto;
+}
+
+
+.IconContainer img{
     height: 20px;
     width: auto;
     cursor: pointer;
     background-color: transparent;
     padding: 5px;
 }
-.Icons img:hover{
+.Icons small{
+    position: absolute;
+    padding-top: 7px;
+    margin-left: 3px;
+    color: #657786;
+}
+.IconContainer img:hover{
     transform: scale(1.1);
     border-radius: 35%;
 }
@@ -60,7 +75,6 @@
     -webkit-animation: blur 1.2s  linear infinite;
     -moz-animation: blur 1.2s  linear infinite;
 }
-
 
 @keyframes blur {
     0%{

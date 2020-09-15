@@ -2,6 +2,7 @@ import axios from "axios";
 import * as actionTypes from "./actionTypes";
 import tokenConfig from "./auth";
 import {createError} from "./messages";
+import {fetchUserPosts} from "./posts";
 
 
 export const fetchRelatedUsers = (payload) => {
@@ -34,11 +35,11 @@ export const fetchRelatedUsers = (payload) => {
                     dispatch(createError('userFail', 'Cannot load user'));
             });
         }
-
     };
 };
 
-export const fetchUser = (username) => {
+
+export const fetchUser = (username, loadPosts=false) => {
     return (dispatch, getState) => {
         axios.get(`/api/user/username/${username}/`, tokenConfig(getState))
             .then(res => {
@@ -46,11 +47,15 @@ export const fetchUser = (username) => {
                     type: actionTypes.FETCH_USER_SUCCESS,
                     payload: res.data
                 });
+                if(loadPosts){
+                    dispatch(fetchUserPosts(res.data.uuid));
+                }
             }).catch(err => {
                 dispatch({
                     type: actionTypes.FETCH_USER_FAIL,
                     payload: err.response.data
                 });
+                dispatch(createError('noUser', 'Cannot find user'));
             });
     };
 };

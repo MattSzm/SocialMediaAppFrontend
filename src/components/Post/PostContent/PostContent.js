@@ -36,35 +36,49 @@ const PostContent = (props) => {
                     style={{color: '#E1E8ED'}}>
                     ...........
                 </span>
-                &#183; {date}</span></p>) : (<p className={classes.bolded}>
-                {props.usernameDisplay}<span style={{cursor: 'pointer'}}> @{props.username}
-                &#183; {date}</span></p>)}
-
+                &#183; {date}</span></p>)
+                :
+                (<p className={classes.bolded}>
+                    {props.usernameDisplay}<span style={{cursor: 'pointer'}}> @{props.username}
+                    &#183; {date}</span>
+                </p>)}
                 <p>
                 <Linkify fuzzyEmail={false}>
                     {hashtag_formatter(props.content)}
                 </Linkify>
-            </p>
+                </p>
+
             {props.imageLink ?
                 (<PostImage link={props.imageLink} />) :
                 null}
 
             <div className={classes.Icons}>
-                <img src={commentButton}
-                     className={classes.Comment}/>
-                <img src={shareButton}
-                     className={classes.Share}/>
-                {props.likedAlready ?
-                    (<img src={likeButton}
-                          className={classes.Like}
-                            style={{
-                                backgroundColor: '#fddbdb',
-                                borderRadius: '35%'
-                            }}/>)
-                    :
-                    (<img src={likeButton}
-                          className={classes.Like}/>)
-                }
+                <div className={classes.IconContainer}>
+                    <img src={commentButton}
+                         className={classes.Comment}/>
+                     <small>{props.commentsNumber}</small>
+                </div>
+
+                <div className={classes.IconContainer}>
+                    <img src={shareButton}
+                        className={classes.Share}/>
+                        <small>{props.sharesNumber}</small>
+                </div>
+
+                <div className={classes.IconContainer}>
+                    {props.likedAlready ?
+                        (<img src={likeButton}
+                              className={classes.Like}
+                                style={{
+                                    backgroundColor: '#fddbdb',
+                                    borderRadius: '35%'
+                                }}/>)
+                        :
+                        (<img src={likeButton}
+                              className={classes.Like}/>)
+                    }
+                    <small>{props.likesNumber}</small>
+                </div>
             </div>
         </div>
     );

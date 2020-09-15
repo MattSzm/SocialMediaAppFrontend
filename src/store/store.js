@@ -1,5 +1,5 @@
 import {createStore, applyMiddleware, combineReducers} from "redux";
-import newsFeedReducer from "./reducers/newsFeed";
+import newsFeedReducer from "./reducers/posts";
 import authReducer from "./reducers/auth";
 import modalReducer from "./reducers/modal";
 import errorsReducer from './reducers/errors';
