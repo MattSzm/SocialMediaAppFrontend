@@ -4,11 +4,33 @@
     border-bottom: solid #E1E8ED 1px;
     text-align: left;
 }
-.Title{
+
+.ContainerTitle{
     position: fixed;
+    width: 780px;
+    z-index: 3;
+}
+@media(max-width: 1300px){
+    .ContainerTitle{
+        width: 60%;
+    }
+}
+@media(max-width: 1050px){
+    .ContainerTitle{
+        width: 700px;
+    }
+}
+@media(max-width: 800px){
+    .ContainerTitle{
+        width: 81%;
+    }
+}
+.Title{
     height: 3em;
     padding: 0.5em 1.5em;
     border-bottom: solid #E1E8ED 1px;
+    background-color: rgb(255,255,255);
+    z-index: 2;
 }
 
 .UserDetail h2,
@@ -28,24 +50,34 @@
 }
 .Follows{
     width: calc(100% - 230px);
-    margin-top: 20px;
+    margin-top: 5px;
     display: flex;
     flex-direction: column;
 }
+.Names{
+    padding-top: 0em;
+    padding-bottom: 1em;
+    margin-bottom: 5px;
+}
 .InlineContainer{
-    margin-bottom: 1.5em;
+    margin-bottom: 0.5em;
 }
 .Inline{
     display: inline-block;
     padding-right: 3em;
 }
+
+
 @media(max-width: 1050px){
     .Follows{
         width: calc(100% - 200px);
     }
-
 }
-
+@media(max-width: 800px){
+    .Follows{
+        width: calc(100% - 200px);
+    }
+}
 @media(max-width: 700px){
     .Inline{
         padding-right: 0;
@@ -74,6 +106,7 @@
     -webkit-animation: blur 1.2s  linear infinite;
     -moz-animation: blur 1.2s  linear infinite;
 }
+
 
 
 @keyframes blur {

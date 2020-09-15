@@ -24,6 +24,11 @@ const reducer = (state=initialState, action) => {
             return {...state,
                     pickedUser: null,
                     error: action.payload};
+        case actionTypes.CLEAR_USERS:
+            return {...state,
+                    users: {},
+                    pickedUser: null,
+                    error: null};
         default:
             return state;
     }

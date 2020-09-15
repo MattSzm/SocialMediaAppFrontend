@@ -97,6 +97,16 @@ const reducer = (state=initialState, action) => {
         case actionTypes.CREATE_POST_FAIL:
             return {...state,
                 loading: false};
+        case actionTypes.FETCH_USER_POSTS_SUCCESS:
+            let hasMoreUserPosts = true;
+            if(action.payload.next){
+                hasMoreUserPosts = false;
+            }
+            return {...state,
+                posts: action.payload.results,
+                linkToLoadMoreUserPage: action.payload.next,
+                loading: false,
+                hasMore: hasMoreUserPosts};
         default:
             return state;
     }

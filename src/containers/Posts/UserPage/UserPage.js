@@ -3,6 +3,10 @@ import classes from './UserPage.module.css'
 import {connect} from 'react-redux';
 import {fetchUser} from "../../../store/actions/users";
 import UserDetail from "../../../components/UserDetail/UserDetail";
+import InfiniteScroll from 'react-infinite-scroll-component';
+import Spinner from "../../../components/UI/Spinner/Spinner";
+import Post from "../../../components/Post/Post";
+import SharedPost from "../../../components/Post/SharedPost";
 
 
 class UserPage extends Component{
@@ -20,16 +24,65 @@ class UserPage extends Component{
                         />
             );
         }
+
         return(
             <div className={classes.UserPage}>
                 {userDetail}
+                <InfiniteScroll
+                    next={()=>{}}
+                    hasMore={this.props.hasMore}
+                    loader={<Spinner />}
+                    dataLength={this.props.posts.length}
+                    endMessage={ this.props.posts.length > 0 ?
+                        (<p style={{textAlign: 'center',
+                            marginBottom: '4em',
+                            color: '#AAB8C2'}}>
+                            You have seen it all!
+                        </p>) :
+                        (<h2
+                            style={{
+                                textAlign: 'center',
+                                margin: '2em 0'
+                            }}>
+                            No tweets to show.
+                        </h2>)
+                    }
+                >
+                    {this.props.posts.map(
+                        singlePost => {
+                            if(`${singlePost.user}`.substring(36, singlePost.user.length - 1)
+                                === this.props.user.uuid){
+                                return (<Post key={singlePost.id}
+                                              post={singlePost}
+                                              user={this.props.user} />);
+                            }
+                            else{
+                                if(this.props.users[`${singlePost.user}`.substring(36, singlePost.user.length - 1)]) {
+                                    return (<SharedPost key={singlePost.id}
+                                                        post={singlePost}
+                                                        user={this.props.users[`${singlePost.user}`.substring(36, singlePost.user.length - 1)]}
+                                                        userWhoShared={this.props.user}/>);
+                                }
+                                else {
+                                    return (<SharedPost
+                                        key={singlePost.id}
+                                        post={singlePost}
+                                        loading={true}/>);
+                                }
+                            }
+                        }
+                    )}
+                </InfiniteScroll>
             </div>
         );
     }
 }
 
 const mapStateToProps = state => ({
-    user: state.users.pickedUser
+    user: state.users.pickedUser,
+    posts: state.posts.posts,
+    users: state.users.users,
+    hasMore: state.posts.hasMore
 });
 
 const mapDispatchToProps = dispatch => ({

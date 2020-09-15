@@ -1,8 +1,8 @@
 import * as actionTypes from './actionTypes';
-import axios from 'axios'
+import axios from '../../axios';
 import tokenConfig from "./auth";
 import {createMessage} from './messages';
-
+import {fetchRelatedUsersUserPage} from './users';
 
 export const createPost = (form) => {
     return (dispatch, getState) => {
@@ -43,7 +43,13 @@ export const fetchUserPosts = (userUuid) => {
 
         axios.get(`/api/tweet/byuser/${userUuid}/`, tokenConfig(getState))
             .then(res => {
-                console.log(res.data);
+                dispatch(fetchRelatedUsersUserPage(
+                    res.data.results,
+                    userUuid));
+                dispatch({
+                    type: actionTypes.FETCH_USER_POSTS_SUCCESS,
+                    payload: res.data
+                });
             });
     }
 }

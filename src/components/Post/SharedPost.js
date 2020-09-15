@@ -10,7 +10,7 @@ const sharedPost = (props) => {
             {props.loading ? <span className={classes.ShareLoading}>.</span> :
                 <span className={classes.Share}>
                     <img src={shareIcon} />
-                    {props.account.username_displayed} Retweeted
+                    {props.userWhoShared.username_displayed} Retweeted
                 </span>}
             <Post
                 post={props.post}

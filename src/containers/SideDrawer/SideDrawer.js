@@ -37,7 +37,7 @@ class SideDrawer extends React.Component{
                     <div className={classes.SideDrawer}>
                         <Logo />
                         <ul>
-                            <NavLink onClick={() => window.location.replace('/')}
+                            <NavLink
                                      to="/" exact
                                      className={classes.SideDrawerItem}
                                      activeClassName={classes.Active}>

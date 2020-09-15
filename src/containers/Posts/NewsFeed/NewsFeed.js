@@ -95,7 +95,7 @@ class NewsFeed extends React.Component{
                         </h2>)
                     }
                 >
-                    { this.props.posts.map(
+                    {this.props.posts.map(
                         singlePost => {
                             if (!singlePost.tweet_itself) {
                                 if (this.props.users[`${singlePost.user}`.substring(36, singlePost.user.length - 1)]) {
@@ -112,7 +112,7 @@ class NewsFeed extends React.Component{
                                     this.props.users[`${singlePost.tweet_itself.user}`.substring(36, singlePost.tweet_itself.user.length - 1)]) {
                                     return (<SharedPost key={singlePost.id}
                                                         post={singlePost.tweet_itself}
-                                                        account={this.props.users[`${singlePost.account}`.substring(36, singlePost.account.length - 1)]}
+                                                        userWhoShared={this.props.users[`${singlePost.account}`.substring(36, singlePost.account.length - 1)]}
                                                         user={this.props.users[`${singlePost.tweet_itself.user}`.substring(36, singlePost.tweet_itself.user.length - 1)]}/>);
                                 } else {
                                     return (<SharedPost
@@ -130,10 +130,10 @@ class NewsFeed extends React.Component{
 }
 
 const mapStateToProps = state => ({
-    newsFeedTimeStamp: state.newsFeed.newsFeedTimeStamp,
-    posts: state.newsFeed.posts,
+    newsFeedTimeStamp: state.posts.newsFeedTimeStamp,
+    posts: state.posts.posts,
     users: state.users.users,
-    hasMore: state.newsFeed.hasMore
+    hasMore: state.posts.hasMore
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import axios from 'axios'
+import axios from '../../axios';
 import * as modalActions from './modal';
 import {createMessage} from './messages';
 

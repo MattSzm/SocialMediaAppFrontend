@@ -1,17 +1,18 @@
 import * as actionTypes from './actionTypes';
-import axios from 'axios'
+import axios from '../../axios';
 import tokenConfig from "./auth";
-import {fetchRelatedUsers} from "./users";
+import {fetchRelatedUsersNewsFeed} from "./users";
 
 
 export const fetchNewsFeed = () => {
     return (dispatch, getState) => {
+        dispatch({type: actionTypes.CLEAR_USERS});
         dispatch({type: actionTypes.FETCH_NEWSFEED_START});
         axios.get('/api/tweet/newsfeed/', tokenConfig(getState))
             .then(res => {
                 dispatch({type: actionTypes.FETCH_NEWSFEED_SUCCESS,
                         payload: res.data});
-                dispatch(fetchRelatedUsers(res.data));
+                dispatch(fetchRelatedUsersNewsFeed(res.data));
             }).catch(error => {
                 dispatch({type: actionTypes.FETCH_NEWSFEED_FAIL});
             if(error.response) {
@@ -28,6 +29,7 @@ export const fetchNewsFeed = () => {
 
 export const fetchMore = (TimeStamp) => {
     return (dispatch, getState) => {
+
         dispatch({type: actionTypes.LOAD_MORE_NEWSFEED_START});
         const data = {
             time_stamp: TimeStamp,
@@ -36,7 +38,7 @@ export const fetchMore = (TimeStamp) => {
             .then(res => {
                 dispatch({type: actionTypes.LOAD_MORE_NEWSFEED_SUCCESS,
                             payload: res.data});
-                dispatch(fetchRelatedUsers(res.data));
+                dispatch(fetchRelatedUsersNewsFeed(res.data));
             }).catch(error => {
             dispatch({type: actionTypes.FETCH_NEWSFEED_FAIL});
             if(error.response) {
@@ -49,6 +51,5 @@ export const fetchMore = (TimeStamp) => {
                 });
             }
         });
-
     }
 }
