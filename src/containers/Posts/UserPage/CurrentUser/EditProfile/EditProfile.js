@@ -29,6 +29,11 @@ class EditProfile extends Component {
         },
         pictures: [],
     }
+    componentDidMount() {
+        if(this.props.currentUser){
+            this.setInitialValues()
+        }
+    }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(!prevProps.currentUser && this.props.currentUser){
@@ -109,12 +114,11 @@ class EditProfile extends Component {
         }
 
         let formInputs = formElementArray.map(formElement => (
-            <div>
+            <div key={formElement.id}>
                 <p className={classes.Label}>
                     {formElement.config.label}
                 </p>
                 <Input
-                    key={formElement.id}
                     elementType={formElement.config.elementType}
                     elementConfig={formElement.config.elementConfig}
                     value={formElement.config.value}

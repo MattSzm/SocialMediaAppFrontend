@@ -14,3 +14,19 @@
 .ImageContainer{
     margin: 2em 0;
 }
+
+@media(max-width: 600px){
+    .EditProfile{
+        width: 70%;
+    }
+}
+@media(max-width: 450px){
+    .EditProfile{
+        width: 80%;
+    }
+}
+@media(max-width: 350px){
+    .EditProfile{
+        width: 90%;
+    }
+}

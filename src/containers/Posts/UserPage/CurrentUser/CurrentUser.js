@@ -44,7 +44,7 @@ class UserPage extends Component{
                 <Modal show={this.props.showModal}
                        closeModalAndBackdrop={this.props.modalToggle.bind(this)}
                         dark={false}
-                       modalToTop={true}>
+                       modalUserEdit={true}>
                     <EditProfile />
                 </Modal>
 

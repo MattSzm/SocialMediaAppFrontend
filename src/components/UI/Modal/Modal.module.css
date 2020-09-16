@@ -19,16 +19,34 @@
     color: white;
 }
 
-@media (min-width: 300px) {
+.ModalUserEdit {
+    position: fixed;
+    z-index: 600;
+    width: 95%;
+    border: 1.5px solid #657786;
+    left: 2.5%;
+    top: 5%;
+    box-sizing: border-box;
+    transition: all 0.25s ease-in;
+}
+
+@media (min-width: 350px) {
     .Modal{
         width: 280px;
         left: calc(50% - 140px);
     }
-
+    .ModalUserEdit{
+        width: 88%;
+        left: 6%;
+    }
 }
 
 @media (min-width: 600px) {
     .Modal {
+        width: 500px;
+        left: calc(50% - 250px);
+    }
+    .ModalUserEdit{
         width: 500px;
         left: calc(50% - 250px);
     }
@@ -39,10 +57,12 @@
         width: 700px;
         left: calc(50% - 350px);
     }
+    .ModalUserEdit{
+        width: 700px;
+        left: calc(50% - 350px);
+    }
 }
 
-.ModalToTop {
-    top: 5%;
-}
+
 
 

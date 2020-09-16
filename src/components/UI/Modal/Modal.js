@@ -9,8 +9,8 @@ const modal = (props) => {
     if (props.dark){
         modalClasses = [classes.Modal, classes.ModalDark];
     }
-    if (props.modalToTop){
-        modalClasses.push(classes.ModalToTop);
+    if (props.modalUserEdit){
+        modalClasses = [classes.ModalUserEdit, classes.ModalBright];
     }
     return (
         <Fragment>
