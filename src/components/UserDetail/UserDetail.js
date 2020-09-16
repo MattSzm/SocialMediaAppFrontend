@@ -103,6 +103,7 @@ const userDetail = (props) => {
                             </Link>
                             <div className={classes.Settings}>
                                 {props.worksAsProfile ? <Button
+                                    click={props.openModal}
                                     isGrey={true}
                                     isTransparent={false}>Edit profile</Button> : null}
                             </div>

@@ -30,9 +30,7 @@ class UserPage extends Component{
         this.props.fetchMore(this.props.linkLoadMore,
                         this.props.user.uuid);
     }
-//     if(this.props.user.uuid === this.props.currentUser.uuid){
-//     this.props.history.replace('/profile')
-// }
+
     render() {
         let userDetail = <UserDetail loading={true} />;
         if(this.props.user){

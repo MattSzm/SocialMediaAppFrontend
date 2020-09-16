@@ -3,9 +3,7 @@ import classes from './Layout.module.css';
 import SideDrawer from "../../containers/SideDrawer/SideDrawer";
 import NewsFeed from "../../containers/Posts/NewsFeed/NewsFeed";
 import Info from "../../containers/Info/Info";
-import Modal from '../../components/UI/Modal/Modal';
 import { connect } from 'react-redux';
-import * as modalActions from '../../store/actions/modal';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import UserPage from "../../containers/Posts/UserPage/UserPage";
 import CurrentUser from "../../containers/Posts/UserPage/CurrentUser/CurrentUser";
@@ -15,29 +13,20 @@ class Layout extends React.Component{
 
     render() {
         return(
-            <React.Fragment>
-                <Modal show={this.props.showModal}
-                       closeModalAndBackdrop={this.props.modalToggle.bind(this)}>
-                        <h2>MODALPLACEHOLDER</h2>
-                </Modal>
+            <div className={classes.Layout}>
+                <SideDrawer/>
 
+                <Switch>
+                    {this.props.currentUser ?
+                        <Redirect from={`/user/${this.props.currentUser.username}`} to="/profile" /> : null }
+                    <Route path="/user/:username" exact component={UserPage} />
+                    <Route path="/profile" exact component={CurrentUser}/>
 
-                <div className={classes.Layout}>
-                    <SideDrawer/>
+                    <Route path="/" component={NewsFeed} />
+                </Switch>
 
-                    <Switch>
-                        {this.props.currentUser ?
-                            <Redirect from={`/user/${this.props.currentUser.username}`} to="/profile" /> : null }
-                        <Route path="/user/:username" exact component={UserPage} />
-                        <Route path="/profile" exact component={CurrentUser}/>
-
-                        <Route path="/" component={NewsFeed} />
-                    </Switch>
-
-                    <Info />
-                </div>
-
-            </React.Fragment>
+                <Info />
+            </div>
         );
     }
 }
@@ -45,14 +34,7 @@ class Layout extends React.Component{
 const mapStateToProps = state => (
     {
         currentUser: state.auth.user,
-        showModal: state.modal.showModal,
     }
 );
 
-const mapDispatchToProps = dispatch => (
-    {
-        modalToggle: () => dispatch(modalActions.modalToggle())
-    }
-);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Layout);
+export default connect(mapStateToProps)(Layout);

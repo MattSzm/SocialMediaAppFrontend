@@ -12,6 +12,7 @@ import MobileNavigation from "../../components/MobileNavigation/MobileNavigation
 import ProfileHighlight from "../../components/ProfileHighlight/ProfileHighlight";
 import {withRouter} from 'react-router-dom';
 
+
 class SideDrawer extends React.Component{
 
     performLogout = () => {
@@ -62,12 +63,6 @@ class SideDrawer extends React.Component{
                                     </span>
                                 </h2>
                             </NavLink>
-
-                            {/*<NavLink to="/notifications"*/}
-                            {/*         className={classes.SideDrawerItem}*/}
-                            {/*         activeClassName={classes.Active}>*/}
-                            {/*    <h2><span>Notifications</span></h2>*/}
-                            {/*</NavLink>*/}
 
                             <NavLink to="/profile" exact
                                      className={classes.SideDrawerItem}

@@ -1,0 +1,16 @@
+.EditProfile{
+    margin: auto;
+    width: 60%;
+}
+.EditProfile h2{
+    margin-bottom: 2em;
+}
+.Label{
+    color: #657786;
+    text-align: left;
+    margin-left: 0.5em;
+    margin-bottom: -0.5em;
+}
+.ImageContainer{
+    margin: 2em 0;
+}

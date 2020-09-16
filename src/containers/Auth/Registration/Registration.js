@@ -195,7 +195,7 @@ class Login extends React.Component{
 
         let formInputs = formElementArray.map(formElement => (
             <Input
-                key ={formElement.id}
+                key={formElement.id}
                 elementType={formElement.config.elementType}
                 elementConfig={formElement.config.elementConfig}
                 value={formElement.config.value}
@@ -207,7 +207,7 @@ class Login extends React.Component{
                 invalid={!formElement.config.valid}
                 colorGreen={true}
             />
-        ))
+        ));
 
         let form = <Spinner />
         if(!this.props.loading){

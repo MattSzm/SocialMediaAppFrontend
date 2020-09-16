@@ -9,6 +9,10 @@ const UploadImages = (props) => {
         props.upload(imageList);
     };
 
+    let imageWidth = 100;
+    if(props.userEdit){
+        imageWidth = 200;
+    }
     return (
         <div className="App">
             <ImageUploading
@@ -48,7 +52,7 @@ const UploadImages = (props) => {
                         }} /> : null }
                         {imageList.map((image, index) => (
                             <div key={index} className="image-item">
-                                <img src={image['data_url']} alt="" width="100" />
+                                <img src={image['data_url']} alt="" width={imageWidth} />
                                 <div className="image-item__btn-wrapper">
                                     <span style={{
                                         cursor: 'pointer',

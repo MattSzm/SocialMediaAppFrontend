@@ -10,7 +10,10 @@ const navigationCreatePost = (props) => {
             <div className={classes.Navigation}>
                 <UploadImages
                     images={props.images}
-                    upload={props.pictureUpload}/>
+                    upload={props.pictureUpload}
+                    registration={false}
+                    tranparentButtons={false}
+                />
                 <Button
                     click={props.sumbit}>
                     Tweet

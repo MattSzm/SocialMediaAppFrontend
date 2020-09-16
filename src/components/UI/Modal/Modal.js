@@ -9,6 +9,9 @@ const modal = (props) => {
     if (props.dark){
         modalClasses = [classes.Modal, classes.ModalDark];
     }
+    if (props.modalToTop){
+        modalClasses.push(classes.ModalToTop);
+    }
     return (
         <Fragment>
             <Backdrop
