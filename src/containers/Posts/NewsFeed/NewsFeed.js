@@ -21,7 +21,12 @@ class NewsFeed extends React.Component{
     render() {
         return(
             <div className={classes.NewsFeed}>
-                <h2>Home</h2>
+                <div className={classes.ContainerTitle}>
+                    <div className={classes.Title}>
+                        <h2>Home</h2>
+                    </div>
+                </div>
+                <div className={classes.EmptySpace}/>
                 <CreatePost />
                 <InfiniteScroll
                     next={() => {
