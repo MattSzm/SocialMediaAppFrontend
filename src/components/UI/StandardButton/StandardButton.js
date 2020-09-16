@@ -7,6 +7,9 @@ const standardButton = (props) => {
     if (props.isGrey){
         classNames.push(classes.btnGrey);
     }
+    else if(props.isTransparent){
+        classNames.push(classes.btnTransparent);
+    }
     return (
         <span className={classNames.join(' ')}
               onClick={props.click}

@@ -1,6 +1,7 @@
 import React from "react";
 import classes from './ProfileHighlight.module.css';
 import Avatar from "../images/Avatar/Avatar";
+import {withRouter} from 'react-router-dom';
 
 const profileHighlight = (props) => {
     let profile = (
@@ -25,7 +26,8 @@ const profileHighlight = (props) => {
             avatar = ( <Avatar link={props.photo}/>);
         }
         profile = (
-            <div className={classes.ProfileHighlight}>
+            <div className={classes.ProfileHighlight}
+                 onClick={() => {props.history.push('/profile')}}>
                 {avatar}
                 <div className={classes.Content}>
                     <h4>{props.usernameDisplay.length > 19 ?
@@ -45,4 +47,4 @@ const profileHighlight = (props) => {
     );
 }
 
-export default profileHighlight;
+export default withRouter(profileHighlight);

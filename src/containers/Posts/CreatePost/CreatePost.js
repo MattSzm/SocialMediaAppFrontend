@@ -104,6 +104,7 @@ class CreatePost extends React.Component{
                 </div>
                 <NavigationCreatePost
                     pictureUpload={this.pictureUploadHandler}
+                    tranparentButtons={false}
                     images={this.state.pictures}
                     sumbit={this.submitHandler}/>
 

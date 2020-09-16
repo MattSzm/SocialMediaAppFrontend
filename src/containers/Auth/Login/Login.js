@@ -118,7 +118,7 @@ class Login extends React.Component{
                     </Button>
                     <SpaceStyledDiv/>
                     <Button click={this.props.changeState}
-                        isGrey={true}>
+                            isTransparent={true}>
                         Switch to Sign up
                     </Button>
                 </form>

@@ -18,6 +18,12 @@
     background-color: #657786;
 }
 
+.btnTransparent{
+    background-color: transparent;
+    padding: 10.5px 23.5px;
+    border: 1.5px solid #1DA1F2;
+}
+
 .btn:hover{
     text-shadow: 0 -1px 0 rgba(0,0,0,0.45);
     background-color: #0890e2;

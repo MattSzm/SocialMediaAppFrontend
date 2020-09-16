@@ -26,6 +26,8 @@ class Layout extends React.Component{
                     <SideDrawer/>
 
                     <Switch>
+                        {this.props.currentUser ?
+                            <Redirect from={`/user/${this.props.currentUser.username}`} to="/profile" /> : null }
                         <Route path="/user/:username" exact component={UserPage} />
                         <Route path="/profile" exact component={CurrentUser}/>
 
@@ -42,6 +44,7 @@ class Layout extends React.Component{
 
 const mapStateToProps = state => (
     {
+        currentUser: state.auth.user,
         showModal: state.modal.showModal,
     }
 );

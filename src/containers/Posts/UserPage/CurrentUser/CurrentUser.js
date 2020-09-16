@@ -31,6 +31,7 @@ class UserPage extends Component{
             userDetail = (
                 <UserDetail
                     user={this.props.user}
+                    worksAsProfile={true}
                 />
             );
         }

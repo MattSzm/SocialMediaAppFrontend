@@ -55,9 +55,14 @@
     flex-direction: column;
 }
 .Names{
+    display: flex;
+    flex-direction: row;
     padding-top: 0em;
     padding-bottom: 1em;
     margin-bottom: 5px;
+}
+.Settings{
+    margin: auto 1em auto auto;
 }
 .InlineContainer{
     margin-bottom: 0.5em;
@@ -78,6 +83,15 @@
         width: calc(100% - 200px);
     }
 }
+@media(max-width: 750px){
+    .Names{
+        flex-direction: column;
+    }
+    .Settings{
+        margin: 0.5em auto auto -0.5em;
+    }
+}
+
 @media(max-width: 700px){
     .Inline{
         padding-right: 0;

@@ -1,6 +1,7 @@
 import React, {Fragment} from "react";
 import classes from './UserDetail.module.css';
 import Avatar from "../images/Avatar/Avatar";
+import Button from '../UI/StandardButton/StandardButton';
 import FollowButton from "../UI/StandardButton/FollowButton/FollowButton";
 import {Link} from "react-router-dom";
 
@@ -100,20 +101,30 @@ const userDetail = (props) => {
                                     @{props.user.username}
                                 </p>
                             </Link>
+                            <div className={classes.Settings}>
+                                {props.worksAsProfile ? <Button
+                                    isGrey={true}
+                                    isTransparent={false}>Edit profile</Button> : null}
+                            </div>
+
                         </div>
-                        <div className={classes.InlineContainer}>
-                            <p className={classes.Inline}>
-                                <strong style={{color: '#14171A'}}>
-                                    {props.user.number_following}
-                                </strong> Following
-                            </p>
-                            <p className={classes.Inline}>
-                                <strong style={{color: '#14171A'}}>
-                                    {props.user.number_followers}
-                                </strong> Followers
-                            </p>
+                        <div>
+                            <div className={classes.InlineContainer}>
+                                <p className={classes.Inline}>
+                                    <strong style={{color: '#14171A'}}>
+                                        {props.user.number_following}
+                                    </strong> Following
+                                </p>
+                                <p className={classes.Inline}>
+                                    <strong style={{color: '#14171A'}}>
+                                        {props.user.number_followers}
+                                    </strong> Followers
+                                </p>
+                            </div>
                         </div>
-                        <FollowButton alreadyFollow={props.user.followed_by_current_user}/>
+                        {!props.worksAsProfile ?
+                            <FollowButton alreadyFollow={props.user.followed_by_current_user}/> : null
+                        }
                     </div>
                 </div>
             </div>

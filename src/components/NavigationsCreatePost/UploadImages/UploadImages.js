@@ -26,21 +26,23 @@ const UploadImages = (props) => {
                       dragProps,
                   }) => (
                     <div className="upload__image-wrapper">
-                        {props.images[0] ? <StandardButton
-                                        isGrey={true}
+                        {props.images[0] ? (<StandardButton
+                                        isTransparent={props.tranparentButtons}
+                                        isGrey={!props.tranparentButtons}
                                         click={onImageUpdate}
                                         >
                                             Update
-                                        </StandardButton>
+                                        </StandardButton>)
                                     :
-                                        <StandardButton
-                                        isGrey={true}
+                                        (<StandardButton
+                                        isTransparent={props.tranparentButtons}
+                                        isGrey={!props.tranparentButtons}
                                         isDragging ={isDragging}
                                         click={onImageUpload}
                                         drag = {dragProps}
                                     >
                                             {props.registration ? 'Set your picture ': 'Upload'}
-                                    </StandardButton>
+                                    </StandardButton>)
                         }
                         {props.images[0]  ? <div style={{height: '0.5em'
                         }} /> : null }
@@ -65,6 +67,6 @@ const UploadImages = (props) => {
             </ImageUploading>
         </div>
     );
-}
+};
 
 export default UploadImages;

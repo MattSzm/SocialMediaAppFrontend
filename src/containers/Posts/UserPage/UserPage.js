@@ -30,7 +30,9 @@ class UserPage extends Component{
         this.props.fetchMore(this.props.linkLoadMore,
                         this.props.user.uuid);
     }
-
+//     if(this.props.user.uuid === this.props.currentUser.uuid){
+//     this.props.history.replace('/profile')
+// }
     render() {
         let userDetail = <UserDetail loading={true} />;
         if(this.props.user){
@@ -101,6 +103,7 @@ class UserPage extends Component{
 
 
 const mapStateToProps = state => ({
+    currentUser: state.auth.user,
     user: state.users.pickedUser,
     posts: state.posts.posts,
     linkLoadMore: state.posts.linkToLoadMoreUserPage,

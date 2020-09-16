@@ -217,7 +217,8 @@ class Login extends React.Component{
                     <UploadImages
                         upload={this.pictureUploadHandler}
                         images={this.state.pictures}
-                        registration={true}/>
+                        registration={true}
+                        tranparentButtons={true}/>
                     <br/>
                     <br/>
                     <Button click={this.submitHandler}>
@@ -225,7 +226,7 @@ class Login extends React.Component{
                     </Button>
                     <SpaceStyledDiv />
                     <Button click={this.props.changeState}
-                            isGrey={true}>
+                            isTransparent={true}>
                         Switch to Log in
                     </Button>
                 </form>
