@@ -19,60 +19,17 @@ class NewsFeed extends React.Component{
     }
 
     render() {
-        // let content = null;
-        //
-        // if(!this.props.loadingPosts){
-        //     const mergedPosts = this.mergePostsWithShares()
-        //     if(mergedPosts.length === 0 && this.props.available){
-        //         content = (<h2
-        //             style={{
-        //                 textAlign: 'center',
-        //                 margin: '2em 0'
-        //             }}>
-        //             No tweets to show.
-        //             <br/><br/>
-        //             <small>
-        //                 Start following people.
-        //             </small>
-        //         </h2>);
-        //     }
-        //     else {
-        //         content = mergedPosts.map(
-        //             singlePost => {
-        //                 if (!singlePost.tweet_itself) {
-        //                     if (this.props.users[`${singlePost.user}`.substring(36, singlePost.user.length - 1)]) {
-        //                         return (<Post key={singlePost.id}
-        //                                       post={singlePost}
-        //                                       user={this.props.users[`${singlePost.user}`.substring(36, singlePost.user.length - 1)]}/>);
-        //                     } else {
-        //                         return <Post key={singlePost.id}
-        //                                      post={singlePost}
-        //                                      loading={true}/>
-        //                     }
-        //                 } else {
-        //                     if (this.props.users[`${singlePost.account}`.substring(36, singlePost.account.length - 1)] &&
-        //                         this.props.users[`${singlePost.tweet_itself.user}`.substring(36, singlePost.tweet_itself.user.length - 1)]) {
-        //                         return (<SharedPost key={singlePost.id}
-        //                                             post={singlePost.tweet_itself}
-        //                                             account={this.props.users[`${singlePost.account}`.substring(36, singlePost.account.length - 1)]}
-        //                                             user={this.props.users[`${singlePost.tweet_itself.user}`.substring(36, singlePost.tweet_itself.user.length - 1)]}/>);
-        //                     } else {
-        //                         return (<SharedPost
-        //                             key={singlePost.id}
-        //                             post={singlePost.tweet_itself}
-        //                             loading={true}/>);
-        //                     }
-        //                 }
-        //             }
-        //         );
-        //     }
-        // }
         return(
             <div className={classes.NewsFeed}>
                 <h2>Home</h2>
                 <CreatePost />
                 <InfiniteScroll
-                    next={() => {this.loadMore()}}
+                    next={() => {
+                        if(this.props.newsFeedTimeStamp)
+                        {
+                            this.loadMore();
+                        }
+                    }}
                     hasMore={this.props.hasMore}
                     loader={<Spinner />}
                     dataLength={this.props.posts.length}
@@ -128,6 +85,7 @@ class NewsFeed extends React.Component{
         );
     }
 }
+
 
 const mapStateToProps = state => ({
     newsFeedTimeStamp: state.posts.newsFeedTimeStamp,

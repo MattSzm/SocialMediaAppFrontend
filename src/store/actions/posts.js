@@ -4,6 +4,7 @@ import tokenConfig from "./auth";
 import {createMessage} from './messages';
 import {fetchRelatedUsersUserPage} from './users';
 
+
 export const createPost = (form) => {
     return (dispatch, getState) => {
         dispatch({type: actionTypes.CREATE_POST_START});
@@ -50,6 +51,45 @@ export const fetchUserPosts = (userUuid) => {
                     type: actionTypes.FETCH_USER_POSTS_SUCCESS,
                     payload: res.data
                 });
-            });
-    }
-}
+            }).catch(error => {
+                dispatch({type: actionTypes.FETCH_USER_POSTS_FAIL});
+                if(error.response) {
+                    dispatch({
+                        type: actionTypes.GET_ERRORS,
+                        payload: {
+                            msg: {userPosts: 'Unable to load tweets'},
+                            status: error.response.status
+                        }
+                    });
+            }
+        });
+    };
+};
+
+
+export const fetchMoreUserPosts = (link, userUuid) => {
+    return (dispatch, getState) => {
+        dispatch({type: actionTypes.LOAD_MORE_USER_POSTS_START});
+        axios.get(link.substring(22, ), tokenConfig(getState))
+            .then(res => {
+                dispatch(fetchRelatedUsersUserPage(
+                    res.data.results,
+                    userUuid));
+                dispatch({
+                    type: actionTypes.LOAD_MORE_USER_POSTS_SUCCESS,
+                    payload: res.data
+                });
+            }).catch(error => {
+                dispatch({type: actionTypes.FETCH_USER_POSTS_FAIL});
+            if(error.response) {
+                dispatch({
+                    type: actionTypes.GET_ERRORS,
+                    payload: {
+                        msg: {newsfeed: 'Unable to load newsfeed'},
+                        status: error.response.status
+                    }
+                });
+            }
+        });
+    };
+};

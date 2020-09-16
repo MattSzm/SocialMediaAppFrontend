@@ -50,7 +50,7 @@
 }
 .Follows{
     width: calc(100% - 230px);
-    margin-top: 5px;
+    margin-top: -1em;
     display: flex;
     flex-direction: column;
 }

@@ -28,6 +28,9 @@ class Alert extends Component{
             if(error.message.userFail){
                 alert.error(error.message.userFail);
             }
+            if(error.message.userPosts){
+                alert.error(error.message.userPosts);
+            }
             if(error.message.noUser){
                 alert.error(error.message.noUser);
             }

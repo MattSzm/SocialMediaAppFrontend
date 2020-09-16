@@ -82,7 +82,7 @@ export const logout = () => {
         axios.post('/api/auth/logout/', null, tokenConfig(getState))
             .then(res => {
                 dispatch({
-                    type: actionTypes.CLEAR_NEWSFEED
+                    type: actionTypes.CLEAR_POSTS
                 });
                 dispatch({
                     type: actionTypes.LOGOUT_SUCCESS,

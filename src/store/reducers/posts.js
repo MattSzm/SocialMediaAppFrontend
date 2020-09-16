@@ -34,6 +34,7 @@ const mergePostsWithShares = (posts, shares) => {
 }
 
 const reducer = (state=initialState, action) => {
+    let hasMore = true;
     switch (action.type){
         case actionTypes.FETCH_NEWSFEED_START:
         case actionTypes.FETCH_USER_POSTS_START:
@@ -44,11 +45,11 @@ const reducer = (state=initialState, action) => {
                 loading: true,
                 hasMore: true}
         case actionTypes.LOAD_MORE_NEWSFEED_START:
+        case actionTypes.LOAD_MORE_USER_POSTS_START:
             return {...state,
                 loading: true,
                 hasMore: true};
         case actionTypes.FETCH_NEWSFEED_SUCCESS:
-            let hasMore = true;
             if((action.payload.tweets.length +
                     action.payload.shares.length) < 10){
                 hasMore = false;
@@ -62,11 +63,13 @@ const reducer = (state=initialState, action) => {
                 loading: false,
                 hasMore: hasMore};
         case actionTypes.FETCH_NEWSFEED_FAIL:
+        case actionTypes.FETCH_USER_POSTS_FAIL:
             return {...state, loading: false};
-        case actionTypes.CLEAR_NEWSFEED:
+        case actionTypes.CLEAR_POSTS:
             return {...state,
                 posts: [],
                 newsFeedTimeStamp: null,
+                linkToLoadMoreUserPage: null,
                 loading: false,
                 hasMore: true}
         case actionTypes.LOAD_MORE_NEWSFEED_SUCCESS:
@@ -75,16 +78,15 @@ const reducer = (state=initialState, action) => {
                 action.payload.shares
             );
             const newPosts = [...state.posts].concat(newMergedPosts);
-            let hasMoreMore = true;
             if((action.payload.tweets.length +
                     action.payload.shares.length) < 10){
-                hasMoreMore = false;
+                hasMore = false;
             }
             return {...state,
                 posts: newPosts,
                 newsFeedTimeStamp: action.payload.time_stamp,
                 loading: false,
-                hasMore: hasMoreMore};
+                hasMore: hasMore};
         case actionTypes.CREATE_POST_START:
             return {...state,
                 loading: true};
@@ -98,15 +100,24 @@ const reducer = (state=initialState, action) => {
             return {...state,
                 loading: false};
         case actionTypes.FETCH_USER_POSTS_SUCCESS:
-            let hasMoreUserPosts = true;
-            if(action.payload.next){
-                hasMoreUserPosts = false;
+            if(!action.payload.next){
+                hasMore = false;
             }
             return {...state,
                 posts: action.payload.results,
                 linkToLoadMoreUserPage: action.payload.next,
                 loading: false,
-                hasMore: hasMoreUserPosts};
+                hasMore: hasMore};
+        case actionTypes.LOAD_MORE_USER_POSTS_SUCCESS:
+            const newPostsUserPosts = [...state.posts].concat(action.payload.results)
+            if(!action.payload.next){
+                hasMore = false;
+            }
+            return {...state,
+                posts: newPostsUserPosts,
+                linkToLoadMoreUserPage: action.payload.next,
+                loading: false,
+                hasMore: hasMore};
         default:
             return state;
     }

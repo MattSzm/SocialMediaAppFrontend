@@ -6,7 +6,6 @@ import {fetchRelatedUsersNewsFeed} from "./users";
 
 export const fetchNewsFeed = () => {
     return (dispatch, getState) => {
-        dispatch({type: actionTypes.CLEAR_USERS});
         dispatch({type: actionTypes.FETCH_NEWSFEED_START});
         axios.get('/api/tweet/newsfeed/', tokenConfig(getState))
             .then(res => {
@@ -26,6 +25,7 @@ export const fetchNewsFeed = () => {
             }});
     };
 };
+
 
 export const fetchMore = (TimeStamp) => {
     return (dispatch, getState) => {
@@ -51,5 +51,5 @@ export const fetchMore = (TimeStamp) => {
                 });
             }
         });
-    }
-}
+    };
+};

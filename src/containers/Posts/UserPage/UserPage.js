@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import classes from './UserPage.module.css'
 import {connect} from 'react-redux';
 import {fetchUser} from "../../../store/actions/users";
+import {fetchMoreUserPosts} from '../../../store/actions/posts';
 import UserDetail from "../../../components/UserDetail/UserDetail";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Spinner from "../../../components/UI/Spinner/Spinner";
@@ -15,6 +16,11 @@ class UserPage extends Component{
         this.props.loadUser(username);
     }
 
+    loadMore = () => {
+        this.props.fetchMore(this.props.linkLoadMore,
+                        this.props.user.uuid);
+    }
+
     render() {
         let userDetail = <UserDetail loading={true} />;
         if(this.props.user){
@@ -24,12 +30,11 @@ class UserPage extends Component{
                         />
             );
         }
-
         return(
             <div className={classes.UserPage}>
                 {userDetail}
                 <InfiniteScroll
-                    next={()=>{}}
+                    next={() => {this.loadMore()}}
                     hasMore={this.props.hasMore}
                     loader={<Spinner />}
                     dataLength={this.props.posts.length}
@@ -50,24 +55,26 @@ class UserPage extends Component{
                 >
                     {this.props.posts.map(
                         singlePost => {
-                            if(`${singlePost.user}`.substring(36, singlePost.user.length - 1)
-                                === this.props.user.uuid){
-                                return (<Post key={singlePost.id}
-                                              post={singlePost}
-                                              user={this.props.user} />);
-                            }
-                            else{
-                                if(this.props.users[`${singlePost.user}`.substring(36, singlePost.user.length - 1)]) {
-                                    return (<SharedPost key={singlePost.id}
-                                                        post={singlePost}
-                                                        user={this.props.users[`${singlePost.user}`.substring(36, singlePost.user.length - 1)]}
-                                                        userWhoShared={this.props.user}/>);
-                                }
-                                else {
-                                    return (<SharedPost
-                                        key={singlePost.id}
-                                        post={singlePost}
-                                        loading={true}/>);
+                            if(singlePost.user && this.props.user) {
+                                if (`${singlePost.user}`.substring(36, singlePost.user.length - 1)
+                                    === this.props.user.uuid) {
+                                    return (<Post key={singlePost.id}
+                                                  post={singlePost}
+                                                  user={this.props.user}/>);
+                                } else {
+                                    if (this.props.users[`${singlePost.user}`.substring(36,
+                                        singlePost.user.length - 1)]) {
+                                        return (<SharedPost key={singlePost.id}
+                                                            post={singlePost}
+                                                            user={this.props.users[`${singlePost.user}`
+                                                                .substring(36, singlePost.user.length - 1)]}
+                                                            userWhoShared={this.props.user}/>);
+                                    } else {
+                                        return (<SharedPost
+                                            key={singlePost.id}
+                                            post={singlePost}
+                                            loading={true}/>);
+                                    }
                                 }
                             }
                         }
@@ -78,16 +85,18 @@ class UserPage extends Component{
     }
 }
 
+
 const mapStateToProps = state => ({
     user: state.users.pickedUser,
     posts: state.posts.posts,
+    linkLoadMore: state.posts.linkToLoadMoreUserPage,
     users: state.users.users,
     hasMore: state.posts.hasMore
 });
 
 const mapDispatchToProps = dispatch => ({
-    loadUser: (username) => dispatch(fetchUser(username, true))
+    loadUser: (username) => dispatch(fetchUser(username, true)),
+    fetchMore: (link, userUuid) => dispatch(fetchMoreUserPosts(link, userUuid))
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPage);
