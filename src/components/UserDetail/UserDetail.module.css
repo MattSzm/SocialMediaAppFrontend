@@ -30,7 +30,7 @@
     padding: 0.5em 1.5em;
     border-bottom: solid #E1E8ED 1px;
     background-color: rgb(255,255,255);
-    z-index: 2;
+    z-index: 5;
 }
 
 .UserDetail h2,

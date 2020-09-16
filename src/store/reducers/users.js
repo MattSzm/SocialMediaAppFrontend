@@ -29,6 +29,10 @@ const reducer = (state=initialState, action) => {
                     users: {},
                     pickedUser: null,
                     error: null};
+        case actionTypes.CLEAR_PICKED_USER:
+            return {...state,
+                    pickedUser: null,
+                    error: null}
         default:
             return state;
     }

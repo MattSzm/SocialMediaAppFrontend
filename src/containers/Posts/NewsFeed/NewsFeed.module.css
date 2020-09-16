@@ -12,7 +12,7 @@
 .ContainerTitle{
     position: fixed;
     width: 780px;
-    z-index: 3;
+    z-index: 5;
 }
 
 @media(max-width: 1300px){

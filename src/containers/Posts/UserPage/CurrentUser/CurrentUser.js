@@ -1,43 +1,37 @@
 import React, {Component} from "react";
-import classes from './UserPage.module.css'
+import classes from '../UserPage.module.css';
 import {connect} from 'react-redux';
-import {fetchUser} from "../../../store/actions/users";
-import {fetchMoreUserPosts} from '../../../store/actions/posts';
-import UserDetail from "../../../components/UserDetail/UserDetail";
+import {fetchUserPosts, fetchMoreUserPosts} from '../../../../store/actions/posts';
+import {loadCurrentUser} from '../../../../store/actions/auth';
+import UserDetail from "../../../../components/UserDetail/UserDetail";
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Spinner from "../../../components/UI/Spinner/Spinner";
-import Post from "../../../components/Post/Post";
-import SharedPost from "../../../components/Post/SharedPost";
-import {clearPickedUser} from "../../../store/actions/users";
+import Spinner from "../../../../components/UI/Spinner/Spinner";
+import Post from "../../../../components/Post/Post";
+import SharedPost from "../../../../components/Post/SharedPost";
 
 
 class UserPage extends Component{
     componentDidMount() {
-        this.props.clearUser();
-        const username = this.props.match.params.username;
-        this.props.loadUser(username);
-    }
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevProps.match.params.username !== this.props.match.params.username){
-            this.props.clearUser();
-            const username = this.props.match.params.username;
-            this.props.loadUser(username);
+        if(this.props.user) {
+            this.props.startFetching(this.props.user.uuid);
+        }
+        else{
+            this.props.loadCurrentUser();
         }
     }
 
     loadMore = () => {
         this.props.fetchMore(this.props.linkLoadMore,
-                        this.props.user.uuid);
+            this.props.user.uuid);
     }
 
     render() {
         let userDetail = <UserDetail loading={true} />;
         if(this.props.user){
             userDetail = (
-                        <UserDetail
-                            user={this.props.user}
-                        />
+                <UserDetail
+                    user={this.props.user}
+                />
             );
         }
         return(
@@ -101,7 +95,7 @@ class UserPage extends Component{
 
 
 const mapStateToProps = state => ({
-    user: state.users.pickedUser,
+    user: state.auth.user,
     posts: state.posts.posts,
     linkLoadMore: state.posts.linkToLoadMoreUserPage,
     users: state.users.users,
@@ -109,9 +103,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    loadUser: (username) => dispatch(fetchUser(username, true)),
+    loadCurrentUser: () => dispatch(loadCurrentUser(true)),
+    startFetching: (userUuid) => dispatch(fetchUserPosts(userUuid)),
     fetchMore: (link, userUuid) => dispatch(fetchMoreUserPosts(link, userUuid)),
-    clearUser: () => dispatch(clearPickedUser())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPage);

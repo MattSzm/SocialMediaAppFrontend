@@ -6,7 +6,7 @@
     padding: 10px 0;
     justify-content: space-around;
     border-bottom: solid #E1E8ED 1px;
-    z-index: 1;
+    z-index: 3;
 }
 
 .Post:hover{

@@ -5,6 +5,7 @@ import commentButton from '../../../assets/icons/comment.png'
 import shareButton from '../../../assets/icons/share.png';
 import Linkify from 'react-linkify'
 import PostImage from "../../images/PostImage/PostImage";
+import {Link} from "react-router-dom";
 
 
 const hashtag_formatter = string => {
@@ -39,8 +40,12 @@ const PostContent = (props) => {
                 &#183; {date}</span></p>)
                 :
                 (<p className={classes.bolded}>
-                    {props.usernameDisplay}<span style={{cursor: 'pointer'}}> @{props.username}
-                    &#183; {date}</span>
+                    <Link to={`/user/${props.username}`}
+                          style={{ textDecoration: 'none',
+                                    color: '#14171A'}}>
+                    {props.usernameDisplay}<span> @{props.username}
+                    </span></Link>
+                    <span>&#183; {date}</span>
                 </p>)}
                 <p>
                 <Linkify fuzzyEmail={false}>

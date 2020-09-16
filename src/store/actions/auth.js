@@ -2,6 +2,7 @@ import * as actionTypes from './actionTypes';
 import axios from '../../axios';
 import * as modalActions from './modal';
 import {createMessage} from './messages';
+import {fetchUserPosts} from "./posts";
 
 
 const tokenConfig = getState => {
@@ -20,7 +21,7 @@ const tokenConfig = getState => {
 export default tokenConfig;
 
 
-export const loadUser = () => {
+export const loadCurrentUser = (shouldFetchPosts=false) => {
     return (dispatch, getState) => {
     dispatch({type: actionTypes.USER_LOADING_START});
 
@@ -30,13 +31,17 @@ export const loadUser = () => {
                     type: actionTypes.USER_LOADING_SUCCESS,
                     payload: res.data
                 });
+                if(shouldFetchPosts){
+                    dispatch(fetchUserPosts(res.data.uuid))
+                }
             }).catch(error => {
             console.log(error);
             dispatch({
                 type: actionTypes.AUTH_ERROR
             })
-        })
+        });
 };};
+
 
 export const login = (username, password) => {
     return dispatch => {

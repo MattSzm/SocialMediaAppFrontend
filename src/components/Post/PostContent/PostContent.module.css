@@ -3,7 +3,6 @@
     text-align: left;
     margin-right: 8px;
 }
-
 .bolded{
     font-weight: bold;
     margin-top: 0em;
@@ -12,14 +11,16 @@
     font-weight: normal;
     color: #AAB8C2;
 }
-
+/*.HoverSpan{*/
+/*    display: inline;*/
+/*    cursor: pointer;*/
+/*}*/
 .hashtag{
     color: #1DA1F2;
 }
 .hashtag:hover{
     cursor: pointer;
 }
-
 .Icons{
     width: 90%;
     float: right;
@@ -27,13 +28,10 @@
     flex-direction: row;
     justify-content: space-around;
 }
-
 .IconContainer{
     width: calc(100%/3);
     height: auto;
 }
-
-
 .IconContainer img{
     height: 20px;
     width: auto;

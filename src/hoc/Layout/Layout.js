@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import * as modalActions from '../../store/actions/modal';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import UserPage from "../../containers/Posts/UserPage/UserPage";
+import CurrentUser from "../../containers/Posts/UserPage/CurrentUser/CurrentUser";
 
 
 class Layout extends React.Component{
@@ -26,6 +27,8 @@ class Layout extends React.Component{
 
                     <Switch>
                         <Route path="/user/:username" exact component={UserPage} />
+                        <Route path="/profile" exact component={CurrentUser}/>
+
                         <Route path="/" component={NewsFeed} />
                     </Switch>
 
@@ -40,7 +43,6 @@ class Layout extends React.Component{
 const mapStateToProps = state => (
     {
         showModal: state.modal.showModal,
-        user: state.auth.user
     }
 );
 

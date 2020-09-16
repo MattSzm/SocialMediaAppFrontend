@@ -2,6 +2,7 @@ import React, {Fragment} from "react";
 import classes from './UserDetail.module.css';
 import Avatar from "../images/Avatar/Avatar";
 import FollowButton from "../UI/StandardButton/FollowButton/FollowButton";
+import {Link} from "react-router-dom";
 
 
 const userDetail = (props) => {
@@ -89,12 +90,16 @@ const userDetail = (props) => {
                     {avatar}
                     <div className={classes.Follows}>
                         <div className={classes.Names}>
-                            <h3>{props.user.username_displayed}</h3>
-                            <p style={{
-                                marginTop: '-1em'
-                                }}>
-                                @{props.user.username}
-                            </p>
+                            <Link to={`/user/${props.user.username}`}
+                                  style={{ textDecoration: 'none',
+                                      color: '#14171A'}}>
+                                <h3>{props.user.username_displayed}</h3>
+                                <p style={{
+                                    marginTop: '-1em'
+                                    }}>
+                                    @{props.user.username}
+                                </p>
+                            </Link>
                         </div>
                         <div className={classes.InlineContainer}>
                             <p className={classes.Inline}>

@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import UnauthorizedUserMainPage from "./containers/UnauthorizedUserMainPage/UnauthorizedUserMainPage";
 import { Route, Switch, Redirect } from 'react-router-dom';
 import store from './store/store';
-import {loadUser} from './store/actions/auth';
+import {loadCurrentUser} from './store/actions/auth';
 import {Provider as AlertProvider} from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import Alert from "./containers/Alert/Alert";
@@ -20,7 +20,7 @@ const alertOptions = {
 
 class App extends React.Component {
     componentDidMount() {
-        store.dispatch(loadUser());
+        store.dispatch(loadCurrentUser());
     }
 
     render() {

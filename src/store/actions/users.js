@@ -73,11 +73,18 @@ export const fetchUser = (username, loadPosts=false) => {
                     dispatch(fetchUserPosts(res.data.uuid));
                 }
             }).catch(err => {
-                dispatch({
-                    type: actionTypes.FETCH_USER_FAIL,
-                    payload: err.response.data
-                });
+                if(err.response) {
+                    dispatch({
+                        type: actionTypes.FETCH_USER_FAIL,
+                        payload: err.response.data
+                    });
+                }
                 dispatch(createError('noUser', 'Cannot find user'));
             });
     };
 };
+
+
+export const clearPickedUser = () => ({
+    type: actionTypes.CLEAR_PICKED_USER
+});
