@@ -8,7 +8,7 @@
 .ContainerTitle{
     position: fixed;
     width: 780px;
-    z-index: 3;
+    z-index: 5;
 }
 @media(max-width: 1300px){
     .ContainerTitle{
@@ -30,7 +30,7 @@
     padding: 0.5em 1.5em;
     border-bottom: solid #E1E8ED 1px;
     background-color: rgb(255,255,255);
-    z-index: 5;
+    z-index: 6;
 }
 
 .UserDetail h2,

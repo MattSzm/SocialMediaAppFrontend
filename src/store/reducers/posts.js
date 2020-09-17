@@ -118,6 +118,11 @@ const reducer = (state=initialState, action) => {
                 linkToLoadMoreUserPage: action.payload.next,
                 loading: false,
                 hasMore: hasMore};
+        case actionTypes.DELETE_POST:
+            const newPostsWithoutDeleted = state.posts.filter(
+                post => post.uuid !== action.payloadUuid);
+            return {...state,
+                posts: newPostsWithoutDeleted}
         default:
             return state;
     }

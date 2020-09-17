@@ -1,7 +1,7 @@
 import React from "react";
 import Post from './Post';
 import classes from './SharedPost.module.css';
-import shareIcon from '../../assets/icons/share.png';
+import shareIcon from '../../../assets/icons/share.png';
 
 
 const sharedPost = (props) => {

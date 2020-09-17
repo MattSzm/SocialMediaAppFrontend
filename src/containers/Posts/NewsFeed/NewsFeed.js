@@ -1,11 +1,11 @@
 import React from "react";
 import classes from './NewsFeed.module.css';
-import Post from "../../../components/Post/Post";
+import Post from "../Post/Post";
 import CreatePost from "../CreatePost/CreatePost";
 import {connect} from 'react-redux';
 import * as newsFeedActions from '../../../store/actions/newsFeed';
 import Spinner from '../../../components/UI/Spinner/Spinner';
-import SharedPost from '../../../components/Post/SharedPost';
+import SharedPost from '../Post/SharedPost';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 

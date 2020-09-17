@@ -29,7 +29,7 @@ export const createPost = (form) => {
                 dispatch({
                     type: actionTypes.GET_ERRORS,
                     payload: {
-                        msg: {createPost: 'Unable to create post'},
+                        msg: {createPost: 'Unable to create tweet'},
                         status: 500
                     }
             });
@@ -90,6 +90,29 @@ export const fetchMoreUserPosts = (link, userUuid) => {
                     }
                 });
             }
+        });
+    };
+};
+
+
+export const deletePost = (postUuid) => {
+    return (dispatch, getState) => {
+        axios.delete(`/api/tweet/destroy/${postUuid}/`, tokenConfig(getState))
+            .then(res => {
+                dispatch({
+                    type: actionTypes.DELETE_POST,
+                    payloadUuid: postUuid
+                });
+                dispatch(createMessage(
+                    {postDeleted: 'Deleted tweet successfully'}));
+            }).catch(error => {
+                dispatch({
+                    type: actionTypes.GET_ERRORS,
+                    payload: {
+                        msg: {createPost: 'Unable to delete tweet'},
+                        status: 500
+                    }
+                });
         });
     };
 };

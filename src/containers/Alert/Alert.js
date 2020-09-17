@@ -63,6 +63,9 @@ class Alert extends Component{
             if(message.createdPost){
                 alert.success(message.createdPost);
             }
+            if(message.postDeleted){
+                alert.success(message.postDeleted);
+            }
         }
     }
 

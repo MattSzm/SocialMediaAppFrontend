@@ -5,16 +5,14 @@
 }
 .bolded{
     font-weight: bold;
-    margin-top: 0em;
+    margin-top: 0;
+    width: 94%;
+    margin-left: 0;
 }
 .bolded span{
     font-weight: normal;
     color: #AAB8C2;
 }
-/*.HoverSpan{*/
-/*    display: inline;*/
-/*    cursor: pointer;*/
-/*}*/
 .hashtag{
     color: #1DA1F2;
 }

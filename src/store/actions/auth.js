@@ -115,7 +115,7 @@ export const register = (form) => {
                     payload: res.data
                 })
                 dispatch(createMessage(
-                    {registered: 'Account successfully created'}));
+                    {registered: 'Account created successfully'}));
                 dispatch(modalActions.modalToggle());
             }).catch(error => {
             if(error.response) {
@@ -149,7 +149,7 @@ export const userEdit = (form) => {
                     payload: res.data
                 });
                 dispatch(createMessage(
-                    {profileUpdated: 'Account successfully updated'}));
+                    {profileUpdated: 'Account updated successfully'}));
             }).catch(error => {
                 dispatch({
                     type: actionTypes.USER_EDIT_FAIL
