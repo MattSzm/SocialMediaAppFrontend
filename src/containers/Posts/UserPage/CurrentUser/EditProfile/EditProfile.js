@@ -3,6 +3,10 @@ import classes from './EditProfile.module.css';
 import {connect} from 'react-redux';
 import Input from "../../../../../components/UI/Input/Input";
 import UploadImages from "../../../../../components/NavigationsCreatePost/UploadImages/UploadImages";
+import {createError} from "../../../../../store/actions/messages";
+import {userEdit} from "../../../../../store/actions/auth";
+import Spinner from "../../../../../components/UI/Spinner/Spinner";
+import Button from "../../../../../components/UI/StandardButton/StandardButton";
 
 
 class EditProfile extends Component {
@@ -36,7 +40,8 @@ class EditProfile extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(!prevProps.currentUser && this.props.currentUser){
+        if((!prevProps.currentUser && this.props.currentUser)
+            || (!prevProps.show && this.props.show)){
             this.setInitialValues()
         }
     }
@@ -53,7 +58,9 @@ class EditProfile extends Component {
             ...this.state.controls,
                 usernameDisplayed:{
                     ...this.state.controls.usernameDisplayed,
-                    value: this.props.currentUser.username_displayed
+                    value: this.props.currentUser.username_displayed,
+                    valid: true,
+                    touched: true
                 }
             },
             pictures: picturesObject
@@ -61,8 +68,7 @@ class EditProfile extends Component {
     }
 
     pictureUploadHandler = (picturesList) => {
-        this.setState({pictures: picturesList});
-        console.log(picturesList);
+        this.setState({pictures: picturesList});;
     }
 
     checkValidity(value, rules){
@@ -104,6 +110,28 @@ class EditProfile extends Component {
         this.setState({controls: updatedControls});
     }
 
+    submitHandler = (event) => {
+        event.preventDefault();
+        if(!this.checkFormValidity()){
+            this.props.createError('badCreditsEditProfile',
+                                    'Fields filled in incorrectly')
+        }
+        else {
+            const formData = new FormData()
+            formData.append('username_displayed',
+                this.state.controls.usernameDisplayed.value);
+            if(this.state.pictures[0] &&
+                this.state.pictures[0].file !== this.props.currentUser.photo) {
+                formData.append('photo', this.state.pictures[0].file)
+            }
+            else if (this.state.pictures.length === 0){
+                formData.append('photo', new File([], ''));
+            }
+            this.props.updateProfile(formData);
+            this.props.closeProfile();
+        }
+    }
+
     render() {
         const formElementArray = []
         for(let key in this.state.controls){
@@ -133,26 +161,46 @@ class EditProfile extends Component {
             </div>
         ));
 
+        let form = <Spinner />;
+        if(!this.props.loading){
+            form = (
+                <form>
+                    {formInputs}
+                    <div className={classes.ImageContainer}>
+                        <UploadImages
+                            upload={this.pictureUploadHandler}
+                            images={this.state.pictures}
+                            registration={false}
+                            tranparentButtons={false}
+                            userEdit={true}
+                        />
+                    </div>
+                    <Button click={this.submitHandler}>
+                        Submit changes
+                    </Button>
+                </form>
+            );
+        }
+
         return(
             <div className={classes.EditProfile}>
                 <h2>Edit your profile</h2>
-                {formInputs}
-                <div className={classes.ImageContainer}>
-                    <UploadImages
-                        upload={this.pictureUploadHandler}
-                        images={this.state.pictures}
-                        registration={false}
-                        tranparentButtons={false}
-                        userEdit={true}
-                    />
-                </div>
+                {form}
+                <br/>
+                <br/>
             </div>
         );
     }
 }
 
 const mapStateToProps = state => ({
-   currentUser: state.auth.user
+    currentUser: state.auth.user,
+    loading: state.auth.loading
 });
 
-export default connect(mapStateToProps)(EditProfile);
+const mapDispatchToProps = (dispatch) => ({
+    updateProfile: (form) => dispatch(userEdit(form)),
+    createError: (msg, body) => dispatch(createError(msg, body))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);

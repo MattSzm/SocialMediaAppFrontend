@@ -28,6 +28,9 @@ class Alert extends Component{
             if(error.message.userFail){
                 alert.error(error.message.userFail);
             }
+            if(error.message.userEdit){
+                alert.error(error.message.userEdit);
+            }
             if(error.message.userPosts){
                 alert.error(error.message.userPosts);
             }
@@ -36,6 +39,9 @@ class Alert extends Component{
             }
             if(error.message.badCreditsRegistration){
                 alert.error(error.message.badCreditsRegistration);
+            }
+            if(error.message.badCreditsEditProfile){
+                alert.error(error.message.badCreditsEditProfile);
             }
             if(error.status === 500){
                 alert.error('Error');
@@ -50,6 +56,9 @@ class Alert extends Component{
             }
             if(message.registered){
                 alert.success(message.registered);
+            }
+            if(message.profileUpdated){
+                alert.success(message.profileUpdated);
             }
             if(message.createdPost){
                 alert.success(message.createdPost);

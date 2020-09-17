@@ -29,7 +29,7 @@ export const createPost = (form) => {
                 dispatch({
                     type: actionTypes.GET_ERRORS,
                     payload: {
-                        msg: { createPost: 'Unable to create post'},
+                        msg: {createPost: 'Unable to create post'},
                         status: 500
                     }
             });

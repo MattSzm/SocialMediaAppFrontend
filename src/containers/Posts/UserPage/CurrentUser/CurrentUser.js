@@ -14,6 +14,20 @@ import EditProfile from "./EditProfile/EditProfile";
 
 
 class UserPage extends Component{
+    state = {
+        showSettings: false,
+    }
+
+    showSettingsHandler = () => {
+        this.setState({showSettings: true});
+        this.props.modalToggle();
+    }
+
+    closeModalAndBackgroundSettings = () => {
+        this.setState({showSettings: false});
+        this.props.modalToggle();
+    }
+
     componentDidMount() {
         if(this.props.currentUser) {
             this.props.startFetching(this.props.currentUser.uuid);
@@ -35,17 +49,20 @@ class UserPage extends Component{
                 <UserDetail
                     user={this.props.currentUser}
                     worksAsProfile={true}
-                    openModal={this.props.modalToggle}
+                    openModal={this.showSettingsHandler}
                 />
             );
         }
         return(
             <Fragment>
-                <Modal show={this.props.showModal}
-                       closeModalAndBackdrop={this.props.modalToggle.bind(this)}
-                        dark={false}
+                <Modal show={this.state.showSettings}
+                       closeModalAndBackdrop={this.closeModalAndBackgroundSettings.bind(this)}
+                       dark={false}
                        modalUserEdit={true}>
-                    <EditProfile />
+                    <EditProfile
+                        show={this.state.showSettings}
+                        closeProfile={this.closeModalAndBackgroundSettings.bind(this)}
+                    />
                 </Modal>
 
                 <div className={classes.UserPage}>

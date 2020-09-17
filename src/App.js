@@ -14,7 +14,7 @@ import UserPage from "./containers/Posts/UserPage/UserPage";
 
 const alertOptions = {
     timeout: 3000,
-    position: 'top center'
+    position: 'top center',
 }
 
 

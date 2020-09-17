@@ -35,7 +35,6 @@ export const loadCurrentUser = (shouldFetchPosts=false) => {
                     dispatch(fetchUserPosts(res.data.uuid))
                 }
             }).catch(error => {
-            console.log(error);
             dispatch({
                 type: actionTypes.AUTH_ERROR
             })
@@ -99,6 +98,7 @@ export const logout = () => {
     };
 };
 
+
 export const register = (form) => {
     return dispatch => {
         dispatch({type: actionTypes.REGISTER_START});
@@ -110,7 +110,6 @@ export const register = (form) => {
 
         axios.post('/api/auth/register/', form, config)
             .then(res => {
-                console.log(res.data);
                 dispatch({
                     type: actionTypes.REGISTER_SUCCESS,
                     payload: res.data
@@ -132,6 +131,40 @@ export const register = (form) => {
                 });
             }
         })
+    };
+};
+
+
+export const userEdit = (form) => {
+    return (dispatch, getState) => {
+        dispatch({type: actionTypes.USER_EDIT_START});
+        const config = tokenConfig(getState);
+        config.headers["Content-Type"] = {
+            'Content-Type': 'multipart/form-data'
+        };
+        axios.patch('/api/user/currentuser/', form, config)
+            .then(res => {
+                dispatch({
+                    type: actionTypes.USER_EDIT_SUCCESS,
+                    payload: res.data
+                });
+                dispatch(createMessage(
+                    {profileUpdated: 'Account successfully updated'}));
+            }).catch(error => {
+                dispatch({
+                    type: actionTypes.USER_EDIT_FAIL
+                });
+                if(error.response) {
+                    console.log(error.response);
+                    dispatch({
+                        type: actionTypes.GET_ERRORS,
+                        payload: {
+                            msg: {userEdit: 'Unable to change'},
+                            status: error.response.status
+                        }
+                    });
+                }
+        });
     };
 };
 

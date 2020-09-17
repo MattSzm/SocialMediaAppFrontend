@@ -15,6 +15,16 @@ const reducer = (state= initialState, action) =>{
                 token: null,
                 user: null,
                 loading: true};
+        case actionTypes.USER_EDIT_START:
+            return {...state,
+                loading: true};
+        case actionTypes.USER_EDIT_SUCCESS:
+            return {...state,
+                user: action.payload,
+                loading: false};
+        case actionTypes.USER_EDIT_FAIL:
+            return {...state,
+                loading: false};
         case actionTypes.LOGIN_SUCCESS:
         case actionTypes.REGISTER_SUCCESS:
             localStorage.setItem('token', action.payload.token)

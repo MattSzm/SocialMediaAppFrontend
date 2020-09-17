@@ -13,6 +13,10 @@ export const USER_LOADING_START = 'USER_LOADING_START';
 export const USER_LOADING_SUCCESS = 'USER_LOADED';
 export const AUTH_ERROR = 'AUTH_ERROR';
 
+export const USER_EDIT_START = 'USER_EDIT_START';
+export const USER_EDIT_SUCCESS = 'USER_EDIT_SUCCESS';
+export const USER_EDIT_FAIL = 'USER_EDIT_FAIL';
+
 
 export const MODAL_TOGGLE = 'MODAL_TOGGLE';
 

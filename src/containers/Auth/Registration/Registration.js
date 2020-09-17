@@ -171,7 +171,7 @@ class Login extends React.Component{
         if(!this.checkFormValidity()){
             this.props.createError('badCreditsRegistration', 'Bad credentials');
         }
-        else{
+        else {
             const formData = new FormData();
             formData.append('email', this.state.controls.email.value);
             formData.append('username', this.state.controls.username.value);
@@ -209,7 +209,7 @@ class Login extends React.Component{
             />
         ));
 
-        let form = <Spinner />
+        let form = <Spinner />;
         if(!this.props.loading){
             form = (
                 <form>
