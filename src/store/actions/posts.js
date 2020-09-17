@@ -109,10 +109,51 @@ export const deletePost = (postUuid) => {
                 dispatch({
                     type: actionTypes.GET_ERRORS,
                     payload: {
-                        msg: {createPost: 'Unable to delete tweet'},
+                        msg: {deletePost: 'Unable to delete tweet'},
                         status: 500
                     }
                 });
         });
     };
 };
+
+
+export const createLikePost = (postUuid) => {
+    return (dispatch, getState) => {
+        axios.post(`/api/tweet/likes/${postUuid}/`,{}, tokenConfig(getState))
+            .then((res) => {
+                dispatch({
+                    type: actionTypes.CREATE_LIKE_POST,
+                    payloadUuid: postUuid
+                });
+            }).catch(error => {
+                dispatch({
+                    type: actionTypes.GET_ERRORS,
+                    payload: {
+                        msg: {likePost: 'Unable to like tweet'},
+                        status: 500
+                    }
+                });
+        });
+    };
+};
+
+export const deleteLikePost = (postUuid) => {
+    return (dispatch, getState) => {
+        axios.delete(`/api/tweet/likes/${postUuid}/`, tokenConfig(getState))
+            .then(res => {
+                dispatch({
+                    type: actionTypes.DELETE_LIKE_POST,
+                    payloadUuid: postUuid
+                });
+            }).catch(error => {
+            dispatch({
+                type: actionTypes.GET_ERRORS,
+                payload: {
+                    msg: {likePost: 'Unable to unlike tweet'},
+                    status: 500
+                }
+            });
+        });
+    }
+}

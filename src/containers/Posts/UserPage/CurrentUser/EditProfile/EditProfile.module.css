@@ -1,6 +1,7 @@
 .EditProfile{
     margin: auto;
     width: 60%;
+   text-align: center;
 }
 .EditProfile h2{
     margin-bottom: 2em;

@@ -71,7 +71,8 @@ const PostContent = (props) => {
                         <small>{props.sharesNumber}</small>
                 </div>
 
-                <div className={classes.IconContainer}>
+                <div className={classes.IconContainer}
+                    onClick={props.LikeOnClick}>
                     {props.likedAlready ?
                         (<img src={likeButton}
                               className={classes.Like}

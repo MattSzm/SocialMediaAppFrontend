@@ -120,9 +120,58 @@ const reducer = (state=initialState, action) => {
                 hasMore: hasMore};
         case actionTypes.DELETE_POST:
             const newPostsWithoutDeleted = state.posts.filter(
-                post => post.uuid !== action.payloadUuid);
+                (post) => {
+                    if(post.tweet_itself) {
+                        return post.tweet_itself.uuid !== action.payloadUuid;
+                    }
+                    return post.uuid !== action.payloadUuid;
+                });
             return {...state,
-                posts: newPostsWithoutDeleted}
+                posts: newPostsWithoutDeleted};
+        case actionTypes.CREATE_LIKE_POST:
+            const newPostsWithLiked = [...state.posts].map(
+                (post) => {
+                    if (post.tweet_iteself) {
+                        if (post.tweet_iteself.uuid === action.payloadUuid) {
+                            const newPost = {...post}
+                            newPost.tweet_iteself.liked_by_current_user = true;
+                            newPost.tweet_iteself.number_likes += 1;
+                            return newPost;
+                        }
+                    } else {
+                        if (post.uuid === action.payloadUuid) {
+                            const newPost = {...post};
+                            newPost.liked_by_current_user = true;
+                            newPost.number_likes += 1;
+                            return newPost;
+                        }
+                    }
+                    return post;
+                });
+            return {...state,
+                posts: newPostsWithLiked};
+        case actionTypes.DELETE_LIKE_POST:
+            const newPostsWithoutLiked = [...state.posts].map(
+                (post) => {
+                    if (post.tweet_iteself) {
+                        if (post.tweet_iteself.uuid === action.payloadUuid) {
+                            const newPost = {...post}
+                            newPost.tweet_iteself.liked_by_current_user = false;
+                            newPost.tweet_iteself.number_likes -= 1;
+                            return newPost;
+                        }
+                    } else {
+                        if (post.uuid === action.payloadUuid) {
+                            const newPost = {...post};
+                            newPost.liked_by_current_user = false;
+                            newPost.number_likes -= 1;
+                            return newPost;
+                        }
+                    }
+                    return post;
+                });
+            return {...state,
+                posts: newPostsWithoutLiked}
         default:
             return state;
     }

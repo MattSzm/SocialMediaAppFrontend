@@ -8,8 +8,17 @@ import * as postActions from '../../../store/actions/posts';
 
 
 class Post extends Component{
-    deletePost= (postUuid) => {
+    deletePost = (postUuid) => {
         this.props.deletePost(postUuid);
+    }
+
+    likePost = (postUuid, likedAlready) => {
+        if(!likedAlready){
+            this.props.createLikePost(postUuid);
+        }
+        else{
+            this.props.deleteLikePost(postUuid)
+        }
     }
 
     render() {
@@ -44,6 +53,9 @@ class Post extends Component{
                         commentsNumber={this.props.post.number_comments}
                         sharesNumber={this.props.post.number_shares}
 
+                        LikeOnClick={this.likePost.bind(this,
+                                    this.props.post.uuid,
+                                    this.props.post.liked_by_current_user)}
                     />
                     {(this.props.currentUser &&
                         (this.props.currentUser.uuid === this.props.user.uuid)) ?
@@ -68,7 +80,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    deletePost: (postUuid) => dispatch(postActions.deletePost(postUuid))
+    deletePost: (postUuid) => dispatch(postActions.deletePost(postUuid)),
+    createLikePost: (postUuid) => dispatch(postActions.createLikePost(postUuid)),
+    deleteLikePost: (postUuid) => dispatch(postActions.deleteLikePost(postUuid))
 });
 
 
