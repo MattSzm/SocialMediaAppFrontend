@@ -72,20 +72,22 @@ class UserPage extends Component{
                             if(singlePost.user && this.props.user) {
                                 if (`${singlePost.user}`.substring(36, singlePost.user.length - 1)
                                     === this.props.user.uuid) {
-                                    return (<Post key={singlePost.id}
+                                    return (<Post key={`${singlePost.id}${singlePost.user}`}
                                                   post={singlePost}
                                                   user={this.props.user}/>);
-                                } else {
+                                }
+                                else {
                                     if (this.props.users[`${singlePost.user}`.substring(36,
                                         singlePost.user.length - 1)]) {
-                                        return (<SharedPost key={singlePost.id}
+                                        return (<SharedPost key={`${singlePost.id}${singlePost.user}`}
                                                             post={singlePost}
                                                             user={this.props.users[`${singlePost.user}`
                                                                 .substring(36, singlePost.user.length - 1)]}
                                                             userWhoShared={this.props.user}/>);
-                                    } else {
+                                    }
+                                    else {
                                         return (<SharedPost
-                                            key={singlePost.id}
+                                            key={`${singlePost.id}${singlePost.user}`}
                                             post={singlePost}
                                             loading={true}/>);
                                     }

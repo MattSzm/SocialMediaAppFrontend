@@ -21,6 +21,15 @@ class Post extends Component{
         }
     }
 
+    sharePost = (postUuid, sharedAlready) => {
+        if(!sharedAlready){
+            this.props.createSharePost(postUuid);
+        }
+        else{
+            this.props.deleteSharePost(postUuid)
+        }
+    }
+
     render() {
         let content = (
             <div className={classes.Post}>
@@ -47,15 +56,19 @@ class Post extends Component{
                         usernameDisplay={this.props.user.username_displayed}
                         date={this.props.post.created}
                         content={this.props.post.content}
-                        likedAlready={this.props.post.liked_by_current_user}
                         imageLink={this.props.post.image}
                         likesNumber={this.props.post.number_likes}
                         commentsNumber={this.props.post.number_comments}
                         sharesNumber={this.props.post.number_shares}
+                        likedAlready={this.props.post.liked_by_current_user}
+                        sharedAlready={this.props.post.shared_by_current_user}
 
                         LikeOnClick={this.likePost.bind(this,
                                     this.props.post.uuid,
                                     this.props.post.liked_by_current_user)}
+                        ShareOnClick={this.sharePost.bind(this,
+                                    this.props.post.uuid,
+                                    this.props.post.shared_by_current_user)}
                     />
                     {(this.props.currentUser &&
                         (this.props.currentUser.uuid === this.props.user.uuid)) ?
@@ -81,8 +94,12 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     deletePost: (postUuid) => dispatch(postActions.deletePost(postUuid)),
+
     createLikePost: (postUuid) => dispatch(postActions.createLikePost(postUuid)),
-    deleteLikePost: (postUuid) => dispatch(postActions.deleteLikePost(postUuid))
+    deleteLikePost: (postUuid) => dispatch(postActions.deleteLikePost(postUuid)),
+
+    createSharePost: (postUuid) => dispatch(postActions.createSharePost(postUuid)),
+    deleteSharePost: (postUuid) => dispatch(postActions.deleteSharePost(postUuid))
 });
 
 

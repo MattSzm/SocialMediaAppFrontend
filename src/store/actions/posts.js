@@ -147,13 +147,79 @@ export const deleteLikePost = (postUuid) => {
                     payloadUuid: postUuid
                 });
             }).catch(error => {
-            dispatch({
-                type: actionTypes.GET_ERRORS,
-                payload: {
-                    msg: {likePost: 'Unable to unlike tweet'},
-                    status: 500
-                }
-            });
+                dispatch({
+                    type: actionTypes.GET_ERRORS,
+                    payload: {
+                        msg: {likePost: 'Unable to unlike tweet'},
+                        status: 500
+                    }
+                });
         });
-    }
-}
+    };
+};
+
+
+export const createSharePost = (postUuid) => {
+    return (dispatch, getState) => {
+        axios.post(`/api/tweet/share/${postUuid}/`, {}, tokenConfig(getState))
+            .then(res => {
+                dispatch({
+                    type: actionTypes.CREATE_SHARE_POST,
+                    payload: res.data,
+                    payloadUuid: postUuid
+                });
+            }).catch(error => {
+                if(error.response){
+                    if(error.response.status===406){
+                        dispatch({
+                            type: actionTypes.GET_ERRORS,
+                            payload: {
+                                msg: {sharePost406: 'Cannot share own tweet'},
+                                status: error.response.status
+                            }
+                        });
+                    }
+                    else if (error.response.status===409){
+                        dispatch({
+                            type: actionTypes.GET_ERRORS,
+                            payload: {
+                                msg: {sharePost409: 'Already shared this tweet'},
+                                status: error.response.status
+                            }
+                        });
+                    }
+                    else {
+                        dispatch({
+                            type: actionTypes.GET_ERRORS,
+                            payload: {
+                                msg: {sharePost: 'Unable to share tweet'},
+                                status: 500
+                            }
+                        });
+                    }
+                }
+        });
+    };
+};
+
+export const deleteSharePost = (postUuid) => {
+    return (dispatch, getState) => {
+        axios.delete(`/api/tweet/share/${postUuid}/`, tokenConfig(getState))
+            .then(res =>{
+                dispatch({
+                    type: actionTypes.DELETE_SHARE_POST,
+                    payloadPostUuid: postUuid,
+                    payloadUserUuid: getState().auth.user.uuid
+                });
+            }).catch((error) => {
+                dispatch({
+                    type: actionTypes.GET_ERRORS,
+                    payload: {
+                        msg: {sharePost: 'Unable to delete'},
+                        status: 500
+                    }
+                });
+
+        });
+    };
+};

@@ -61,24 +61,31 @@ class NewsFeed extends React.Component{
                         singlePost => {
                             if (!singlePost.tweet_itself) {
                                 if (this.props.users[`${singlePost.user}`.substring(36, singlePost.user.length - 1)]) {
-                                    return (<Post key={singlePost.id}
+                                    return (<Post key={`${singlePost.id}${singlePost.user}`}
                                                   post={singlePost}
-                                                  user={this.props.users[`${singlePost.user}`.substring(36, singlePost.user.length - 1)]}/>);
-                                } else {
-                                    return <Post key={singlePost.id}
+                                                  user={this.props.users[`${singlePost.user}`.substring(36,
+                                                      singlePost.user.length - 1)]}/>);
+                                }
+                                else {
+                                    return <Post key={`${singlePost.id}${singlePost.user}`}
                                                  post={singlePost}
                                                  loading={true}/>
                                 }
-                            } else {
+                            }
+                            else {
                                 if (this.props.users[`${singlePost.account}`.substring(36, singlePost.account.length - 1)] &&
-                                    this.props.users[`${singlePost.tweet_itself.user}`.substring(36, singlePost.tweet_itself.user.length - 1)]) {
-                                    return (<SharedPost key={singlePost.id}
+                                    this.props.users[`${singlePost.tweet_itself.user}`.substring(36,
+                                            singlePost.tweet_itself.user.length - 1)]) {
+                                    return (<SharedPost key={`${singlePost.tweet_itself.id}${singlePost.account}`}
                                                         post={singlePost.tweet_itself}
-                                                        userWhoShared={this.props.users[`${singlePost.account}`.substring(36, singlePost.account.length - 1)]}
-                                                        user={this.props.users[`${singlePost.tweet_itself.user}`.substring(36, singlePost.tweet_itself.user.length - 1)]}/>);
-                                } else {
+                                                        userWhoShared={this.props.users[`${singlePost.account}`.substring(
+                                                                36, singlePost.account.length - 1)]}
+                                                        user={this.props.users[`${singlePost.tweet_itself.user}`.substring(
+                                                                36, singlePost.tweet_itself.user.length - 1)]}/>);
+                                }
+                                else {
                                     return (<SharedPost
-                                        key={singlePost.id}
+                                        key={`${singlePost.tweet_itself.id}${singlePost.account}`}
                                         post={singlePost.tweet_itself}
                                         loading={true}/>);
                                 }

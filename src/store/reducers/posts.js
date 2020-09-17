@@ -129,13 +129,14 @@ const reducer = (state=initialState, action) => {
             return {...state,
                 posts: newPostsWithoutDeleted};
         case actionTypes.CREATE_LIKE_POST:
-            const newPostsWithLiked = [...state.posts].map(
+            const newPostsWithLike = [...state.posts].map(
                 (post) => {
-                    if (post.tweet_iteself) {
-                        if (post.tweet_iteself.uuid === action.payloadUuid) {
-                            const newPost = {...post}
-                            newPost.tweet_iteself.liked_by_current_user = true;
-                            newPost.tweet_iteself.number_likes += 1;
+                    if (post.tweet_itself) {
+                        if (post.tweet_itself.uuid === action.payloadUuid) {
+                            const newPost = {...post,
+                                tweet_itself: {...post.tweet_itself,
+                                    liked_by_current_user: true,
+                                    number_likes: post.tweet_itself.number_likes + 1}};
                             return newPost;
                         }
                     } else {
@@ -149,15 +150,16 @@ const reducer = (state=initialState, action) => {
                     return post;
                 });
             return {...state,
-                posts: newPostsWithLiked};
+                posts: newPostsWithLike};
         case actionTypes.DELETE_LIKE_POST:
-            const newPostsWithoutLiked = [...state.posts].map(
+            const newPostsWithoutLike = [...state.posts].map(
                 (post) => {
-                    if (post.tweet_iteself) {
-                        if (post.tweet_iteself.uuid === action.payloadUuid) {
-                            const newPost = {...post}
-                            newPost.tweet_iteself.liked_by_current_user = false;
-                            newPost.tweet_iteself.number_likes -= 1;
+                    if (post.tweet_itself) {
+                        if (post.tweet_itself.uuid === action.payloadUuid) {
+                            const newPost = {...post,
+                                tweet_itself: {...post.tweet_itself,
+                                liked_by_current_user: false,
+                                number_likes: post.tweet_itself.number_likes - 1}};
                             return newPost;
                         }
                     } else {
@@ -171,7 +173,69 @@ const reducer = (state=initialState, action) => {
                     return post;
                 });
             return {...state,
-                posts: newPostsWithoutLiked}
+                posts: newPostsWithoutLike};
+        case actionTypes.CREATE_SHARE_POST:
+            let newPostsWithShare = [...state.posts].map(
+                (post) => {
+                    if (post.tweet_itself) {
+                        if (post.tweet_itself.uuid === action.payloadUuid) {
+                            const newPost = {...post,
+                                tweet_itself: {...post.tweet_itself,
+                                    shared_by_current_user: true,
+                                    number_shares: post.tweet_itself.number_shares + 1}};
+                            return newPost;
+                        }
+                    } else {
+                        if (post.uuid === action.payloadUuid) {
+                            const newPost = {...post};
+                            newPost.shared_by_current_user = true;
+                            newPost.number_shares += 1;
+                            return newPost;
+                        }
+                    }
+                    return post;
+                });
+            newPostsWithShare.unshift(action.payload);
+            return {...state,
+                posts: newPostsWithShare};
+        case actionTypes.DELETE_SHARE_POST:
+            const newPostsWithoutShare = [...state.posts].map(
+                (post) => {
+                    if(post.tweet_itself) {
+                        if (post.tweet_itself.uuid === action.payloadPostUuid) {
+                                const newPost = {
+                                    ...post,
+                                    tweet_itself: {
+                                        ...post.tweet_itself,
+                                        shared_by_current_user: false,
+                                        number_likes: post.tweet_itself.number_shares - 1
+                                    }
+                                };
+                                return newPost;
+                        }
+                    }
+                    else {
+                        if (post.uuid === action.payloadPostUuid) {
+                            const newPost = {...post};
+                            newPost.shared_by_current_user = false;
+                            newPost.number_shares -= 1;
+                            return newPost;
+                        }
+                    }
+                    return post;
+                }).filter(
+                (post) => {
+                    if(post.tweet_itself) {
+                        if ((post.tweet_itself.uuid === action.payloadPostUuid) &&
+                            (`${post.account}`.substring(36, post.account.length - 1) ===
+                                action.payloadUserUuid)) {
+                            return false;
+                        }
+                    }
+                    return true;
+                });
+            return {...state,
+                posts: newPostsWithoutShare};
         default:
             return state;
     }

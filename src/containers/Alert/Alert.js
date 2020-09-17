@@ -34,6 +34,12 @@ class Alert extends Component{
             if(error.message.userPosts){
                 alert.error(error.message.userPosts);
             }
+            if(error.message.sharePost406){
+                alert.error(error.message.sharePost406);
+            }
+            if(error.message.sharePost409){
+                alert.error(error.message.sharePost409);
+            }
             if(error.message.noUser){
                 alert.error(error.message.noUser);
             }

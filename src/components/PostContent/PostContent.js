@@ -65,10 +65,20 @@ const PostContent = (props) => {
                      <small>{props.commentsNumber}</small>
                 </div>
 
-                <div className={classes.IconContainer}>
-                    <img src={shareButton}
-                        className={classes.Share}/>
-                        <small>{props.sharesNumber}</small>
+                <div className={classes.IconContainer}
+                    onClick={props.ShareOnClick}>
+                    {props.sharedAlready ?
+                        (<img src={shareButton}
+                                className={classes.Share}
+                                style={{
+                                    backgroundColor: '#e6fdcd',
+                                    borderRadius: '35%'
+                                }} />)
+                        :
+                        (<img src={shareButton}
+                                className={classes.Share} /> )
+                        }
+                    <small>{props.sharesNumber}</small>
                 </div>
 
                 <div className={classes.IconContainer}
@@ -79,10 +89,10 @@ const PostContent = (props) => {
                                 style={{
                                     backgroundColor: '#fddbdb',
                                     borderRadius: '35%'
-                                }}/>)
+                                }} />)
                         :
                         (<img src={likeButton}
-                              className={classes.Like}/>)
+                              className={classes.Like} />)
                     }
                     <small>{props.likesNumber}</small>
                 </div>
