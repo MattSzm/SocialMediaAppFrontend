@@ -1,14 +1,13 @@
 import React, {Component} from "react";
 import classes from './UserPage.module.css'
 import {connect} from 'react-redux';
-import {fetchUser} from "../../../store/actions/users";
 import {fetchMoreUserPosts} from '../../../store/actions/posts';
 import UserDetail from "../../../components/UserDetail/UserDetail";
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import Post from "../Post/Post";
 import SharedPost from "../Post/SharedPost";
-import {clearPickedUser} from "../../../store/actions/users";
+import * as usersActions from '../../../store/actions/users';
 
 
 class UserPage extends Component{
@@ -28,22 +27,32 @@ class UserPage extends Component{
 
     loadMore = () => {
         this.props.fetchMore(this.props.linkLoadMore,
-                        this.props.user.uuid);
+                        this.props.pickedUser.uuid);
+    }
+
+    followHandle = () => {
+        if (this.props.pickedUser.followed_by_current_user) {
+            this.props.unfollowUser(this.props.pickedUser.uuid);
+        }
+        else{
+            this.props.followUser(this.props.pickedUser.uuid);
+        }
     }
 
     render() {
         let userDetail = <UserDetail loading={true} />;
-        if(this.props.user){
+        if(this.props.pickedUser){
             userDetail = (
                         <UserDetail
-                            user={this.props.user}
+                            user={this.props.pickedUser}
+                            performFolllowAction={this.followHandle.bind(this)}
                         />
             );
         }
         return(
             <div className={classes.UserPage}>
                 {userDetail}
-                {this.props.user ? (<InfiniteScroll
+                {this.props.pickedUser ? (<InfiniteScroll
                     next={() => {
                         if(this.props.linkLoadMore) {
                             this.loadMore();
@@ -69,12 +78,12 @@ class UserPage extends Component{
                 >
                     {this.props.posts.map(
                         singlePost => {
-                            if(singlePost.user && this.props.user) {
+                            if(singlePost.user && this.props.pickedUser) {
                                 if (`${singlePost.user}`.substring(36, singlePost.user.length - 1)
-                                    === this.props.user.uuid) {
+                                    === this.props.pickedUser.uuid) {
                                     return (<Post key={`${singlePost.id}${singlePost.user}`}
                                                   post={singlePost}
-                                                  user={this.props.user}/>);
+                                                  user={this.props.pickedUser}/>);
                                 }
                                 else {
                                     if (this.props.users[`${singlePost.user}`.substring(36,
@@ -83,7 +92,7 @@ class UserPage extends Component{
                                                             post={singlePost}
                                                             user={this.props.users[`${singlePost.user}`
                                                                 .substring(36, singlePost.user.length - 1)]}
-                                                            userWhoShared={this.props.user}/>);
+                                                            userWhoShared={this.props.pickedUser}/>);
                                     }
                                     else {
                                         return (<SharedPost
@@ -104,7 +113,7 @@ class UserPage extends Component{
 
 const mapStateToProps = state => ({
     currentUser: state.auth.user,
-    user: state.users.pickedUser,
+    pickedUser: state.users.pickedUser,
     posts: state.posts.posts,
     linkLoadMore: state.posts.linkToLoadMoreUserPage,
     users: state.users.users,
@@ -112,9 +121,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    loadUser: (username) => dispatch(fetchUser(username, true)),
+    loadUser: (username) => dispatch(usersActions.fetchUser(username, true)),
     fetchMore: (link, userUuid) => dispatch(fetchMoreUserPosts(link, userUuid)),
-    clearUser: () => dispatch(clearPickedUser())
+    clearUser: () => dispatch(usersActions.clearPickedUser()),
+
+    followUser: (pickedUserUuid) => dispatch(usersActions.followUser(pickedUserUuid)),
+    unfollowUser: (pickedUserUuid) => dispatch(usersActions.unfollowUser(pickedUserUuid))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPage);

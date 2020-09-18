@@ -124,7 +124,11 @@ const userDetail = (props) => {
                             </div>
                         </div>
                         {!props.worksAsProfile ?
-                            <FollowButton alreadyFollow={props.user.followed_by_current_user}/> : null
+                            <FollowButton
+                                alreadyFollow={props.user.followed_by_current_user}
+                                click={props.performFolllowAction}
+                            />
+                                : null
                         }
                     </div>
                 </div>

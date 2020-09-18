@@ -32,7 +32,19 @@ const reducer = (state=initialState, action) => {
         case actionTypes.CLEAR_PICKED_USER:
             return {...state,
                     pickedUser: null,
-                    error: null}
+                    error: null};
+        case actionTypes.FOLLOW_USER:
+            const pickedUserWithFollow = {...state.pickedUser,
+                followed_by_current_user: true,
+                number_followers: state.pickedUser.number_followers + 1};
+            return {...state,
+                    pickedUser: pickedUserWithFollow};
+        case actionTypes.UNFOLLOW_USER:
+            const pickedUserWithoutFollow = {...state.pickedUser,
+                followed_by_current_user: false,
+                number_followers: state.pickedUser.number_followers - 1};
+            return {...state,
+                    pickedUser: pickedUserWithoutFollow};
         default:
             return state;
     }

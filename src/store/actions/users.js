@@ -3,6 +3,7 @@ import * as actionTypes from "./actionTypes";
 import tokenConfig from "./auth";
 import {createError} from "./messages";
 import {fetchUserPosts} from "./posts";
+import errors from "../reducers/errors";
 
 
 export const fetchRelatedUsersNewsFeed = (payload) => {
@@ -88,3 +89,54 @@ export const fetchUser = (username, loadPosts=false) => {
 export const clearPickedUser = () => ({
     type: actionTypes.CLEAR_PICKED_USER
 });
+
+
+export const followUser = (userUuid) => {
+    return (dispatch, getState) => {
+        axios.post(`/api/user/follow/${userUuid}/`, {}, tokenConfig(getState))
+            .then(res => {
+                dispatch({
+                    type: actionTypes.FOLLOW_USER,
+                    payloadUuid: userUuid
+                });
+                dispatch({
+                    type: actionTypes.ADD_FOLLOW_TO_CURRENT_USER_COUNTER
+                });
+            }).catch(err => {
+                if(err.response){
+                    dispatch({
+                        type: actionTypes.GET_ERRORS,
+                        payload: {
+                            msg: {followUser: 'Unable to follow user'},
+                            status: 500
+                        }
+                    });
+                }
+        });
+    };
+};
+
+export const unfollowUser = (userUuid) => {
+    return (dispatch, getState) => {
+        axios.delete(`/api/user/follow/${userUuid}/`, tokenConfig(getState))
+            .then(res => {
+                dispatch({
+                    type: actionTypes.UNFOLLOW_USER,
+                    payloadUuid: userUuid
+                });
+                dispatch({
+                    type: actionTypes.REMOVE_FOLLOW_FROM_CURRENT_USER_COUNTER
+                });
+            }).catch(err => {
+                if(err.response){
+                    dispatch({
+                        type: actionTypes.GET_ERRORS,
+                        payload: {
+                            msg: {unfollowUser: 'Unable to unfollow user'},
+                            status: 500
+                        }
+                    });
+                }
+        });
+    };
+};

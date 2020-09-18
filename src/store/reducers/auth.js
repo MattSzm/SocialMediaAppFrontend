@@ -48,6 +48,16 @@ const reducer = (state= initialState, action) =>{
                 token: null,
                 user: null,
                 loading: false};
+        case actionTypes.ADD_FOLLOW_TO_CURRENT_USER_COUNTER:
+            const userWithNewFollow = {...state.user,
+                number_following: state.user.number_following + 1};
+            return {...state,
+                    user: userWithNewFollow};
+        case actionTypes.REMOVE_FOLLOW_FROM_CURRENT_USER_COUNTER:
+            const userWithoutOldFollow = {...state.user,
+            number_following: state.user.number_following - 1};
+            return {...state,
+                    user: userWithoutOldFollow};
         default:
             return state;
     }
