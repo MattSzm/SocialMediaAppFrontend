@@ -1,21 +1,21 @@
 import React, {Component} from "react";
-import classes from './CreatePost.module.css';
+import classesCreatePost from '../../Posts/CreatePost/CreatePost.module.css';
 import {connect} from "react-redux";
 import Avatar from "../../../components/Images/Avatar/Avatar";
 import Input from '../../../components/UI/Input/Input';
 import NavigationCreatePost from "../../../components/NavigationsCreatePost/NavigationsCreatePost";
 import {createError} from "../../../store/actions/messages";
-import {createPost} from '../../../store/actions/posts';
+import {createComment} from "../../../store/actions/comments";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 
 
-class CreatePost extends Component{
+class CreateComment extends Component {
     state = {
         content: {
             elementType: 'textarea',
             elementConfig: {
                 type: 'text',
-                placeholder: `What's happening?`
+                placeholder: `Type to comment...`
             },
             value: '',
             validation: {
@@ -32,19 +32,6 @@ class CreatePost extends Component{
         this.setState({pictures: picturesList});
     }
 
-    checkValidity = (value, rules) => {
-        let isValid = true;
-        if (rules) {
-            if (rules.required) {
-                isValid = value.trim() !== '' && isValid;
-            }
-            if (rules.maxLength) {
-                isValid = value.length < rules.maxLength && isValid;
-            }
-        }
-        return isValid;
-    }
-
     contentChangedHandler = event => {
         const updatedContent = {...this.state.content};
         updatedContent.value = event.target.value;
@@ -58,6 +45,19 @@ class CreatePost extends Component{
         this.setState({content: updatedContent});
     }
 
+    checkValidity = (value, rules) => {
+        let isValid = true;
+        if (rules) {
+            if (rules.required) {
+                isValid = value.trim() !== '' && isValid;
+            }
+            if (rules.maxLength) {
+                isValid = value.length < rules.maxLength && isValid;
+            }
+        }
+        return isValid;
+    }
+
     submitHandler = (event) => {
         event.preventDefault();
         if(!this.state.content.valid){
@@ -65,17 +65,17 @@ class CreatePost extends Component{
         }
         else{
             const formData = new FormData();
-            formData.append('content', this.state.content.value);
+            formData.append('comment_content', this.state.content.value);
             if(this.state.pictures[0]) {
                 formData.append('image', this.state.pictures[0].file);
             }
-            this.props.create(formData);
+            this.props.createComment(formData, this.props.postUuid);
         }
         this.setState({content:
-                                {...this.state.content,
-                                    value: ''},
-                            pictures: []
-                            });
+                {...this.state.content,
+                    value: ''},
+            pictures: []
+        });
     }
 
     render() {
@@ -88,9 +88,12 @@ class CreatePost extends Component{
                 avatar = (<Avatar blank={true} /> );
             }
         }
-        return(
-            <div className={classes.ContainerOutside}>
-                <div className={classes.ContainerInside}>
+        return (
+            <div className={classesCreatePost.ContainerOutside}
+                style={{
+                    backgroundColor: '#F5F8FA'
+                }}>
+                <div className={classesCreatePost.ContainerInside}>
                     {avatar}
                     {this.props.loading ?
                         (<div style={{
@@ -116,25 +119,23 @@ class CreatePost extends Component{
                     pictureUpload={this.pictureUploadHandler}
                     tranparentButtons={false}
                     images={this.state.pictures}
-                    sumbit={this.submitHandler}/>
-
+                    sumbit={this.submitHandler}
+                    comment={true}/>
             </div>
         );
     }
 }
 
-const mapStateToProps = (state) => (
-    {
-        currentUser: state.auth.user,
-        loading: state.posts.loadingCreatePost
-    }
-);
+const mapStateToProps = state => ({
+    currentUser: state.auth.user,
+    loading: state.comments.loadingCreateComment
+});
 
 const mapDispatchToProps = (dispatch) => (
     {
-        createPost: (form) => dispatch(createPost(form)),
+        createComment: (form, postUuid) => dispatch(createComment(form, postUuid)),
         createError: (msg, body) => dispatch(createError(msg, body))
     }
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreatePost);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateComment);

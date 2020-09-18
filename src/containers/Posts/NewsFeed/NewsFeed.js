@@ -28,6 +28,7 @@ class NewsFeed extends React.Component{
                 </div>
                 <div className={classes.EmptySpace}/>
                 <CreatePost />
+
                 <InfiniteScroll
                     next={() => {
                         if(this.props.newsFeedTimeStamp)

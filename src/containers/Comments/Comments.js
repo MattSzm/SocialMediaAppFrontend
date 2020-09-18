@@ -5,6 +5,8 @@ import {connect} from "react-redux";
 import * as commentsActions from '../../store/actions/comments';
 import Spinner from "../../components/UI/Spinner/Spinner";
 import Post from "../Posts/Post/Post";
+import CreateComment from "./CreateComment/CreateComment";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 
 class Comments extends Component{
@@ -36,8 +38,36 @@ class Comments extends Component{
                         <h2>Comments</h2>
                     </div>
                 </div>
-                <div className={newsFeedClasses.EmptySpace}/>
+                <div className={classes.EmptySpace}/>
                 {post}
+                <CreateComment
+                    postUuid={this.props.pickedPost ?
+                                this.props.pickedPost.uuid : null}/>
+                <InfiniteScroll next={ () => {}}
+                                hasMore={this.props.hasMore}
+                                loader={<Spinner />}
+                                dataLength={this.props.comments.length}
+                                endMessage={ this.props.comments.length > 0 ?
+                                    (<p style={{textAlign: 'center',
+                                        marginBottom: '4em',
+                                        color: '#AAB8C2'}}>
+                                        You have seen it all!
+                                    </p>) :
+                                    (<h2
+                                        style={{
+                                            textAlign: 'center',
+                                            margin: '2em 0'
+                                        }}>
+                                        No tweets to show.
+                                    </h2>)}
+                                >
+                    {this.props.comments.map(
+                        singleComment => {
+                            return <h2 key={singleComment.id}>{singleComment.comment_content}</h2>
+                        }
+                    )}
+                </InfiniteScroll>
+
 
             </div>
         );
@@ -49,13 +79,15 @@ const mapStateToProps = state => ({
     pickedPost: state.comments.pickedPost,
     userOfPickedPost: state.comments.userOfPickedPost,
     comments: state.comments.comments,
-    currentUser: state.auth.user
+    linkLoadMore: state.comments.linkToLoadMoreComments,
+    users: state.users.users,
+    hasMore: state.comments.hasMore
 });
 
 const mapDispatchToProps = dispatch => ({
     clearComments: () => dispatch(commentsActions.clearCommentsReducer()),
     loadPostWithComments: (postUuid) => dispatch(
-        commentsActions.fetchTweetWithComments(postUuid))
+        commentsActions.fetchTweetWithComments(postUuid)),
 });
 
 

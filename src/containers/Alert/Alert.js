@@ -25,6 +25,9 @@ class Alert extends Component{
             if(error.message.createPost){
                 alert.error(error.message.createPost);
             }
+            if(error.message.createCommentFail){
+                alert.error(error.message.createCommentFail);
+            }
             if(error.message.userFail){
                 alert.error(error.message.userFail);
             }
@@ -33,6 +36,9 @@ class Alert extends Component{
             }
             if(error.message.userPosts){
                 alert.error(error.message.userPosts);
+            }
+            if(error.message.postComments){
+                alert.error(error.message.postComments);
             }
             if(error.message.sharePost406){
                 alert.error(error.message.sharePost406);
@@ -59,6 +65,9 @@ class Alert extends Component{
         if(message !== prevProps.message){
             if(message.loggedIn){
                 alert.success(message.loggedIn);
+            }
+            if(message.createdComment){
+                alert.success(message.createdComment);
             }
             if(message.loggedOut){
                 alert.success(message.loggedOut);

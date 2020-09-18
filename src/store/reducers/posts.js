@@ -5,7 +5,8 @@ const initialState = {
     newsFeedTimeStamp: null,
     linkToLoadMoreUserPage: null,
     loading: false,
-    hasMore: true
+    hasMore: true,
+    loadingCreatePost: false
 }
 
 const mergePostsWithShares = (posts, shares) => {
@@ -89,16 +90,16 @@ const reducer = (state=initialState, action) => {
                 hasMore: hasMore};
         case actionTypes.CREATE_POST_START:
             return {...state,
-                loading: true};
+                loadingCreatePost: true};
         case actionTypes.CREATE_POST_SUCCESS:
-            let newPostsWithCreated = [...state.posts]
-            newPostsWithCreated.unshift(action.payload)
+            let newPostsWithCreated = [...state.posts];
+            newPostsWithCreated.unshift(action.payload);
             return {...state,
                 posts: newPostsWithCreated,
-                loading: false}
+                loadingCreatePost: false}
         case actionTypes.CREATE_POST_FAIL:
             return {...state,
-                loading: false};
+                loadingCreatePost: false};
         case actionTypes.FETCH_USER_POSTS_SUCCESS:
             if(!action.payload.next){
                 hasMore = false;

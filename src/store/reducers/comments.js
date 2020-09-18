@@ -5,9 +5,14 @@ const initialState = {
     pickedPost: null,
     userOfPickedPost: null,
     comments: [],
+    linkToLoadMoreComments: null,
+    loading: false,
+    hasMore: true,
+    loadingCreateComment: false
 }
 
 const reducer = (state= initialState, action) => {
+    let hasMore = true;
     switch (action.type){
         case actionTypes.CLEAR_WHOLE_COMMENTS_REDUCER:
             return {...state,
@@ -50,6 +55,36 @@ const reducer = (state= initialState, action) => {
             newPostWithoutShare.shared_by_current_user -= 1;
             return {...state,
                     pickedPost: newPostWithoutShare};
+        case actionTypes.FETCH_COMMENTS_START:
+            return {...state,
+                comments: [],
+                linkToLoadMoreComments: null,
+                loading: true,
+                hasMore: true};
+        case actionTypes.FETCH_COMMENTS_SUCCESS:
+            if(!action.payload.next){
+                hasMore = false;
+            }
+            return {...state,
+                    comments: action.payload.results,
+                    linkToLoadMoreComments: action.payload.next,
+                    loading: false,
+                    hasMore: hasMore};
+        case actionTypes.FETCH_COMMENTS_FAIL:
+            return {...state, loading: false};
+
+        case actionTypes.CREATE_COMMENT_START:
+            return {...state,
+                loadingCreateComment: true};
+        case actionTypes.CREATE_COMMENT_SUCCESS:
+            let newCommentsWithCreated = [...state.comments];
+            newCommentsWithCreated.unshift(action.payload);
+            return {...state,
+                comments: newCommentsWithCreated,
+                loadingCreateComment: false};
+        case actionTypes.CREATE_COMMENT_FAIL:
+            return {...state,
+            loadingCreateComment: false};
         default:
             return state;
     }

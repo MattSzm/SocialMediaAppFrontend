@@ -43,7 +43,7 @@ export const fetchRelatedUsersNewsFeed = (payload) => {
 
 
 export const fetchRelatedUsersUserPage = (payload, userUuid) => {
-    return (dispatch, getState) =>{
+    return (dispatch, getState) => {
         for(let post of payload){
             if(userUuid !== post.user.substring(36, post.user.length-1)) {
                 axios.get(post.user.substring(22,), tokenConfig(getState))
@@ -57,9 +57,25 @@ export const fetchRelatedUsersUserPage = (payload, userUuid) => {
                 });
             }
         }
-    }
-}
+    };
+};
 
+
+export const fetchRelatedUsersComments = (payload) => {
+    return (dispatch, getState) => {
+        for(let comment of payload){
+            axios.get(comment.account.substring(22, ), tokenConfig(getState))
+                .then(res => {
+                    dispatch({
+                        type: actionTypes.SAVE_USERS_SUCCESS,
+                        payload: res.data
+                    });
+                }).catch(error => {
+                dispatch(createError('userFail', 'Cannot load user'));
+            });
+        }
+    };
+};
 
 export const fetchUser = (username, loadPosts=false) => {
     return (dispatch, getState) => {

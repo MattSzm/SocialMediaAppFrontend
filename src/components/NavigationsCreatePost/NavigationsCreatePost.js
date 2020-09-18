@@ -16,7 +16,7 @@ const navigationCreatePost = (props) => {
                 />
                 <Button
                     click={props.sumbit}>
-                    Tweet
+                    {props.comment ? 'Comment' : 'Tweet'}
                 </Button>
             </div>
             <div className={classes.Dump2} />

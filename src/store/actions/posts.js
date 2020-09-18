@@ -44,13 +44,13 @@ export const fetchUserPosts = (userUuid) => {
 
         axios.get(`/api/tweet/byuser/${userUuid}/`, tokenConfig(getState))
             .then(res => {
-                dispatch(fetchRelatedUsersUserPage(
-                    res.data.results,
-                    userUuid));
                 dispatch({
                     type: actionTypes.FETCH_USER_POSTS_SUCCESS,
                     payload: res.data
                 });
+                dispatch(fetchRelatedUsersUserPage(
+                    res.data.results,
+                    userUuid));
             }).catch(error => {
                 dispatch({type: actionTypes.FETCH_USER_POSTS_FAIL});
                 if(error.response) {
