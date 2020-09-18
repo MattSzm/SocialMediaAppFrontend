@@ -118,14 +118,21 @@ export const deletePost = (postUuid) => {
 };
 
 
-export const createLikePost = (postUuid) => {
+export const createLikePost = (postUuid, detail=false) => {
     return (dispatch, getState) => {
         axios.post(`/api/tweet/likes/${postUuid}/`,{}, tokenConfig(getState))
             .then((res) => {
-                dispatch({
-                    type: actionTypes.CREATE_LIKE_POST,
-                    payloadUuid: postUuid
-                });
+                if(detail){
+                    dispatch({
+                        type: actionTypes.CREATE_LIKE_POST_DETAIL,
+                    });
+                }
+                else {
+                    dispatch({
+                        type: actionTypes.CREATE_LIKE_POST,
+                        payloadUuid: postUuid
+                    });
+                }
             }).catch(error => {
                 dispatch({
                     type: actionTypes.GET_ERRORS,
@@ -138,14 +145,21 @@ export const createLikePost = (postUuid) => {
     };
 };
 
-export const deleteLikePost = (postUuid) => {
+export const deleteLikePost = (postUuid, detail=false) => {
     return (dispatch, getState) => {
         axios.delete(`/api/tweet/likes/${postUuid}/`, tokenConfig(getState))
             .then(res => {
-                dispatch({
-                    type: actionTypes.DELETE_LIKE_POST,
-                    payloadUuid: postUuid
-                });
+                if(detail){
+                    dispatch({
+                        type: actionTypes.DELETE_LIKE_POST_DETAIL,
+                    });
+                }
+                else {
+                    dispatch({
+                        type: actionTypes.DELETE_LIKE_POST,
+                        payloadUuid: postUuid
+                    });
+                }
             }).catch(error => {
                 dispatch({
                     type: actionTypes.GET_ERRORS,
@@ -159,15 +173,22 @@ export const deleteLikePost = (postUuid) => {
 };
 
 
-export const createSharePost = (postUuid) => {
+export const createSharePost = (postUuid, detail=false) => {
     return (dispatch, getState) => {
         axios.post(`/api/tweet/share/${postUuid}/`, {}, tokenConfig(getState))
             .then(res => {
-                dispatch({
-                    type: actionTypes.CREATE_SHARE_POST,
-                    payload: res.data,
-                    payloadUuid: postUuid
-                });
+                if(detail){
+                    dispatch({
+                        type: actionTypes.CREATE_SHARE_POST_DETAIL
+                    });
+                }
+                else{
+                    dispatch({
+                        type: actionTypes.CREATE_SHARE_POST,
+                        payload: res.data,
+                        payloadUuid: postUuid
+                    });
+                }
             }).catch(error => {
                 if(error.response){
                     if(error.response.status===406){
@@ -202,15 +223,22 @@ export const createSharePost = (postUuid) => {
     };
 };
 
-export const deleteSharePost = (postUuid) => {
+export const deleteSharePost = (postUuid, detail=false) => {
     return (dispatch, getState) => {
         axios.delete(`/api/tweet/share/${postUuid}/`, tokenConfig(getState))
             .then(res =>{
-                dispatch({
-                    type: actionTypes.DELETE_SHARE_POST,
-                    payloadPostUuid: postUuid,
-                    payloadUserUuid: getState().auth.user.uuid
-                });
+                if(detail){
+                    dispatch({
+                        type: actionTypes.DELETE_SHARE_POST_DETAIL
+                    });
+                }
+                else {
+                    dispatch({
+                        type: actionTypes.DELETE_SHARE_POST,
+                        payloadPostUuid: postUuid,
+                        payloadUserUuid: getState().auth.user.uuid,
+                    });
+                }
             }).catch((error) => {
                 dispatch({
                     type: actionTypes.GET_ERRORS,

@@ -3,7 +3,6 @@ import * as actionTypes from "./actionTypes";
 import tokenConfig from "./auth";
 import {createError} from "./messages";
 import {fetchUserPosts} from "./posts";
-import errors from "../reducers/errors";
 
 
 export const fetchRelatedUsersNewsFeed = (payload) => {
@@ -74,10 +73,9 @@ export const fetchUser = (username, loadPosts=false) => {
                     dispatch(fetchUserPosts(res.data.uuid));
                 }
             }).catch(err => {
-                if(err.response) {
+                if(err.response){
                     dispatch({
                         type: actionTypes.FETCH_USER_FAIL,
-                        payload: err.response.data
                     });
                 }
                 dispatch(createError('noUser', 'Cannot find user'));

@@ -223,19 +223,34 @@ const reducer = (state=initialState, action) => {
                         }
                     }
                     return post;
-                }).filter(
-                (post) => {
-                    if(post.tweet_itself) {
-                        if ((post.tweet_itself.uuid === action.payloadPostUuid) &&
-                            (`${post.account}`.substring(36, post.account.length - 1) ===
-                                action.payloadUserUuid)) {
-                            return false;
-                        }
-                    }
-                    return true;
-                });
+                })
+                let newPostsWithoutShareOutput = null;
+                if(state.newsFeedTimeStamp) {
+                     newPostsWithoutShareOutput = newPostsWithoutShare.filter(
+                        (post) => {
+                            if (post.tweet_itself) {
+                                if ((post.tweet_itself.uuid === action.payloadPostUuid) &&
+                                    (`${post.account}`.substring(36, post.account.length - 1) ===
+                                        action.payloadUserUuid)) {
+                                    return false;
+                                }
+                            }
+                            return true;
+                        });
+                }
+                else{
+                     newPostsWithoutShareOutput = newPostsWithoutShare.filter(
+                        (post) => {
+                            if ((post.uuid === action.payloadPostUuid) &&
+                                (`${post.user}`.substring(36, post.user.length - 1) !==
+                                    action.payloadUserUuid)) {
+                                return false;
+                            }
+                            return true;
+                    });
+                }
             return {...state,
-                posts: newPostsWithoutShare};
+                posts: newPostsWithoutShareOutput};
         default:
             return state;
     }

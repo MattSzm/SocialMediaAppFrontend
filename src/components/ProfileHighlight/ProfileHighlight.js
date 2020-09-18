@@ -1,6 +1,6 @@
 import React from "react";
 import classes from './ProfileHighlight.module.css';
-import Avatar from "../images/Avatar/Avatar";
+import Avatar from "../Images/Avatar/Avatar";
 import {withRouter} from 'react-router-dom';
 
 const profileHighlight = (props) => {

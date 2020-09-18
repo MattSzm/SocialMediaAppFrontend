@@ -4,9 +4,8 @@ import likeButton from '../../assets/icons/heart.png'
 import commentButton from '../../assets/icons/comment.png'
 import shareButton from '../../assets/icons/share.png';
 import Linkify from 'react-linkify'
-import PostImage from "../images/PostImage/PostImage";
+import PostImage from "../Images/PostImage/PostImage";
 import {Link} from "react-router-dom";
-import CloseButton from "../UI/CloseButton/CloseButton";
 
 
 const hashtag_formatter = string => {

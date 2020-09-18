@@ -67,9 +67,9 @@ class NewsFeed extends React.Component{
                                                       singlePost.user.length - 1)]}/>);
                                 }
                                 else {
-                                    return <Post key={`${singlePost.id}${singlePost.user}`}
+                                    return (<Post key={`${singlePost.id}${singlePost.user}`}
                                                  post={singlePost}
-                                                 loading={true}/>
+                                                 loading={true}/>);
                                 }
                             }
                             else {

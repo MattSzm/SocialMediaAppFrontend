@@ -43,6 +43,9 @@ class Alert extends Component{
             if(error.message.noUser){
                 alert.error(error.message.noUser);
             }
+            if(error.message.noTweet){
+                alert.error(error.message.noTweet);
+            }
             if(error.message.badCreditsRegistration){
                 alert.error(error.message.badCreditsRegistration);
             }

@@ -1,6 +1,6 @@
 import React, {Fragment} from "react";
 import classes from './UserDetail.module.css';
-import Avatar from "../images/Avatar/Avatar";
+import Avatar from "../Images/Avatar/Avatar";
 import Button from '../UI/StandardButton/StandardButton';
 import FollowButton from "../UI/StandardButton/FollowButton/FollowButton";
 import {Link} from "react-router-dom";

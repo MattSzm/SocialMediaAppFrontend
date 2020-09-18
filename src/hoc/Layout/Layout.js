@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import UserPage from "../../containers/Posts/UserPage/UserPage";
 import CurrentUser from "../../containers/Posts/UserPage/CurrentUser/CurrentUser";
+import Comments from "../../containers/Comments/Comments";
 
 
 class Layout extends React.Component{
@@ -20,6 +21,7 @@ class Layout extends React.Component{
                     {this.props.currentUser ?
                         <Redirect from={`/user/${this.props.currentUser.username}`} to="/profile" /> : null }
                     <Route path="/user/:username" exact component={UserPage} />
+                    <Route path="/tweet/:postUuid" exact component={Comments} />
                     <Route path="/profile" exact component={CurrentUser}/>
 
                     <Route path="/" component={NewsFeed} />
