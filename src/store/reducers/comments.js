@@ -62,6 +62,13 @@ const reducer = (state= initialState, action) => {
                 loading: true,
                 hasMore: true};
         case actionTypes.FETCH_COMMENTS_SUCCESS:
+            if(action.status === 204){
+                return {...state,
+                    comments: [],
+                    linkToLoadMoreComments: null,
+                    loading: false,
+                    hasMore: false};
+            }
             if(!action.payload.next){
                 hasMore = false;
             }
@@ -72,7 +79,20 @@ const reducer = (state= initialState, action) => {
                     hasMore: hasMore};
         case actionTypes.FETCH_COMMENTS_FAIL:
             return {...state, loading: false};
-
+        case actionTypes.LOAD_MORE_COMMENTS_START:
+            return {...state,
+                    loading: true,
+                    hasMore: true};
+        case actionTypes.LOAD_MORE_COMMENTS_SUCCESS:
+            const newComments = [...state.comments].concat(action.payload.results);
+            if(!action.payload.next){
+                hasMore = false;
+            }
+            return {...state,
+                comments: newComments,
+                linkToLoadMoreComments: action.payload.next,
+                loading: false,
+                hasMore: hasMore};
         case actionTypes.CREATE_COMMENT_START:
             return {...state,
                 loadingCreateComment: true};
@@ -85,6 +105,13 @@ const reducer = (state= initialState, action) => {
         case actionTypes.CREATE_COMMENT_FAIL:
             return {...state,
             loadingCreateComment: false};
+        case actionTypes.DELETE_COMMENT:
+            const newCommentsWithoutDeleted = state.comments.filter(
+                (comment) => {
+                    return comment.id !== action.payload;
+                });
+            return {...state,
+                comments: newCommentsWithoutDeleted};
         default:
             return state;
     }

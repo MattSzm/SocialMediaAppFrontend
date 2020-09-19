@@ -8,7 +8,7 @@ import PostImage from "../Images/PostImage/PostImage";
 import {Link} from "react-router-dom";
 
 
-const hashtag_formatter = string => {
+export const hashtag_formatter = string => {
     return string.split(/((?:^|\s)(?:[@|#][a-z\d-]+))/gi)
         .filter(Boolean).map((v, i) => {
         if(v.includes('#') || v.includes('@')){
@@ -58,11 +58,27 @@ const PostContent = (props) => {
                 null}
 
             <div className={classes.Icons}>
-                <div className={classes.IconContainer}>
-                    <img src={commentButton}
-                         className={classes.Comment}/>
-                     <small>{props.commentsNumber}</small>
-                </div>
+                    <div className={classes.IconContainer}>
+                        {props.commentedAlready ?
+                        (<Link to={`/tweet/${props.commentUuid}`}
+                               style={{textDecoration: 'none',
+                                   color: '#14171A'}}>
+                            <img src={commentButton}
+                                className={classes.Comment}
+                                style={{
+                                  backgroundColor: '#cfe7fa',
+                                  borderRadius: '35%'
+                              }} />
+                        </Link>) :
+                        (<Link to={`/tweet/${props.commentUuid}`}
+                               style={{textDecoration: 'none',
+                                   color: '#14171A'}}>
+                            <img src={commentButton}
+                             className={classes.Comment}/>
+                        </Link>)
+                        }
+                         <small>{props.commentsNumber}</small>
+                    </div>
 
                 <div className={classes.IconContainer}
                     onClick={props.ShareOnClick}>

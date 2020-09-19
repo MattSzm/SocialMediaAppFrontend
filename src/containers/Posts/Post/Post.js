@@ -8,7 +8,7 @@ import * as postActions from '../../../store/actions/posts';
 
 
 class Post extends Component{
-    deletePost = (postUuid) => {
+    deletePostHandler = (postUuid) => {
         this.props.deletePost(postUuid);
     }
 
@@ -74,12 +74,14 @@ class Post extends Component{
                         usernameDisplay={this.props.user.username_displayed}
                         date={this.props.post.created}
                         content={this.props.post.content}
+                        commentUuid={this.props.post.uuid}
                         imageLink={this.props.post.image}
                         likesNumber={this.props.post.number_likes}
                         commentsNumber={this.props.post.number_comments}
                         sharesNumber={this.props.post.number_shares}
                         likedAlready={this.props.post.liked_by_current_user}
                         sharedAlready={this.props.post.shared_by_current_user}
+                        commentedAlready={this.props.post.commented_by_current_user}
 
                         LikeOnClick={this.likePost.bind(this,
                                     this.props.post.uuid,
@@ -91,7 +93,7 @@ class Post extends Component{
                     {(this.props.currentUser &&
                         (this.props.currentUser.uuid === this.props.user.uuid)) ?
                             <CloseButton
-                                clicked={this.deletePost.bind(this, this.props.post.uuid)}
+                                clicked={this.deletePostHandler.bind(this, this.props.post.uuid)}
                                 post={true} /> : null}
 
                 </div>

@@ -7,6 +7,7 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 import Post from "../Posts/Post/Post";
 import CreateComment from "./CreateComment/CreateComment";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Comment from "../../components/Comment/Comment";
 
 
 class Comments extends Component{
@@ -14,6 +15,22 @@ class Comments extends Component{
         this.props.clearComments();
         const postUuid = this.props.match.params.postUuid;
         this.props.loadPostWithComments(postUuid);
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.match.params.postUuid !== this.props.match.params.postUuid){
+            this.props.clearComments();
+            const postUuid = this.props.match.params.postUuid;
+            this.props.loadPostWithComments(postUuid);
+        }
+    }
+
+    loadMore = () => {
+        this.props.loadMoreComments(this.props.linkLoadMore);
+    }
+
+    deleteCommentHandler = (commentId) => {
+        this.props.deleteComment(this.props.pickedPost.uuid, commentId);
     }
 
     render() {
@@ -43,7 +60,11 @@ class Comments extends Component{
                 <CreateComment
                     postUuid={this.props.pickedPost ?
                                 this.props.pickedPost.uuid : null}/>
-                <InfiniteScroll next={ () => {}}
+                <InfiniteScroll next={ () => {
+                                if(this.props.linkLoadMore){
+                                    this.loadMore();
+                                }
+                            }}
                                 hasMore={this.props.hasMore}
                                 loader={<Spinner />}
                                 dataLength={this.props.comments.length}
@@ -58,12 +79,27 @@ class Comments extends Component{
                                             textAlign: 'center',
                                             margin: '2em 0'
                                         }}>
-                                        No tweets to show.
+                                        No comments to show.
                                     </h2>)}
                                 >
                     {this.props.comments.map(
                         singleComment => {
-                            return <h2 key={singleComment.id}>{singleComment.comment_content}</h2>
+                                if(this.props.users[`${singleComment.account}`.substring(36,
+                                    singleComment.account.length - 1)]) {
+                                    return (<Comment key={singleComment.id}
+                                                    comment={singleComment}
+                                                    user={this.props.users[`${singleComment.account}`.substring(36,
+                                                        singleComment.account.length - 1)]}
+                                                    currentUser={this.props.currentUser}
+                                                    deleteAction={this.deleteCommentHandler.bind(this, singleComment.id)}/>);
+                                }
+                                else {
+                                    return (<Comment
+                                            key={singleComment.id}
+                                            comment={singleComment}
+                                            loading={true} />);
+                                }
+
                         }
                     )}
                 </InfiniteScroll>
@@ -76,6 +112,7 @@ class Comments extends Component{
 
 
 const mapStateToProps = state => ({
+    currentUser: state.auth.user,
     pickedPost: state.comments.pickedPost,
     userOfPickedPost: state.comments.userOfPickedPost,
     comments: state.comments.comments,
@@ -88,6 +125,10 @@ const mapDispatchToProps = dispatch => ({
     clearComments: () => dispatch(commentsActions.clearCommentsReducer()),
     loadPostWithComments: (postUuid) => dispatch(
         commentsActions.fetchTweetWithComments(postUuid)),
+    loadMoreComments: (link) => dispatch(commentsActions.fetchMoreComments(link)),
+    deleteComment: (tweetUuid, commentId) => dispatch(commentsActions.deleteComment(
+        tweetUuid, commentId))
+
 });
 
 

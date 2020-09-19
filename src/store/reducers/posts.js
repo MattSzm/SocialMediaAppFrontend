@@ -101,6 +101,13 @@ const reducer = (state=initialState, action) => {
             return {...state,
                 loadingCreatePost: false};
         case actionTypes.FETCH_USER_POSTS_SUCCESS:
+            if(action.status === 204){
+                return {...state,
+                    posts: [],
+                    linkToLoadMoreUserPage: null,
+                    loading: false,
+                    hasMore: false}
+            }
             if(!action.payload.next){
                 hasMore = false;
             }
@@ -110,7 +117,7 @@ const reducer = (state=initialState, action) => {
                 loading: false,
                 hasMore: hasMore};
         case actionTypes.LOAD_MORE_USER_POSTS_SUCCESS:
-            const newPostsUserPosts = [...state.posts].concat(action.payload.results)
+            const newPostsUserPosts = [...state.posts].concat(action.payload.results);
             if(!action.payload.next){
                 hasMore = false;
             }

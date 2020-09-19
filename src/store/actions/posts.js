@@ -46,7 +46,8 @@ export const fetchUserPosts = (userUuid) => {
             .then(res => {
                 dispatch({
                     type: actionTypes.FETCH_USER_POSTS_SUCCESS,
-                    payload: res.data
+                    payload: res.data,
+                    status: res.status
                 });
                 dispatch(fetchRelatedUsersUserPage(
                     res.data.results,
@@ -72,13 +73,13 @@ export const fetchMoreUserPosts = (link, userUuid) => {
         dispatch({type: actionTypes.LOAD_MORE_USER_POSTS_START});
         axios.get(link.substring(22, ), tokenConfig(getState))
             .then(res => {
-                dispatch(fetchRelatedUsersUserPage(
-                    res.data.results,
-                    userUuid));
                 dispatch({
                     type: actionTypes.LOAD_MORE_USER_POSTS_SUCCESS,
                     payload: res.data
                 });
+                dispatch(fetchRelatedUsersUserPage(
+                    res.data.results,
+                    userUuid));
             }).catch(error => {
                 dispatch({type: actionTypes.FETCH_USER_POSTS_FAIL});
             if(error.response) {

@@ -53,7 +53,8 @@ export const fetchComments = (postUuid) => {
             .then(res => {
                 dispatch({
                     type: actionTypes.FETCH_COMMENTS_SUCCESS,
-                    payload: res.data
+                    payload: res.data,
+                    status: res.status
                 });
                 dispatch(fetchRelatedUsersComments(
                     res.data.results
@@ -73,6 +74,33 @@ export const fetchComments = (postUuid) => {
     };
 };
 
+export const fetchMoreComments = (link) => {
+    return (dispatch, getState) => {
+        dispatch({type: actionTypes.LOAD_MORE_COMMENTS_START});
+        axios.get(link.substring(22,), tokenConfig(getState))
+            .then(res => {
+                dispatch({
+                   type: actionTypes.LOAD_MORE_COMMENTS_SUCCESS,
+                   payload: res.data
+                });
+                dispatch(fetchRelatedUsersComments(
+                    res.data.results
+                ));
+            }).catch(error => {
+            dispatch({type: actionTypes.FETCH_COMMENTS_FAIL});
+            if(error.response){
+                dispatch({
+                    type: actionTypes.GET_ERRORS,
+                    payload: {
+                        msg: {postComments: 'Unable to load comments'},
+                        status: error.response.status
+                    }
+                });
+            }
+        });
+    }
+}
+
 
 export const createComment = (form, postUuid) => {
     return (dispatch, getState) => {
@@ -84,7 +112,6 @@ export const createComment = (form, postUuid) => {
 
         axios.post(`/api/tweet/comments/${postUuid}/`, form, config)
             .then(res => {
-                console.log(res.data);
                 dispatch({
                     type: actionTypes.CREATE_COMMENT_SUCCESS,
                     payload: res.data
@@ -97,7 +124,6 @@ export const createComment = (form, postUuid) => {
                 type: actionTypes.CREATE_COMMENT_FAIL,
             });
             if(error.response) {
-                console.log(error.response);
                 dispatch({
                     type: actionTypes.GET_ERRORS,
                     payload: {
@@ -106,6 +132,30 @@ export const createComment = (form, postUuid) => {
                     }
                 });
             }
+        });
+    };
+};
+
+
+export const deleteComment = (tweetUuid, commentId) => {
+    return (dispatch, getState) => {
+        axios.delete(`/api/tweet/destroycomment/${tweetUuid}/${commentId}/`,
+                tokenConfig(getState))
+            .then(res => {
+                dispatch({
+                    type: actionTypes.DELETE_COMMENT,
+                    payload: commentId
+                });
+                dispatch(createMessage(
+                    {commentDeleted: 'Deleted comment successfully'}));
+            }).catch(error => {
+            dispatch({
+                type: actionTypes.GET_ERRORS,
+                payload: {
+                    msg: {deleteComment: 'Unable to delete comment'},
+                    status: 500
+                }
+            });
         });
     };
 };

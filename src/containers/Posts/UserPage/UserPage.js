@@ -26,7 +26,7 @@ class UserPage extends Component{
     }
 
     loadMore = () => {
-        this.props.fetchMore(this.props.linkLoadMore,
+        this.props.loadMore(this.props.linkLoadMore,
                         this.props.pickedUser.uuid);
     }
 
@@ -121,9 +121,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    loadUser: (username) => dispatch(usersActions.fetchUser(username, true)),
-    fetchMore: (link, userUuid) => dispatch(fetchMoreUserPosts(link, userUuid)),
     clearUser: () => dispatch(usersActions.clearPickedUser()),
+    loadUser: (username) => dispatch(usersActions.fetchUser(username, true)),
+    loadMore: (link, userUuid) => dispatch(fetchMoreUserPosts(link, userUuid)),
 
     followUser: (pickedUserUuid) => dispatch(usersActions.followUser(pickedUserUuid)),
     unfollowUser: (pickedUserUuid) => dispatch(usersActions.unfollowUser(pickedUserUuid))

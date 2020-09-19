@@ -84,6 +84,9 @@ class Alert extends Component{
             if(message.postDeleted){
                 alert.success(message.postDeleted);
             }
+            if(message.commentDeleted){
+                alert.success(message.commentDeleted);
+            }
         }
     }
 
