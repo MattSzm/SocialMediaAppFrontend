@@ -1,15 +1,15 @@
 import React, {Component, Fragment} from "react";
 import classes from '../UserPage.module.css';
 import {connect} from 'react-redux';
-import {fetchUserPosts, fetchMoreUserPosts} from '../../../../store/actions/posts';
-import {loadCurrentUser} from '../../../../store/actions/auth';
-import UserDetail from "../../../../components/UserDetail/UserDetail";
+import {fetchUserPosts, fetchMoreUserPosts} from '../../../store/actions/posts';
+import {loadCurrentUser} from '../../../store/actions/auth';
+import UserDetail from "../../../components/UserDetail/UserDetail";
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Spinner from "../../../../components/UI/Spinner/Spinner";
-import Post from "../../Post/Post";
-import SharedPost from "../../Post/SharedPost";
-import Modal from "../../../../components/UI/Modal/Modal";
-import * as modalActions from "../../../../store/actions/modal";
+import Spinner from "../../../components/UI/Spinner/Spinner";
+import Post from "../../Posts/Post/Post";
+import SharedPost from "../../Posts/Post/SharedPost";
+import Modal from "../../../components/UI/Modal/Modal";
+import * as modalActions from "../../../store/actions/modal";
 import EditProfile from "./EditProfile/EditProfile";
 
 

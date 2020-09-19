@@ -4,27 +4,13 @@ import Avatar from "../Images/Avatar/Avatar";
 import Button from '../UI/StandardButton/StandardButton';
 import FollowButton from "../UI/StandardButton/FollowButton/FollowButton";
 import {Link} from "react-router-dom";
+import UserHeader from "./UserHeader/UserHeader";
 
 
 const userDetail = (props) => {
     let content = (
         <div className={classes.UserDetail}>
-            <div className={classes.ContainerTitle} >
-                <div className={classes.Title}>
-                    <h2 className={classes.loading}
-                        style={{
-                            width: '7em',
-                            marginLeft: '0'
-                        }}>
-                        .
-                    </h2>
-                    <p>
-                        <small>
-                            <span className={classes.loading}>........</span>Tweets
-                        </small>
-                    </p>
-                </div>
-            </div>
+            <UserHeader loading={true} />
             <div className={classes.Info}>
                 <Avatar loading={true}
                         blank={false}
@@ -75,18 +61,9 @@ const userDetail = (props) => {
         }
         content = (
             <div className={classes.UserDetail}>
-                <div className={classes.ContainerTitle} >
-                    <div className={classes.Title}>
-                        <h2>
-                            {props.user.username_displayed}
-                        </h2>
-                        <p>
-                            <small>
-                                {props.user.number_of_tweets} Tweets
-                            </small>
-                        </p>
-                    </div>
-                </div>
+                <UserHeader loading={false}
+                            usernameDisplayes={props.user.username_displayed}
+                            NumberOfTweets={props.user.number_of_tweets}/>
                 <div className={classes.Info}>
                     {avatar}
                     <div className={classes.Follows}>
@@ -112,14 +89,22 @@ const userDetail = (props) => {
                         <div>
                             <div className={classes.InlineContainer}>
                                 <p className={classes.Inline}>
-                                    <strong style={{color: '#14171A'}}>
-                                        {props.user.number_following}
-                                    </strong> Following
+                                    <Link to={`/user/${props.user.username}/following`}
+                                        style={{textDecoration: 'none',
+                                        color: '#14171A'}}>
+                                        <strong style={{color: '#14171A'}}>
+                                            {props.user.number_following}
+                                        </strong> Following
+                                    </Link>
                                 </p>
                                 <p className={classes.Inline}>
-                                    <strong style={{color: '#14171A'}}>
-                                        {props.user.number_followers}
-                                    </strong> Followers
+                                    <Link to={`/user/${props.user.username}/followers`}
+                                          style={{textDecoration: 'none',
+                                              color: '#14171A'}}>
+                                        <strong style={{color: '#14171A'}}>
+                                            {props.user.number_followers}
+                                        </strong> Followers
+                                    </Link>
                                 </p>
                             </div>
                         </div>

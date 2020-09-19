@@ -5,9 +5,10 @@ import NewsFeed from "../../containers/Posts/NewsFeed/NewsFeed";
 import Info from "../../containers/Info/Info";
 import { connect } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import UserPage from "../../containers/Posts/UserPage/UserPage";
-import CurrentUser from "../../containers/Posts/UserPage/CurrentUser/CurrentUser";
+import UserPage from "../../containers/UserPage/UserPage";
+import CurrentUser from "../../containers/UserPage/CurrentUser/CurrentUser";
 import Comments from "../../containers/Comments/Comments";
+import Follow from "../../containers/UserPage/Follow/Follow";
 
 
 class Layout extends React.Component{
@@ -19,11 +20,12 @@ class Layout extends React.Component{
 
                 <Switch>
                     {this.props.currentUser ?
-                        <Redirect from={`/user/${this.props.currentUser.username}`} to="/profile" /> : null }
+                        <Redirect from={`/user/${this.props.currentUser.username}`} to="/profile" exact /> : null }
                     <Route path="/user/:username" exact component={UserPage} />
+                    <Route path="/user/:username/following" exact render={() => (<Follow type={"following"} />)} />
+                    <Route path="/user/:username/followers" exact render={() =>(<Follow type={"followers"} />)} />
                     <Route path="/tweet/:postUuid" exact component={Comments} />
                     <Route path="/profile" exact component={CurrentUser}/>
-
                     <Route path="/" component={NewsFeed} />
                 </Switch>
 

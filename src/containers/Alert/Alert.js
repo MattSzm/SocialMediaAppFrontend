@@ -34,6 +34,9 @@ class Alert extends Component{
             if(error.message.userEdit){
                 alert.error(error.message.userEdit);
             }
+            if(error.message.fetchFollowing){
+                alert.error(error.message.fetchFollowing);
+            }
             if(error.message.userPosts){
                 alert.error(error.message.userPosts);
             }

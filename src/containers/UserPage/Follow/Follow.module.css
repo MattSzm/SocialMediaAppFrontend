@@ -1,0 +1,53 @@
+.Follow{
+    text-align: center;
+    margin: auto;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    border-left: solid #E1E8ED 1px;
+    border-right: solid #E1E8ED 1px;
+}
+.Header{
+    width: 100%;
+    margin: auto;
+    border-bottom: solid #E1E8ED 1px;
+    text-align: left;
+}
+.Follow h2,
+.Follow p{
+    margin: auto;
+}
+
+.Follow p{
+    color: #657786;
+}
+
+.Navigations{
+    margin-top: 3.5em;
+    width: 100%;
+    height: 3em;
+    display: flex;
+    flex-direction: row;
+    border-bottom: solid #E1E8ED 1px;
+}
+.NavigationItem{
+    width: 50%;
+}
+
+.Navlink{
+    text-decoration: none;
+    font-weight: normal;
+    color: #14171A;
+}
+.Navlink:hover{
+    color: #0890e2;
+}
+.NavlinkActive{
+    color: #1DA1F2;
+}
+@media(max-width: 1050px){
+    .Follow{
+        width: 90%;
+        max-width: 700px;
+    }
+}

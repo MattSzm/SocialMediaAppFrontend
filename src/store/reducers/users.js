@@ -3,9 +3,13 @@ import * as actionTypes from "../actions/actionTypes";
 const initialState = {
     users: {},
     pickedUser: null,
+    usersFollow: [],
+    hasMoreFollow: null,
+    linkToLoadMoreFollow: null
 }
 
 const reducer = (state=initialState, action) => {
+    let hasMore = true;
     switch (action.type){
         case actionTypes.SAVE_USERS_SUCCESS:
             const id = action.payload.uuid;
@@ -13,7 +17,8 @@ const reducer = (state=initialState, action) => {
                 let newUsers = {...state.users};
                 newUsers[id] = action.payload;
                 return {...state,
-                    users: newUsers};
+                    users: newUsers,
+                    usersFollow: []};
             }
             return state;
         case actionTypes.FETCH_USER_SUCCESS:
@@ -25,7 +30,8 @@ const reducer = (state=initialState, action) => {
         case actionTypes.CLEAR_USERS:
             return {...state,
                     users: {},
-                    pickedUser: null};
+                    pickedUser: null,
+                    usersFollow: []};
         case actionTypes.CLEAR_PICKED_USER:
             return {...state,
                     pickedUser: null};
@@ -41,6 +47,20 @@ const reducer = (state=initialState, action) => {
                 number_followers: state.pickedUser.number_followers - 1};
             return {...state,
                     pickedUser: pickedUserWithoutFollow};
+        case actionTypes.FETCH_FOLLOW_SUCCESS:
+            if(action.status === 204){
+                return {...state,
+                    users: {},
+                    usersFollow: []};
+            }
+            if(!action.payload.next){
+                hasMore = false;
+            }
+            return {...state,
+                    users: {},
+                    usersFollow: action.payload.results,
+                    linkToLoadMoreFollow: action.payload.next,
+                    hasMoreFollow: hasMore}
         default:
             return state;
     }

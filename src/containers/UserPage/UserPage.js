@@ -1,13 +1,13 @@
 import React, {Component} from "react";
 import classes from './UserPage.module.css'
 import {connect} from 'react-redux';
-import {fetchMoreUserPosts} from '../../../store/actions/posts';
-import UserDetail from "../../../components/UserDetail/UserDetail";
+import {fetchMoreUserPosts} from '../../store/actions/posts';
+import UserDetail from "../../components/UserDetail/UserDetail";
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Spinner from "../../../components/UI/Spinner/Spinner";
-import Post from "../Post/Post";
-import SharedPost from "../Post/SharedPost";
-import * as usersActions from '../../../store/actions/users';
+import Spinner from "../../components/UI/Spinner/Spinner";
+import Post from "../Posts/Post/Post";
+import SharedPost from "../Posts/Post/SharedPost";
+import * as usersActions from '../../store/actions/users';
 
 
 class UserPage extends Component{

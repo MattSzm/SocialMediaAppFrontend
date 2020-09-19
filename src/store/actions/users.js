@@ -154,3 +154,74 @@ export const unfollowUser = (userUuid) => {
         });
     };
 };
+
+export const fetchUserWithFollowingOrFollowers = (username, following=true) => {
+    return (dispatch, getState) => {
+        axios.get(`/api/user/username/${username}/`, tokenConfig(getState))
+            .then(res => {
+                dispatch({
+                    type: actionTypes.FETCH_USER_SUCCESS,
+                    payload: res.data
+                });
+                if(following){
+                    dispatch(fetchFollowingUserList(res.data.uuid));
+                }
+                else{
+                    dispatch(fetchFollowersUserList(res.data.uuid));
+                }
+            }).catch(err => {
+            if(err.response){
+                dispatch({
+                    type: actionTypes.FETCH_USER_FAIL,
+                });
+            }
+            dispatch(createError('noUser', 'Cannot find user'));
+        });
+    };
+};
+
+export const fetchFollowingUserList = (userUuid) => {
+    return (dispatch, getState) => {
+        axios.get(`/api/user/followinglist/${userUuid}/`, tokenConfig(getState))
+            .then(res => {
+                dispatch({
+                    type: actionTypes.FETCH_FOLLOW_SUCCESS,
+                    payload: res.data,
+                    status: res.status
+                });
+            }).catch(err => {
+                if(err.response){
+                    dispatch({
+                        type: actionTypes.GET_ERRORS,
+                        payload: {
+                            msg: {fetchFollowing: 'Unable to perform'},
+                            status: 500
+                        }
+                    })
+                }
+        });
+    }
+}
+
+export const fetchFollowersUserList = (userUuid) => {
+    return (dispatch, getState) => {
+        axios.get(`/api/user/followerslist/${userUuid}/`, tokenConfig(getState))
+            .then(res => {
+                dispatch({
+                    type: actionTypes.FETCH_FOLLOW_SUCCESS,
+                    payload: res.data,
+                    status: res.status
+                });
+            }).catch(err => {
+            if(err.response){
+                dispatch({
+                    type: actionTypes.GET_ERRORS,
+                    payload: {
+                        msg: {fetchFollowing: 'Unable to perform'},
+                        status: 500
+                    }
+                })
+            }
+        });
+    }
+}

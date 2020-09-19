@@ -9,7 +9,7 @@ import {loadCurrentUser} from './store/actions/auth';
 import {Provider as AlertProvider} from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import Alert from "./containers/Alert/Alert";
-import UserPage from "./containers/Posts/UserPage/UserPage";
+import UserPage from "./containers/UserPage/UserPage";
 
 
 const alertOptions = {

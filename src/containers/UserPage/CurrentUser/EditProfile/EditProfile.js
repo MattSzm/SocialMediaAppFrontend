@@ -1,12 +1,12 @@
 import React, {Component} from "react";
 import classes from './EditProfile.module.css';
 import {connect} from 'react-redux';
-import Input from "../../../../../components/UI/Input/Input";
-import UploadImages from "../../../../../components/NavigationsCreatePost/UploadImages/UploadImages";
-import {createError} from "../../../../../store/actions/messages";
-import {userEdit} from "../../../../../store/actions/auth";
-import Spinner from "../../../../../components/UI/Spinner/Spinner";
-import Button from "../../../../../components/UI/StandardButton/StandardButton";
+import Input from "../../../../components/UI/Input/Input";
+import UploadImages from "../../../../components/NavigationsCreatePost/UploadImages/UploadImages";
+import {createError} from "../../../../store/actions/messages";
+import {userEdit} from "../../../../store/actions/auth";
+import Spinner from "../../../../components/UI/Spinner/Spinner";
+import Button from "../../../../components/UI/StandardButton/StandardButton";
 
 
 class EditProfile extends Component {
