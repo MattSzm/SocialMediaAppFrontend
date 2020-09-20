@@ -185,7 +185,7 @@ export const fetchFollowingUserList = (userUuid) => {
         axios.get(`/api/user/followinglist/${userUuid}/`, tokenConfig(getState))
             .then(res => {
                 dispatch({
-                    type: actionTypes.FETCH_FOLLOW_SUCCESS,
+                    type: actionTypes.LOAD_FOLLOW_SUCCESS,
                     payload: res.data,
                     status: res.status
                 });
@@ -197,7 +197,7 @@ export const fetchFollowingUserList = (userUuid) => {
                             msg: {fetchFollowing: 'Unable to perform'},
                             status: 500
                         }
-                    })
+                    });
                 }
         });
     }
@@ -208,7 +208,7 @@ export const fetchFollowersUserList = (userUuid) => {
         axios.get(`/api/user/followerslist/${userUuid}/`, tokenConfig(getState))
             .then(res => {
                 dispatch({
-                    type: actionTypes.FETCH_FOLLOW_SUCCESS,
+                    type: actionTypes.LOAD_FOLLOW_SUCCESS,
                     payload: res.data,
                     status: res.status
                 });
@@ -220,7 +220,29 @@ export const fetchFollowersUserList = (userUuid) => {
                         msg: {fetchFollowing: 'Unable to perform'},
                         status: 500
                     }
-                })
+                });
+            }
+        });
+    }
+}
+
+export const fetchMoreFollowingAndFollowersUserList = (link) => {
+    return (dispatch, getState) => {
+        axios.get(link.substring(22, ), tokenConfig(getState))
+            .then(res => {
+                dispatch({
+                    type: actionTypes.LOAD_MORE_FOLLOW_SUCCESS,
+                    payload: res.data
+                });
+            }).catch(err => {
+            if(err.response){
+                dispatch({
+                    type: actionTypes.GET_ERRORS,
+                    payload: {
+                        msg: {fetchFollowing: 'Unable to perform'},
+                        status: 500
+                    }
+                });
             }
         });
     }

@@ -6,6 +6,7 @@ import {NavLink, withRouter} from "react-router-dom";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import * as usersActions from '../../../store/actions/users';
 import InfiniteScroll from "react-infinite-scroll-component";
+import UserItemFollow from "../../../components/UserDetail/UserItemFollow/UserItemFollow";
 
 
 class Follow extends Component{
@@ -34,6 +35,10 @@ class Follow extends Component{
         }
     }
 
+    loadMore = () => {
+        this.props.loadMoreFollow(this.props.linkToLoadMore);
+    }
+
     render() {
         let userHeader = <UserHeader loading={true} />;
         if(this.props.pickedUser){
@@ -41,9 +46,6 @@ class Follow extends Component{
                             loading={false}
                             usernameDisplayes={this.props.pickedUser.username_displayed}
                             NumberOfTweets={this.props.pickedUser.number_of_tweets}/>;
-        }
-        if (this.props.users){
-            console.log(this.props.users);
         }
         return (
             <div className={classes.Follow}>
@@ -72,8 +74,48 @@ class Follow extends Component{
                         </NavLink>
                     </div>
                 </div>
-                {/*<InfiniteScroll */}
-                {/*    next={} hasMore={} loader={} dataLength={}*/}
+                <InfiniteScroll
+                    next={ () => {
+                        if(this.props.linkToLoadMore){
+                            this.loadMore();
+                        }
+                    }}
+                    hasMore={this.props.hasMore}
+                    loader={<Spinner />}
+                    dataLength={this.props.users.length}
+                    endMessage={ this.props.users.length > 0 ?
+                        (this.props.users.length < 10 ? null :
+                            (<p style={{textAlign: 'center',
+                            marginTop: '0.5em',
+                            marginBottom: '4em',
+                            color: '#AAB8C2'}}>
+                            You have seen it all!
+                        </p>)) :
+                        (this.props.type === 'following' ?
+                            (<h2
+                            style={{
+                                textAlign: 'center',
+                                margin: '2em 0'
+                            }}>
+                            No following.
+                        </h2>) :
+                                (<h2
+                                    style={{
+                                        textAlign: 'center',
+                                        margin: '2em 0'
+                                    }}>
+                                    No followers.
+                                </h2>))
+                                }
+                            >
+                    {this.props.users.map(
+                        singleUser => (<UserItemFollow
+                                        key={singleUser.id}
+                                        username={singleUser.username}
+                                        usernameDisplayed={singleUser.username_displayed}
+                                        image={singleUser.photo}/>)
+                    )}
+                </InfiniteScroll>
 
             </div>
         );
@@ -83,8 +125,8 @@ class Follow extends Component{
 const mapStateToProps = state => ({
     pickedUser: state.users.pickedUser,
     users: state.users.usersFollow,
+    linkToLoadMore: state.users.linkToLoadMoreFollow,
     hasMore: state.users.hasMoreFollow,
-    linkToLoadMore: state.users.linkToLoadMoreFollow
 
 });
 
@@ -93,7 +135,9 @@ const mapDispatchToProps = dispatch => ({
     loadUserWithFollowing: (username) => dispatch(
         usersActions.fetchUserWithFollowingOrFollowers(username, true)),
     loadUserWithFollowers: (username) => dispatch(
-        usersActions.fetchUserWithFollowingOrFollowers(username, false))
+        usersActions.fetchUserWithFollowingOrFollowers(username, false)),
+    loadMoreFollow: (link) => dispatch(
+        usersActions.fetchMoreFollowingAndFollowersUserList(link))
 
 });
 

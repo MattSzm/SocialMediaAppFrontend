@@ -60,11 +60,12 @@ class Comments extends Component{
                 <CreateComment
                     postUuid={this.props.pickedPost ?
                                 this.props.pickedPost.uuid : null}/>
-                <InfiniteScroll next={ () => {
-                                if(this.props.linkLoadMore){
-                                    this.loadMore();
-                                }
-                            }}
+                <InfiniteScroll
+                                next={ () => {
+                                    if(this.props.linkLoadMore){
+                                        this.loadMore();
+                                    }
+                                }}
                                 hasMore={this.props.hasMore}
                                 loader={<Spinner />}
                                 dataLength={this.props.comments.length}

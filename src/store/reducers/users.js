@@ -47,7 +47,7 @@ const reducer = (state=initialState, action) => {
                 number_followers: state.pickedUser.number_followers - 1};
             return {...state,
                     pickedUser: pickedUserWithoutFollow};
-        case actionTypes.FETCH_FOLLOW_SUCCESS:
+        case actionTypes.LOAD_FOLLOW_SUCCESS:
             if(action.status === 204){
                 return {...state,
                     users: {},
@@ -61,6 +61,16 @@ const reducer = (state=initialState, action) => {
                     usersFollow: action.payload.results,
                     linkToLoadMoreFollow: action.payload.next,
                     hasMoreFollow: hasMore}
+        case actionTypes.LOAD_MORE_FOLLOW_SUCCESS:
+            const newFollowUsers = [...state.usersFollow].concat(action.payload.results);
+            if(!action.payload.next){
+                hasMore = false;
+            }
+            return {...state,
+                    users: {},
+                    usersFollow: newFollowUsers,
+                    linkToLoadMoreFollow: action.payload.next,
+                    hasMoreFollow: hasMore};
         default:
             return state;
     }

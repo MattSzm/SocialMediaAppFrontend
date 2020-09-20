@@ -1,0 +1,34 @@
+.UserItem{
+    width: 100%;
+    height: auto;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0;
+    justify-content: space-around;
+    border-bottom: solid #E1E8ED 1px;
+    z-index: 3;
+}
+
+.UserItem:hover{
+    background-color: #F5F8FA;
+}
+
+.Content{
+    width: 87%;
+    text-align: left;
+    margin-right: 8px;
+}
+.Content h4{
+    margin-top: 0.3em;
+    margin-bottom: 0;
+}
+.Content p{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+@media(max-width: 700px) {
+    .Content {
+        width: 80%;
+    }
+}
