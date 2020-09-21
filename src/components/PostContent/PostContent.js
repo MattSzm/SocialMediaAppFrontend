@@ -11,8 +11,23 @@ import {Link} from "react-router-dom";
 export const hashtag_formatter = string => {
     return string.split(/((?:^|\s)(?:[@|#][a-z\d-]+))/gi)
         .filter(Boolean).map((v, i) => {
-        if(v.includes('#') || v.includes('@')){
-            return <span key={i} className={classes.hashtag}>{v}</span>
+        if(v.includes('#')){
+            return <span key={i} className={classes.hashtag}>
+                <Link to={`/hashtag/${v.substring(v.indexOf('#')+1,)}`}
+                      style={{ textDecoration: 'none',
+                          color: 'inherit'}}>
+                    {v}
+                </Link>
+            </span>
+        }
+        else if (v.includes('@')){
+            return <span key={i} className={classes.hashtag}>
+                <Link to={`/user/${v.substring(v.indexOf('@')+1,)}`}
+                      style={{ textDecoration: 'none',
+                          color: 'inherit'}}>
+                {v}
+                </Link>
+            </span>
         }
         else{
             return <span key={i} >{v}</span>

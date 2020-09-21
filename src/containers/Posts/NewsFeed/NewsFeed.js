@@ -11,11 +11,11 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 class NewsFeed extends React.Component{
     componentDidMount() {
-        this.props.fetchNewsFeed();
+        this.props.loadNewsFeed();
     }
 
     loadMore = () => {
-        this.props.fetchMore(this.props.newsFeedTimeStamp);
+        this.props.loadMoreNewsFeed(this.props.newsFeedTimeStamp);
     }
 
     render() {
@@ -108,8 +108,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchNewsFeed: () => dispatch(newsFeedActions.fetchNewsFeed()),
-    fetchMore: (timeStamp) =>
+    loadNewsFeed: () => dispatch(newsFeedActions.fetchNewsFeed()),
+    loadMoreNewsFeed: (timeStamp) =>
         dispatch(newsFeedActions.fetchMore(timeStamp))
 });
 

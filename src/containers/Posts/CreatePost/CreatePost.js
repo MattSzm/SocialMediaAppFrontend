@@ -69,7 +69,7 @@ class CreatePost extends Component{
             if(this.state.pictures[0]) {
                 formData.append('image', this.state.pictures[0].file);
             }
-            this.props.create(formData);
+            this.props.createPost(formData);
         }
         this.setState({content:
                                 {...this.state.content,

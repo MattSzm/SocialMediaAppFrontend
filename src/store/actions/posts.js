@@ -41,7 +41,6 @@ export const createPost = (form) => {
 export const fetchUserPosts = (userUuid) => {
     return (dispatch, getState) => {
         dispatch({type: actionTypes.FETCH_USER_POSTS_START});
-
         axios.get(`/api/tweet/byuser/${userUuid}/`, tokenConfig(getState))
             .then(res => {
                 dispatch({
@@ -252,3 +251,67 @@ export const deleteSharePost = (postUuid, detail=false) => {
         });
     };
 };
+
+
+export const fetchPostsWithHashtag = (hashtagValue) => {
+    return (dispatch, getState) => {
+        dispatch({type: actionTypes.FETCH_POSTS_WITH_HASHTAG_START});
+        axios.get(`/api/tweet/withhashtag/${hashtagValue}/`, tokenConfig(getState))
+            .then(res => {
+                dispatch({
+                    type: actionTypes.FETCH_POSTS_WITH_HASHTAG_SUCCESS,
+                    payload: res.data,
+                    status: res.status
+                });
+                dispatch(fetchRelatedUsersUserPage(
+                    res.data.results, ''));
+            }).catch(error => {
+                if(error.response.data.detail === 'Not found.'){
+                    dispatch({
+                        type: actionTypes.FETCH_POSTS_WITH_HASHTAG_SUCCESS,
+                        status: 204
+                    });
+                }
+                else {
+                    dispatch({type: actionTypes.FETCH_POSTS_WITH_HASHTAG_FAIL});
+                    if (error.response) {
+                        dispatch({
+                            type: actionTypes.GET_ERRORS,
+                            payload: {
+                                msg: {userPosts: 'Unable to load tweets'},
+                                status: error.response.status
+                            }
+                        });
+                    }
+                }
+        });
+    }
+}
+
+
+export const fetchMorePostsWithHashtag = (link) => {
+    return (dispatch, getState) => {
+        dispatch({type: actionTypes.FETCH_MORE_POSTS_WITH_HASHTAG_START});
+        axios.get(link.substring(22, ), tokenConfig(getState))
+            .then(res => {
+                dispatch({
+                    type: actionTypes.FETCH_MORE_POSTS_WITH_HASHTAG_SUCCESS,
+                    payload: res.data,
+                });
+                dispatch(fetchRelatedUsersUserPage(
+                    res.data.results, ''));
+            }).catch(error => {
+                dispatch({type: actionTypes.FETCH_POSTS_WITH_HASHTAG_FAIL});
+                if (error.response) {
+                    dispatch({
+                        type: actionTypes.GET_ERRORS,
+                        payload: {
+                            msg: {userPosts: 'Unable to load tweets'},
+                            status: error.response.status
+                        }
+                    });
+                }
+
+        });
+    }
+}

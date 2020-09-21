@@ -1,7 +1,7 @@
 import React from "react";
 import classes from './UserItemFollow.module.css';
 import Avatar from "../../Images/Avatar/Avatar";
-
+import {Link} from "react-router-dom";
 
 
 const userItemFollow = (props) => {
@@ -17,8 +17,12 @@ const userItemFollow = (props) => {
         <div className={classes.UserItem}>
             {avatar}
             <div className={classes.Content}>
-                <h4>{props.username}</h4>
-                <p>@{props.usernameDisplayed}</p>
+                <Link to={`/user/${props.username}`}
+                      style={{ textDecoration: 'none',
+                          color: '#14171A'}}>
+                    <h4>{props.usernameDisplayed}</h4>
+                    <p>@{props.username}</p>
+                </Link>
             </div>
         </div>
     );

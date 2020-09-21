@@ -10,6 +10,7 @@ import {Provider as AlertProvider} from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import Alert from "./containers/Alert/Alert";
 import UserPage from "./containers/UserPage/UserPage";
+import Comments from "./containers/Comments/Comments";
 
 
 const alertOptions = {
@@ -27,6 +28,7 @@ class App extends React.Component {
         let routers = (
             <Switch>
                 <Route path="/user/:username" exact component={UserPage} />
+                <Route path="/tweet/:postUuid" exact component={Comments} />
                 <Redirect from="/logout" to="/" />
                 <Route path="/" component={UnauthorizedUserMainPage} />
                 <Redirect from="*" to="/" />

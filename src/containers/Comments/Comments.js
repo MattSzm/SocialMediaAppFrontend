@@ -57,9 +57,12 @@ class Comments extends Component{
                 </div>
                 <div className={classes.EmptySpace}/>
                 {post}
-                <CreateComment
-                    postUuid={this.props.pickedPost ?
-                                this.props.pickedPost.uuid : null}/>
+                {this.props.currentUser ?
+                    (<CreateComment
+                        postUuid={this.props.pickedPost ?
+                            this.props.pickedPost.uuid : null}/>) :
+                    null
+                }
                 <InfiniteScroll
                                 next={ () => {
                                     if(this.props.linkLoadMore){

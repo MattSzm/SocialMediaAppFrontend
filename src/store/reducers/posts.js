@@ -39,6 +39,7 @@ const reducer = (state=initialState, action) => {
     switch (action.type){
         case actionTypes.FETCH_NEWSFEED_START:
         case actionTypes.FETCH_USER_POSTS_START:
+        case actionTypes.FETCH_POSTS_WITH_HASHTAG_START:
             return {...state,
                 posts: [],
                 newsFeedTimeStamp: null,
@@ -47,6 +48,7 @@ const reducer = (state=initialState, action) => {
                 hasMore: true}
         case actionTypes.LOAD_MORE_NEWSFEED_START:
         case actionTypes.LOAD_MORE_USER_POSTS_START:
+        case actionTypes.FETCH_MORE_POSTS_WITH_HASHTAG_START:
             return {...state,
                 loading: true,
                 hasMore: true};
@@ -65,6 +67,7 @@ const reducer = (state=initialState, action) => {
                 hasMore: hasMore};
         case actionTypes.FETCH_NEWSFEED_FAIL:
         case actionTypes.FETCH_USER_POSTS_FAIL:
+        case actionTypes.FETCH_POSTS_WITH_HASHTAG_FAIL:
             return {...state, loading: false};
         case actionTypes.CLEAR_POSTS:
             return {...state,
@@ -101,6 +104,7 @@ const reducer = (state=initialState, action) => {
             return {...state,
                 loadingCreatePost: false};
         case actionTypes.FETCH_USER_POSTS_SUCCESS:
+        case actionTypes.FETCH_POSTS_WITH_HASHTAG_SUCCESS:
             if(action.status === 204){
                 return {...state,
                     posts: [],
@@ -117,6 +121,7 @@ const reducer = (state=initialState, action) => {
                 loading: false,
                 hasMore: hasMore};
         case actionTypes.LOAD_MORE_USER_POSTS_SUCCESS:
+        case actionTypes.FETCH_MORE_POSTS_WITH_HASHTAG_SUCCESS:
             const newPostsUserPosts = [...state.posts].concat(action.payload.results);
             if(!action.payload.next){
                 hasMore = false;
