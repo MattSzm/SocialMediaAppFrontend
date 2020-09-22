@@ -23,7 +23,7 @@ class Follow extends Component{
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if ((prevProps.match.params.username !== this.props.match.params.username) ||
-            (prevProps.type !== this.props.type)) {
+                (prevProps.type !== this.props.type)) {
             this.props.clearUser();
             const username = this.props.match.params.username;
             if(this.props.type === 'following') {
@@ -55,21 +55,17 @@ class Follow extends Component{
                 <div className={classes.Navigations}>
                     <div className={classes.NavigationItem}>
                             <NavLink to={
-                                this.props.pickedUser ?
-                                `/user/${this.props.pickedUser.username}/following` :
-                                ''} exact
-                                className={classes.Navlink}
-                                 activeClassName={classes.NavlinkActive}>
+                                `/user/${this.props.match.params.username}/following`} exact
+                                className={classes.NavLink}
+                                 activeClassName={classes.NavLinkActive}>
                                 <h4>Following</h4>
                             </NavLink>
                     </div>
                     <div className={classes.NavigationItem}>
                         <NavLink to={
-                            this.props.pickedUser ?
-                                `/user/${this.props.pickedUser.username}/followers` :
-                                ''} exact
-                                 className={classes.Navlink}
-                                 activeClassName={classes.NavlinkActive}>
+                                `/user/${ this.props.match.params.username}/followers`} exact
+                                 className={classes.NavLink}
+                                 activeClassName={classes.NavLinkActive}>
                                  <h4>Followers</h4>
                         </NavLink>
                     </div>
@@ -116,7 +112,6 @@ class Follow extends Component{
                                         image={singleUser.photo}/>)
                     )}
                 </InfiniteScroll>
-
             </div>
         );
     }

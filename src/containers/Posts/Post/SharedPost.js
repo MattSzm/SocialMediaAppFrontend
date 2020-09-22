@@ -2,6 +2,7 @@ import React from "react";
 import Post from './Post';
 import classes from './SharedPost.module.css';
 import shareIcon from '../../../assets/icons/share.png';
+import {Link} from "react-router-dom";
 
 
 const sharedPost = (props) => {
@@ -10,7 +11,11 @@ const sharedPost = (props) => {
             {props.loading ? <span className={classes.ShareLoading}>.</span> :
                 <span className={classes.Share}>
                     <img src={shareIcon} />
-                    {props.userWhoShared.username_displayed} Retweeted
+                    <Link to={`/user/${props.userWhoShared.username}`}
+                          style={{ textDecoration: 'none',
+                              color: 'inherit'}}>
+                    {props.userWhoShared.username_displayed} </Link>
+                    Retweeted
                 </span>}
             <Post
                 post={props.post}

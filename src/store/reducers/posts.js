@@ -40,6 +40,7 @@ const reducer = (state=initialState, action) => {
         case actionTypes.FETCH_NEWSFEED_START:
         case actionTypes.FETCH_USER_POSTS_START:
         case actionTypes.FETCH_POSTS_WITH_HASHTAG_START:
+        case actionTypes.SEARCH_POSTS_WITH_PHRASE_START:
             return {...state,
                 posts: [],
                 newsFeedTimeStamp: null,
@@ -49,6 +50,7 @@ const reducer = (state=initialState, action) => {
         case actionTypes.LOAD_MORE_NEWSFEED_START:
         case actionTypes.LOAD_MORE_USER_POSTS_START:
         case actionTypes.FETCH_MORE_POSTS_WITH_HASHTAG_START:
+        case actionTypes.SEARCH_MORE_POSTS_WITH_PHRASE_START:
             return {...state,
                 loading: true,
                 hasMore: true};
@@ -68,6 +70,7 @@ const reducer = (state=initialState, action) => {
         case actionTypes.FETCH_NEWSFEED_FAIL:
         case actionTypes.FETCH_USER_POSTS_FAIL:
         case actionTypes.FETCH_POSTS_WITH_HASHTAG_FAIL:
+        case actionTypes.SEARCH_POSTS_WITH_PHRASE_FAIL:
             return {...state, loading: false};
         case actionTypes.CLEAR_POSTS:
             return {...state,
@@ -105,6 +108,7 @@ const reducer = (state=initialState, action) => {
                 loadingCreatePost: false};
         case actionTypes.FETCH_USER_POSTS_SUCCESS:
         case actionTypes.FETCH_POSTS_WITH_HASHTAG_SUCCESS:
+        case actionTypes.SEARCH_POSTS_WITH_PHRASE_SUCCESS:
             if(action.status === 204){
                 return {...state,
                     posts: [],
@@ -122,6 +126,7 @@ const reducer = (state=initialState, action) => {
                 hasMore: hasMore};
         case actionTypes.LOAD_MORE_USER_POSTS_SUCCESS:
         case actionTypes.FETCH_MORE_POSTS_WITH_HASHTAG_SUCCESS:
+        case actionTypes.SEARCH_MORE_POSTS_WITH_PHRASE_SUCCESS:
             const newPostsUserPosts = [...state.posts].concat(action.payload.results);
             if(!action.payload.next){
                 hasMore = false;
@@ -221,7 +226,7 @@ const reducer = (state=initialState, action) => {
                                     tweet_itself: {
                                         ...post.tweet_itself,
                                         shared_by_current_user: false,
-                                        number_likes: post.tweet_itself.number_shares - 1
+                                        number_shares: post.tweet_itself.number_shares - 1
                                     }
                                 };
                                 return newPost;

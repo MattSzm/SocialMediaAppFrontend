@@ -266,28 +266,27 @@ export const fetchPostsWithHashtag = (hashtagValue) => {
                 dispatch(fetchRelatedUsersUserPage(
                     res.data.results, ''));
             }).catch(error => {
-                if(error.response.data.detail === 'Not found.'){
-                    dispatch({
-                        type: actionTypes.FETCH_POSTS_WITH_HASHTAG_SUCCESS,
-                        status: 204
-                    });
-                }
-                else {
                     dispatch({type: actionTypes.FETCH_POSTS_WITH_HASHTAG_FAIL});
                     if (error.response) {
-                        dispatch({
-                            type: actionTypes.GET_ERRORS,
-                            payload: {
-                                msg: {userPosts: 'Unable to load tweets'},
-                                status: error.response.status
-                            }
-                        });
-                    }
+                        if(error.response.data.detail === 'Not found.'){
+                            dispatch({
+                                type: actionTypes.FETCH_POSTS_WITH_HASHTAG_SUCCESS,
+                                status: 204
+                            });
+                        }
+                        else {
+                            dispatch({
+                                type: actionTypes.GET_ERRORS,
+                                payload: {
+                                    msg: {userPosts: 'Unable to load tweets'},
+                                    status: error.response.status
+                                }
+                            });
+                        }
                 }
         });
     }
 }
-
 
 export const fetchMorePostsWithHashtag = (link) => {
     return (dispatch, getState) => {
@@ -311,6 +310,69 @@ export const fetchMorePostsWithHashtag = (link) => {
                         }
                     });
                 }
+
+        });
+    }
+}
+
+
+export const searchPostsWithPhrase = (phrase) => {
+    return (dispatch, getState) => {
+        dispatch({type: actionTypes.SEARCH_POSTS_WITH_PHRASE_START});
+        axios.get(`/api/tweet/search/${phrase}/`, tokenConfig(getState))
+            .then(res => {
+                dispatch({
+                    type: actionTypes.SEARCH_POSTS_WITH_PHRASE_SUCCESS,
+                    payload: res.data,
+                    status: res.status
+                });
+                dispatch(fetchRelatedUsersUserPage(
+                    res.data.results, ''));
+            }).catch(error => {
+                dispatch({type: actionTypes.SEARCH_POSTS_WITH_PHRASE_FAIL});
+                if (error.response) {
+                    if(error.response.data.detail === 'Not found.'){
+                        dispatch({
+                            type: actionTypes.SEARCH_POSTS_WITH_PHRASE_SUCCESS,
+                            status: 204
+                        });
+                    }
+                    else {
+                        dispatch({
+                            type: actionTypes.GET_ERRORS,
+                            payload: {
+                                msg: {userPosts: 'Unable to load tweets'},
+                                status: error.response.status
+                            }
+                        });
+                    }
+            }
+        });
+    }
+}
+
+export const searchMorePostsWithPhrase = (link) => {
+    return (dispatch, getState) => {
+        dispatch({type: actionTypes.SEARCH_MORE_POSTS_WITH_PHRASE_START});
+        axios.get(link.substring(22, ), tokenConfig(getState))
+            .then(res => {
+                dispatch({
+                    type: actionTypes.SEARCH_MORE_POSTS_WITH_PHRASE_SUCCESS,
+                    payload: res.data,
+                });
+                dispatch(fetchRelatedUsersUserPage(
+                    res.data.results, ''));
+            }).catch(error => {
+            dispatch({type: actionTypes.SEARCH_POSTS_WITH_PHRASE_FAIL});
+            if (error.response) {
+                dispatch({
+                    type: actionTypes.GET_ERRORS,
+                    payload: {
+                        msg: {userPosts: 'Unable to load tweets'},
+                        status: error.response.status
+                    }
+                });
+            }
 
         });
     }

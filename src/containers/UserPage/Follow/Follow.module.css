@@ -34,15 +34,15 @@
     width: 50%;
 }
 
-.Navlink{
+.NavLink{
     text-decoration: none;
     font-weight: normal;
     color: #14171A;
 }
-.Navlink:hover{
+.NavLink:hover{
     color: #0890e2;
 }
-.NavlinkActive{
+.NavLinkActive{
     color: #1DA1F2;
 }
 @media(max-width: 1050px){

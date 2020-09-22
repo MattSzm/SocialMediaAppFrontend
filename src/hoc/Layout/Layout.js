@@ -10,6 +10,7 @@ import CurrentUser from "../../containers/UserPage/CurrentUser/CurrentUser";
 import Comments from "../../containers/Comments/Comments";
 import Follow from "../../containers/UserPage/Follow/Follow";
 import HashtagPage from "../../containers/HashtagPage/HashtagPage";
+import SearchingPage from "../../containers/SearchingPage/SearchingPage";
 
 
 class Layout extends React.Component{
@@ -22,6 +23,8 @@ class Layout extends React.Component{
                 <Switch>
                     {this.props.currentUser ?
                         <Redirect from={`/user/${this.props.currentUser.username}`} to="/profile" exact /> : null }
+                    <Route path="/search/:phrase/tweets" exact render={() => (<SearchingPage type={"tweets"} />)} />
+                    <Route path="/search/:phrase/users" exact render={() => (<SearchingPage type={"users"} />)} />
                     <Route path="/hashtag/:hashtagValue" exact component={HashtagPage} />
                     <Route path="/user/:username" exact component={UserPage} />
                     <Route path="/user/:username/following" exact render={() => (<Follow type={"following"} />)} />
