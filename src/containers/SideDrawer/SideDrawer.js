@@ -51,7 +51,7 @@ class SideDrawer extends React.Component{
                                 </h2>
                             </NavLink>
 
-                            <NavLink to="/explore" exact
+                            <NavLink to="/explore"
                                      className={classes.SideDrawerItem}
                                      activeClassName={classes.Active}>
                                 <h2>

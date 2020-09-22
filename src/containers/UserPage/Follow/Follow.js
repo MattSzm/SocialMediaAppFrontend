@@ -105,7 +105,7 @@ class Follow extends Component{
                                 }
                             >
                     {this.props.users.map(
-                        singleUser => (<UserItemFollow
+                            singleUser => (<UserItemFollow
                                         key={singleUser.id}
                                         username={singleUser.username}
                                         usernameDisplayed={singleUser.username_displayed}
@@ -119,9 +119,9 @@ class Follow extends Component{
 
 const mapStateToProps = state => ({
     pickedUser: state.users.pickedUser,
-    users: state.users.usersFollow,
-    linkToLoadMore: state.users.linkToLoadMoreFollow,
-    hasMore: state.users.hasMoreFollow,
+    users: state.users.usersAsList,
+    linkToLoadMore: state.users.linkToLoadMoreAsList,
+    hasMore: state.users.hasMoreAsList,
 
 });
 

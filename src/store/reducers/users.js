@@ -3,9 +3,9 @@ import * as actionTypes from "../actions/actionTypes";
 const initialState = {
     users: {},
     pickedUser: null,
-    usersFollow: [],
-    hasMoreFollow: null,
-    linkToLoadMoreFollow: null
+    usersAsList: [],
+    hasMoreAsList: null,
+    linkToLoadMoreAsList: null
 }
 
 const reducer = (state=initialState, action) => {
@@ -18,7 +18,7 @@ const reducer = (state=initialState, action) => {
                 newUsers[id] = action.payload;
                 return {...state,
                     users: newUsers,
-                    usersFollow: []};
+                    usersAsList: []};
             }
             return state;
         case actionTypes.FETCH_USER_SUCCESS:
@@ -31,7 +31,7 @@ const reducer = (state=initialState, action) => {
             return {...state,
                     users: {},
                     pickedUser: null,
-                    usersFollow: []};
+                    usersAsList: []};
         case actionTypes.CLEAR_PICKED_USER:
             return {...state,
                     pickedUser: null};
@@ -48,29 +48,37 @@ const reducer = (state=initialState, action) => {
             return {...state,
                     pickedUser: pickedUserWithoutFollow};
         case actionTypes.LOAD_FOLLOW_SUCCESS:
+        case actionTypes.SEARCH_USERS_WITH_PHRASE_SUCCESS:
             if(action.status === 204){
                 return {...state,
                     users: {},
-                    usersFollow: []};
+                    usersAsList: []};
             }
             if(!action.payload.next){
                 hasMore = false;
             }
             return {...state,
                     users: {},
-                    usersFollow: action.payload.results,
-                    linkToLoadMoreFollow: action.payload.next,
-                    hasMoreFollow: hasMore}
+                    usersAsList: action.payload.results,
+                    linkToLoadMoreAsList: action.payload.next,
+                    hasMoreAsList: hasMore}
         case actionTypes.LOAD_MORE_FOLLOW_SUCCESS:
-            const newFollowUsers = [...state.usersFollow].concat(action.payload.results);
+        case actionTypes.SEARCH_MORE_USERS_WITH_PHRASE_SUCCESS:
+            const newFollowUsers = [...state.usersAsList].concat(action.payload.results);
             if(!action.payload.next){
                 hasMore = false;
             }
             return {...state,
                     users: {},
-                    usersFollow: newFollowUsers,
-                    linkToLoadMoreFollow: action.payload.next,
-                    hasMoreFollow: hasMore};
+                    usersAsList: newFollowUsers,
+                    linkToLoadMoreAsList: action.payload.next,
+                    hasMoreAsList: hasMore};
+        case actionTypes.SEARCH_USERS_WITH_PHRASE_START:
+        case actionTypes.LOAD_FOLLOW_START:
+            return {...state,
+                    usersAsList: [],
+                    hasMoreAsList: null,
+                    linkToLoadMoreAsList: null}
         default:
             return state;
     }

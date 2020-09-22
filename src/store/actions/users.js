@@ -157,6 +157,7 @@ export const unfollowUser = (userUuid) => {
 
 export const fetchUserWithFollowingOrFollowers = (username, following=true) => {
     return (dispatch, getState) => {
+        dispatch({type: actionTypes.LOAD_FOLLOW_START});
         axios.get(`/api/user/username/${username}/`, tokenConfig(getState))
             .then(res => {
                 dispatch({
@@ -244,6 +245,54 @@ export const fetchMoreFollowingAndFollowersUserList = (link) => {
                     }
                 });
             }
+        });
+    }
+}
+
+
+export const searchUsersWithPhrase = (phrase) => {
+    return (dispatch, getState) => {
+        dispatch({type: actionTypes.SEARCH_USERS_WITH_PHRASE_START});
+        axios.get(`/api/user/search/${phrase}/`, tokenConfig(getState))
+            .then(res => {
+                dispatch({
+                    type: actionTypes.SEARCH_USERS_WITH_PHRASE_SUCCESS,
+                    payload: res.data,
+                    status: res.status
+                });
+            }).catch(error => {
+                if (error.response) {
+                    dispatch({
+                        type: actionTypes.GET_ERRORS,
+                        payload: {
+                            msg: {userPosts: 'Unable to load users'},
+                            status: error.response.status
+                        }
+                    });
+                }
+        });
+    }
+}
+
+export const searchMoreUsersWithPhrase = (link) => {
+    return (dispatch, getState) => {
+        axios.get(link.substring(22, ), tokenConfig(getState))
+            .then(res => {
+                dispatch({
+                    type: actionTypes.SEARCH_MORE_USERS_WITH_PHRASE_SUCCESS,
+                    payload: res.data,
+                });
+            }).catch(error => {
+                if (error.response) {
+                    dispatch({
+                        type: actionTypes.GET_ERRORS,
+                        payload: {
+                            msg: {userPosts: 'Unable to load users'},
+                            status: error.response.status
+                        }
+                    });
+                }
+
         });
     }
 }

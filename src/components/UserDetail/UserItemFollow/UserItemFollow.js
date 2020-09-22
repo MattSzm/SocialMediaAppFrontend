@@ -21,7 +21,10 @@ const userItemFollow = (props) => {
                       style={{ textDecoration: 'none',
                           color: '#14171A'}}>
                     <h4>{props.usernameDisplayed}</h4>
-                    <p>@{props.username}</p>
+                    <p style={{
+                        color: '#657786'
+                    }}
+                    >@{props.username}</p>
                 </Link>
             </div>
         </div>
