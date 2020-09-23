@@ -11,11 +11,12 @@ import styled from 'styled-components';
 const SpaceStyledDiv = styled.div`
         display: inline;
         width: 4em;
-        margin: 0 1em;
+        margin: 0 0.5em;
         @media (max-width: 600px){
-           margin: 0em 0em; 
+           display: none 
         }
     }`;
+
 
 
 class Login extends React.Component{
@@ -116,7 +117,10 @@ class Login extends React.Component{
                     <Button click={this.submitHandler}>
                         Log in
                     </Button>
-                    <SpaceStyledDiv/>
+                    <SpaceStyledDiv />
+                    <div className={classes.FreeSpace}>
+                        <br />
+                    </div>
                     <Button click={this.props.changeState}
                             isTransparent={true}>
                         Switch to Sign up

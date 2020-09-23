@@ -3,7 +3,14 @@
     height: auto;
     margin: 70px auto;
 }
-
+.FreeSpace{
+    display: block;
+}
+@media (min-width: 600px){
+    .FreeSpace{
+        display: none;
+    }
+}
 @media (max-width: 700px){
     .Registration{
         width: 90%;

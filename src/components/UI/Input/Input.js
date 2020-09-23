@@ -16,7 +16,7 @@ const InputCreatePostStyledDiv = styled.div.attrs(props =>({
             margin: 0;
             width: ${props => props.precent}%;
             border-bottom: 2px solid ${props => 
-                props.precent < 100 ? '#adef70' : '#fda6a6'};
+                props.precent < 100 ? '#1DA1F2' : '#f37d7d'};
         }
         @media(max-width: 400px){
             width: 78%;

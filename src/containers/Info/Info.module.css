@@ -5,24 +5,71 @@
 
 .Info{
     max-height: 100vh;
-    margin: auto;
+    margin: 0;
     position: fixed;
-    text-align: left;
+    width: 18%;
     display: flex;
-    width: inherit;
     flex-direction: column;
-    border: solid orange;
+    text-align: left;
+    z-index: 0;
+    /*border: solid orange;*/
+    margin-left: 2.5em;
 }
 
 .Info ul{
+    width: 90%;
     overflow-y: scroll;
     list-style: none;
+    margin-top: 3.5em;
 }
+
 .Info ul::-webkit-scrollbar{
     width: 1px;
 }
 
-
+.Searching{
+    margin-top: 0.5em;
+    position: fixed;
+    width: 37%;
+}
+.SearchingInput{
+    position:relative;
+    width: inherit;
+    background-color: #E1E8ED;
+    border-radius: 15px;
+    font-size: 1.2em;
+    padding: 0.4em 0.5em;
+    color: #14171A;
+    border: none;
+    display: inline-block;
+}
+.SearchingInput:focus{
+    outline: none;
+    background-color: #F5F8FA;
+    box-shadow: 0 0 0 1px #1DA1F2;
+}
+@media(max-width: 1550px){
+    .Info{
+        margin-left: 2em;
+    }
+    .Searching{
+        width: 35%;
+    }
+}
+@media(max-width: 1450px){
+    .Info{
+        width: 16.5%;
+    }
+    .Searching{
+        width: 34.2%;
+    }
+}
+@media(max-width: 1370px){
+    .Info{
+        width: 16.5%;
+        margin-left: 1em;
+    }
+}
 @media (min-height: 600px) {
     .Info ul{
         overflow-y: hidden;

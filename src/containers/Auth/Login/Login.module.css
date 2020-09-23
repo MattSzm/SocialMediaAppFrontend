@@ -4,6 +4,14 @@
     margin: 70px auto;
     text-align: center;
 }
+.FreeSpace{
+    display: block;
+}
+@media (min-width: 600px){
+    .FreeSpace{
+        display: none;
+    }
+}
 
 @media (max-width: 700px){
     .Login{

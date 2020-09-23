@@ -11,19 +11,32 @@
     background-color: #AAB8C2;
     font: inherit;
     padding: 6px 10px;
+    border-radius: 10px;
     display: block;
     width: 100%;
     box-sizing: border-box;
 }
+.InputElement[type="password"] {
+    letter-spacing: 0.3em;
+}
+.InputElement[type="text"] {
+    letter-spacing: 0.05em;
+}
+.InputElement[type="email"] {
+    letter-spacing: 0.05em;
+}
+.InputElement::placeholder{
+    letter-spacing: 0.05em;
+}
 
 .InputElement:focus {
     outline: none;
-    background-color: #ccc;
+    background-color: #cfd1d4;
 }
 
 .Invalid{
-    border-bottom: 2px solid #fda6a6;
-    background-color: #ffcaca;
+    border-bottom: 2px solid #f37d7d;
+    background-color: #f3d4d4;
 }
 
 
@@ -45,7 +58,7 @@
 }
 
 .ColorGreen{
-    border-bottom: 2px solid #adef70;
+    border-bottom: 2px solid #1DA1F2;
 }
 
 @media(max-width: 400px){
