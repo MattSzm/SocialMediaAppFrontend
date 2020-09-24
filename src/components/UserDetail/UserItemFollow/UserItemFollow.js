@@ -14,9 +14,11 @@ const userItemFollow = (props) => {
             link={props.image} />);
     }
     return (
-        <div className={classes.UserItem}>
+        <div className={props.worksAsInfo ? classes.InfoUserItem : classes.UserItem}>
+            <div>
             {avatar}
-            <div className={classes.Content}>
+            </div>
+            <div className={props.worksAsInfo ? classes.InfoContent : classes.Content}>
                 <Link to={`/user/${props.username}`}
                       style={{ textDecoration: 'none',
                           color: '#14171A'}}>

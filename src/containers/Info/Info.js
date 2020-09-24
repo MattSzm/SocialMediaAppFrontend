@@ -2,10 +2,18 @@ import React, {Component} from "react";
 import classes from './Info.module.css';
 import SearchInput from "../../components/UI/Input/SearchingInput/SearchingInput";
 import {withRouter} from 'react-router-dom';
+import {loadPopularUsers} from '../../store/actions/info';
+import {connect} from 'react-redux';
+import UserItemFollow from "../../components/UserDetail/UserItemFollow/UserItemFollow";
+
 
 class Info extends Component{
     state = {
         searchingValue: ''
+    }
+
+    componentDidMount() {
+        this.props.loadPopularUsers()
     }
 
     searchingHandler = (event) => {
@@ -33,6 +41,16 @@ class Info extends Component{
     }
 
     render() {
+        let usersContent =  <div className={classes.LoadingBlock}/>
+        if(this.props.popularUsers){
+            usersContent = this.props.popularUsers.map(singleUser => (
+               <UserItemFollow
+                   key={singleUser.id}
+                   username={singleUser.username}
+                   usernameDisplayed={singleUser.username_displayed}
+                   image={singleUser.photo}
+                   worksAsInfo={true}/>)
+            )}
         return (
             <div className={classes.InfoContainer}>
                 <div className={classes.Info}>
@@ -40,7 +58,14 @@ class Info extends Component{
                                   onChangeValue={this.searchingHandler}
                                   submitHandler={this.searchingSubmitHandler}/>
                     <ul>
-                        <li>SEARCHING</li>
+                        <div className={classes.PopularUsers}>
+                            <h3>Popular Users</h3>
+                            <div className={classes.UserList}>
+                                {usersContent}
+                            </div>
+                        </div>
+
+
                         <li>SEARCHING</li><li>SEARCHING</li><li>SEARCHING</li>
                         <li>SEARCHING</li>
                         <li>SEARCHING</li>
@@ -67,4 +92,12 @@ class Info extends Component{
     }
 }
 
-export default withRouter(Info);
+const mapStateToProps = state => ({
+    popularUsers: state.info.users
+});
+
+const mapDispatchToProps = dispatch => ({
+    loadPopularUsers: () => dispatch(loadPopularUsers())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Info));

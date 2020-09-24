@@ -6,6 +6,7 @@ import errorsReducer from './reducers/errors';
 import messagesReducer from './reducers/messages';
 import usersReducer from './reducers/users';
 import commentsReducer from './reducers/comments';
+import infoReducer from './reducers/info';
 import Thunk from "redux-thunk";
 
 
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
     errors: errorsReducer,
     messages: messagesReducer,
     users: usersReducer,
-    comments: commentsReducer
+    comments: commentsReducer,
+    info: infoReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(Thunk));
