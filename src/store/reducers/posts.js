@@ -242,6 +242,11 @@ const reducer = (state=initialState, action) => {
                     }
                     return post;
                 })
+                if(action.explore){
+                    return {...state,
+                    posts: newPostsWithoutShare}
+                }
+
                 let newPostsWithoutShareOutput = null;
                 if(state.newsFeedTimeStamp) {
                      newPostsWithoutShareOutput = newPostsWithoutShare.filter(

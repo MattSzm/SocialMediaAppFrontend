@@ -37,6 +37,9 @@ class Alert extends Component{
             if(error.message.popularUsers){
                 alert.error(error.message.popularUsers);
             }
+            if(error.message.hashtagTrends){
+                alert.error(error.message.hashtagTrends);
+            }
             if(error.message.fetchFollowing){
                 alert.error(error.message.fetchFollowing);
             }

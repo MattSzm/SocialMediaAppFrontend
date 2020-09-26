@@ -1,0 +1,10 @@
+.Trend{
+    margin-top: -0.7em;
+}
+.Trend h4{
+    cursor: pointer;
+}
+.Trend p{
+    color: #657786;
+    margin-top: -1em;
+}

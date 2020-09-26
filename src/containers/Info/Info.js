@@ -1,47 +1,21 @@
 import React, {Component} from "react";
 import classes from './Info.module.css';
-import SearchInput from "../../components/UI/Input/SearchingInput/SearchingInput";
-import {withRouter} from 'react-router-dom';
-import {loadPopularUsers} from '../../store/actions/info';
+import SearchInput from "../SearchingInput/SearchingInput";
+import {Link, withRouter} from 'react-router-dom';
+import {loadPopularUsers, loadHashtagTrends} from '../../store/actions/info';
 import {connect} from 'react-redux';
 import UserItemFollow from "../../components/UserDetail/UserItemFollow/UserItemFollow";
+import SingleTrend from "../../components/SingleTrend/SingleTrend";
 
 
 class Info extends Component{
-    state = {
-        searchingValue: ''
-    }
-
     componentDidMount() {
-        this.props.loadPopularUsers()
-    }
-
-    searchingHandler = (event) => {
-        this.setState({
-            searchingValue: event.target.value
-        });
-    }
-
-     replaceAllChars(string, search, replace) {
-        return string.split(search).join(replace);
-    }
-
-    transformSearchingPhrase = () => {
-        let transformedPhrase = this.state.searchingValue.slice();
-        transformedPhrase = this.replaceAllChars(transformedPhrase, '#', ' ');
-        transformedPhrase = this.replaceAllChars(transformedPhrase, '@', ' ');
-        transformedPhrase = this.replaceAllChars(transformedPhrase, '?', ' ');
-        transformedPhrase = this.replaceAllChars(transformedPhrase, '/', ' ');
-        return transformedPhrase;
-    }
-
-    searchingSubmitHandler = (event) => {
-        event.preventDefault();
-        this.props.history.push(`/explore/${this.transformSearchingPhrase()}/tweets`);
+        this.props.loadPopularUsers();
+        this.props.loadHashtagTrends();
     }
 
     render() {
-        let usersContent =  <div className={classes.LoadingBlock}/>
+        let usersContent =  <div className={classes.LoadingBlock}/>;
         if(this.props.popularUsers){
             usersContent = this.props.popularUsers.map(singleUser => (
                <UserItemFollow
@@ -51,40 +25,37 @@ class Info extends Component{
                    image={singleUser.photo}
                    worksAsInfo={true}/>)
             )}
+        let trendsContent = <div className={classes.LoadingBlock} />;
+        if(this.props.hashtagTrends){
+            trendsContent = this.props.hashtagTrends.map(singleTrend => (
+                <SingleTrend
+                    key={singleTrend.hashtag_value}
+                    value={singleTrend.hashtag_value}
+                    numberOfTweets={singleTrend.number_tweets}
+                />
+            )
+            )}
         return (
             <div className={classes.InfoContainer}>
                 <div className={classes.Info}>
-                    <SearchInput  value={this.state.searchingValue}
-                                  onChangeValue={this.searchingHandler}
-                                  submitHandler={this.searchingSubmitHandler}/>
+                    {this.props.location.pathname === '/explore' ? null :
+                        <SearchInput/>
+                    }
                     <ul>
-                        <div className={classes.PopularUsers}>
-                            <h3>Popular Users</h3>
-                            <div className={classes.UserList}>
+                        <div className={classes.ContainerInside}>
+                            <h3>Who to follow</h3>
+                            <div className={classes.List}>
                                 {usersContent}
                             </div>
                         </div>
-
-
-                        <li>SEARCHING</li><li>SEARCHING</li><li>SEARCHING</li>
-                        <li>SEARCHING</li>
-                        <li>SEARCHING</li>
-                        <li>SEARCHING</li>
-                        <li>SEARCHING</li>
-                        <li>SEARCHING</li>
-                        <li>SEARCHING</li>
-                        <li>SEARCHING</li>
-                        <li>SEARCHING</li>
-                        <li>SEARCHING</li>
-                        <li>SEARCHING</li>
-                        <li>SEARCHING</li>
-                        <li>SEARCHING</li><li>SEARCHING</li>
-                        <li>SEARCHING</li>
-                        <li>SEARCHING</li>
-
-
-
-
+                        {this.props.location.pathname === '/explore' ? null :
+                            (<div className={classes.ContainerInside}>
+                                <h3>Trends for you</h3>
+                                <div className={classes.List}>
+                                    {trendsContent}
+                                </div>
+                            </div>)
+                        }
                     </ul>
                 </div>
             </div>
@@ -93,11 +64,13 @@ class Info extends Component{
 }
 
 const mapStateToProps = state => ({
-    popularUsers: state.info.users
+    popularUsers: state.info.users,
+    hashtagTrends: state.info.hashtags
 });
 
 const mapDispatchToProps = dispatch => ({
-    loadPopularUsers: () => dispatch(loadPopularUsers())
+    loadPopularUsers: () => dispatch(loadPopularUsers()),
+    loadHashtagTrends: () => dispatch(loadHashtagTrends(false))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Info));

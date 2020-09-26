@@ -17,8 +17,11 @@ export const createPost = (form) => {
             .then(res => {
                 dispatch({
                     type: actionTypes.CREATE_POST_SUCCESS,
-                    payload: res.data
+                    payload: res.data,
                 });
+                dispatch(fetchRelatedUsersUserPage(
+                    [res.data]
+                ));
                 dispatch(createMessage(
                     {createdPost: 'Created tweet successfully'}
                 ));
@@ -223,7 +226,7 @@ export const createSharePost = (postUuid, detail=false) => {
     };
 };
 
-export const deleteSharePost = (postUuid, detail=false) => {
+export const deleteSharePost = (postUuid, detail=false, explore=false) => {
     return (dispatch, getState) => {
         axios.delete(`/api/tweet/share/${postUuid}/`, tokenConfig(getState))
             .then(res =>{
@@ -237,6 +240,7 @@ export const deleteSharePost = (postUuid, detail=false) => {
                         type: actionTypes.DELETE_SHARE_POST,
                         payloadPostUuid: postUuid,
                         payloadUserUuid: getState().auth.user.uuid,
+                        explore: explore
                     });
                 }
             }).catch((error) => {

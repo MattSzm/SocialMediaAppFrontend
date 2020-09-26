@@ -26,17 +26,18 @@
 .Info ul::-webkit-scrollbar{
     width: 1px;
 }
-.PopularUsers{
+.ContainerInside{
     margin-left: -2.5em;
     padding-left: 1.5em;
     margin-top: -0.5em;
     border-bottom: solid #E1E8ED 1px;
 }
-.UserList{
+.List{
     display: flex;
     flex-direction: column;
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
 }
+
 .LoadingBlock{
     width: 90%;
     height: 10em;
@@ -91,10 +92,10 @@
         -ms-filter: blur(0px);
     }
     50% {
-        -webkit-filter: blur(5px);
-        -moz-filter: blur(5px);
-        -o-filter: blur(5px);
-        -ms-filter: blur(5px);
+        -webkit-filter: blur(7px);
+        -moz-filter: blur(7px);
+        -o-filter: blur(7px);
+        -ms-filter: blur(7px);
     }
     100%{
         -webkit-filter: blur(0px);

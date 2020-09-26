@@ -39,6 +39,13 @@ class Post extends Component{
                 this.props.deleteSharePost(postUuid, true);
             }
         }
+        else if(this.props.explore){
+            if (!sharedAlready) {
+                this.props.createSharePost(postUuid, false,);
+            } else {
+                this.props.deleteSharePostInfo(postUuid);
+            }
+        }
         else {
             if (!sharedAlready) {
                 this.props.createSharePost(postUuid, false);
@@ -119,7 +126,8 @@ const mapDispatchToProps = dispatch => ({
     deleteLikePost: (postUuid, idDetail) => dispatch(postActions.deleteLikePost(postUuid, idDetail)),
 
     createSharePost: (postUuid, idDetail) => dispatch(postActions.createSharePost(postUuid, idDetail)),
-    deleteSharePost: (postUuid, idDetail) => dispatch(postActions.deleteSharePost(postUuid, idDetail))
+    deleteSharePost: (postUuid, idDetail) => dispatch(postActions.deleteSharePost(postUuid, idDetail)),
+    deleteSharePostInfo: (postUuid) => dispatch(postActions.deleteSharePost(postUuid, false, true))
 });
 
 

@@ -21,7 +21,11 @@
     background-color: #F5F8FA;
     box-shadow: 0 0 0 1px #1DA1F2;
 }
-
+.Explore{
+    margin-top: -0.2em;
+    width: 60%;
+    left: 30%;
+}
 .ArrowButton {
     display: inline-block;
     margin-top: 8px;
@@ -42,15 +46,41 @@
     .Searching{
         width: 39%;
     }
+    .Explore{
+        width: 60%;
+    }
 }
 @media(max-width: 1370px){
     .Searching{
         width: 38%;
+    }
+    .Explore{
+        width: 60%;
     }
 }
 @media(max-width: 1200px){
     .Searching{
         width: 37%;
     }
+    .Explore{
+        width: 60%;
+    }
 }
-
+@media(max-width: 1050px){
+    .Explore{
+        width: 60%;
+        left: 34%;
+    }
+}
+@media(max-width: 800px){
+    .Explore{
+        width: 80%;
+        left: 15%;
+    }
+}
+@media(max-width: 500px){
+    .Explore{
+        width: 80%;
+        left: 13.5%;
+    }
+}
