@@ -1,0 +1,8 @@
+.MobileOnly{
+    display: block;
+}
+@media (min-width: 1050px){
+    .MobileOnly{
+        display: none;
+    }
+}

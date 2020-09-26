@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {connect} from 'react-redux';
+import classes from './Explore.module.css';
 import NewsfeedClasses from '../../containers/Posts/NewsFeed/NewsFeed.module.css';
 import SearchInput from "../SearchingInput/SearchingInput";
 import Spinner from "../../components/UI/Spinner/Spinner";
@@ -87,8 +88,10 @@ class Explore extends Component {
                 <h2>Trends for you</h2>
                 {trendsContent}
 
-                <h2>Who to follow</h2>
-                {usersContent}
+                <div className={classes.MobileOnly}>
+                    <h2>Who to follow</h2>
+                    {usersContent}
+                </div>
 
                 <div className={NewsfeedClasses.EmptySpace}/>
                 <div className={NewsfeedClasses.EmptySpace}/>
