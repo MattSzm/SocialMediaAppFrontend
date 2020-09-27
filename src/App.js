@@ -2,15 +2,26 @@ import React from 'react';
 import classes from './App.module.css';
 import Layout from "./hoc/Layout/Layout";
 import {connect} from 'react-redux';
-import UnauthorizedUserMainPage from "./containers/UnauthorizedUserMainPage/UnauthorizedUserMainPage";
 import { Route, Switch, Redirect } from 'react-router-dom';
 import store from './store/store';
 import {loadCurrentUser} from './store/actions/auth';
 import {Provider as AlertProvider} from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import Alert from "./containers/Alert/Alert";
-import UserPage from "./containers/UserPage/UserPage";
-import Comments from "./containers/Comments/Comments";
+import asyncComponent from "./hoc/asyncComponent/asyncComponent";
+
+
+const UnauthorizedUserMainPage = asyncComponent(() => {
+    return import("./containers/UnauthorizedUserMainPage/UnauthorizedUserMainPage");
+});
+
+const UserPage = asyncComponent(() => {
+    return import("./containers/UserPage/UserPage");
+});
+
+const Comments = asyncComponent(() => {
+    return import("./containers/Comments/Comments");
+})
 
 
 const alertOptions = {
