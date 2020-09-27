@@ -14,7 +14,10 @@ Personal project presenting front-end of the application based on twitter functi
  
  
  ### Back-end side
-   https://github.com/MattSzm/SocialMediaAppBackend
+ https://github.com/MattSzm/SocialMediaAppBackend
+ 
+ ### Presentation
+ https://youtu.be/OMUUU5xKF50
  
  [reactlink]:https://reactjs.org/
  [reduxlink]:https://redux.js.org/
