@@ -16,6 +16,7 @@ const reducer = (state=initialState, action) => {
             if(!(state.users[id])){
                 let newUsers = {...state.users};
                 newUsers[id] = action.payload;
+
                 return {...state,
                     users: newUsers,
                     usersAsList: []};

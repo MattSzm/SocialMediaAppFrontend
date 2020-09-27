@@ -31,48 +31,50 @@ class Explore extends Component {
         let trendsContent = <Spinner />;
         if(this.props.hashtagTrends.length > 0 && this.props.posts.length > 0) {
             trendsContent = this.props.hashtagTrends.map(singleTrend => {
-                if (this.props.users[`${singleTrend.most_popular.user}`.substring(36,
-                    singleTrend.most_popular.user.length - 1)]) {
-                    return (
-                        <div
-                            key={singleTrend.hashtag_value}>
-                            <div style={{
-                                textAlign: 'left',
-                                marginLeft: '1em'
-                            }}>
-                                <SingleTrend
-                                    value={singleTrend.hashtag_value}
-                                    numberOfTweets={singleTrend.number_tweets}
-                                    explore={true}
-                                />
+                if(singleTrend.most_popular) {
+                    if (this.props.users[`${singleTrend.most_popular.user}`.substring(36,
+                        singleTrend.most_popular.user.length - 1)]) {
+                        return (
+                            <div
+                                key={singleTrend.hashtag_value}>
+                                <div style={{
+                                    textAlign: 'left',
+                                    marginLeft: '1em'
+                                }}>
+                                    <SingleTrend
+                                        value={singleTrend.hashtag_value}
+                                        numberOfTweets={singleTrend.number_tweets}
+                                        explore={true}
+                                    />
+                                </div>
+                                {this.props.posts.find(x => x.uuid === singleTrend.most_popular.uuid) ?
+                                    (<Post
+                                        post={
+                                            this.props.posts.find(x => x.uuid === singleTrend.most_popular.uuid)}
+                                        user={this.props.users[`${singleTrend.most_popular.user}`.substring(36,
+                                            singleTrend.most_popular.user.length - 1)]}
+                                        explore={true}
+                                    />) : null}
                             </div>
-                            { this.props.posts.find(x => x.uuid === singleTrend.most_popular.uuid) ?
-                                (<Post
-                                    post={
-                                        this.props.posts.find(x => x.uuid === singleTrend.most_popular.uuid)}
-                                    user={this.props.users[`${singleTrend.most_popular.user}`.substring(36,
-                                        singleTrend.most_popular.user.length - 1)]}
-                                    explore={true}
-                                />) : null }
-                        </div>
-                    );
-                } else {
-                    return (
-                        <div
-                            key={singleTrend.hashtag_value}>
-                            <div style={{
-                                textAlign: 'left',
-                                marginLeft: '1em'
-                            }}>
-                                <SingleTrend
-                                    value={singleTrend.hashtag_value}
-                                    numberOfTweets={singleTrend.number_tweets}
-                                    explore={true}
-                                />
+                        );
+                    } else {
+                        return (
+                            <div
+                                key={singleTrend.hashtag_value}>
+                                <div style={{
+                                    textAlign: 'left',
+                                    marginLeft: '1em'
+                                }}>
+                                    <SingleTrend
+                                        value={singleTrend.hashtag_value}
+                                        numberOfTweets={singleTrend.number_tweets}
+                                        explore={true}
+                                    />
+                                </div>
+                                <Spinner/>
                             </div>
-                            <Spinner />
-                        </div>
-                    );
+                        );
+                    }
                 }
             })
         }
