@@ -1,0 +1,17 @@
+.Container{
+    width: 100%;
+    max-width: 1300px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+}
+
+
+@media (max-width: 800px) {
+    .Container{
+        display: block;
+        justify-content: space-between;
+        width: 90%;
+    }
+}
+

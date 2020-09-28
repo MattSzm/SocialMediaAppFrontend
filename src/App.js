@@ -9,6 +9,7 @@ import {Provider as AlertProvider} from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import Alert from "./containers/Alert/Alert";
 import asyncComponent from "./hoc/asyncComponent/asyncComponent";
+import UnauthorizedWrapper from "./hoc/UnauthorizedWrapper/UnauthorizedWrapper";
 
 
 const UnauthorizedUserMainPage = asyncComponent(() => {
@@ -38,8 +39,15 @@ class App extends React.Component {
     render() {
         let routers = (
             <Switch>
-                <Route path="/user/:username" exact component={UserPage} />
-                <Route path="/tweet/:postUuid" exact component={Comments} />
+                <Route path="/user/:username" exact render={() => (
+                    <UnauthorizedWrapper>
+                        <UserPage />
+                    </UnauthorizedWrapper>)} />
+                <Route path="/tweet/:postUuid" exact render={() => (
+                    <UnauthorizedWrapper>
+                        <Comments />
+                    </UnauthorizedWrapper>
+                )} />
                 <Redirect from="/logout" to="/" />
                 <Route path="/" component={UnauthorizedUserMainPage} />
                 <Redirect from="*" to="/" />

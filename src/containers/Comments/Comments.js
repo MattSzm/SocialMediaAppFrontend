@@ -8,6 +8,7 @@ import Post from "../Posts/Post/Post";
 import CreateComment from "./CreateComment/CreateComment";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Comment from "../../components/Comment/Comment";
+import { withRouter } from 'react-router-dom';
 
 
 class Comments extends Component{
@@ -136,4 +137,4 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Comments);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Comments));

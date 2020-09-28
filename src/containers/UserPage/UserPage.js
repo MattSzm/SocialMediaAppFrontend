@@ -8,6 +8,7 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 import Post from "../Posts/Post/Post";
 import SharedPost from "../Posts/Post/SharedPost";
 import * as usersActions from '../../store/actions/users';
+import { withRouter } from 'react-router-dom';
 
 
 class UserPage extends Component{
@@ -129,4 +130,4 @@ const mapDispatchToProps = dispatch => ({
     unfollowUser: (pickedUserUuid) => dispatch(usersActions.unfollowUser(pickedUserUuid))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserPage);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(UserPage));

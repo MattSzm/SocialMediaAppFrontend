@@ -2,7 +2,10 @@
 Personal project presenting front-end of the application based on twitter functionality. 
 (This is NOT Twitter clone)
 
-##  I've created it with:
+ ## Presentation
+ https://youtu.be/OMUUU5xKF50
+
+ ##  I've created it with:
  * JavaScript
  * [React][reactlink]
  * [Redux][reduxlink]
@@ -15,9 +18,6 @@ Personal project presenting front-end of the application based on twitter functi
  
  ### Back-end side
  https://github.com/MattSzm/SocialMediaAppBackend
- 
- ### Presentation
- https://youtu.be/OMUUU5xKF50
  
  [reactlink]:https://reactjs.org/
  [reduxlink]:https://redux.js.org/
